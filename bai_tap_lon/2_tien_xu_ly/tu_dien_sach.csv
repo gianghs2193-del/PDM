@@ -1,0 +1,83 @@
+﻿bang,ten_cot,kieu,vai_tro,ty_le_trong_%,so_gia_tri_khac_nhau
+tai_nan_loi_sach,nguon,str,khoá / truy vết,0.0,3
+tai_nan_loi_sach,file_goc,str,khoá / truy vết,0.0,3
+tai_nan_loi_sach,dong_goc,int64,khoá / truy vết,0.0,14272
+tai_nan_loi_sach,ngay,datetime64[us],thuộc tính gốc — đã có đặc trưng suy ra thay thế,0.0,974
+tai_nan_loi_sach,gio,string,thuộc tính gốc — đã có đặc trưng suy ra thay thế,0.2,1341
+tai_nan_loi_sach,tinh,string,đặc trưng,0.0,63
+tai_nan_loi_sach,huyen,string,địa bàn chi tiết / văn bản — không dùng trực tiếp,0.0,674
+tai_nan_loi_sach,xa,string,địa bàn chi tiết / văn bản — không dùng trực tiếp,2.5,4903
+tai_nan_loi_sach,loai_duong,string,thuộc tính gốc — đã có đặc trưng suy ra thay thế,12.4,16
+tai_nan_loi_sach,ten_duong,string,địa bàn chi tiết / văn bản — không dùng trực tiếp,28.0,5793
+tai_nan_loi_sach,km,string,địa bàn chi tiết / văn bản — không dùng trực tiếp,26.6,20876
+tai_nan_loi_sach,dia_diem,string,địa bàn chi tiết / văn bản — không dùng trực tiếp,0.0,30689
+tai_nan_loi_sach,so_chet,int64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,10
+tai_nan_loi_sach,so_bi_thuong,int64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,17
+tai_nan_loi_sach,co_trung_khoa,int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_loi_sach,co_ngay_loi,int64,cờ kiểm tra / lọc,0.0,1
+tai_nan_loi_sach,co_gio_loi,int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_loi_sach,gio_so,Int64,đặc trưng,0.2,24
+tai_nan_loi_sach,khung_gio,string,đặc trưng,0.2,7
+tai_nan_loi_sach,thu,Int64,đặc trưng,0.0,7
+tai_nan_loi_sach,cuoi_tuan,Int64,đặc trưng,0.0,2
+tai_nan_loi_sach,thang,Int64,đặc trưng,0.0,12
+tai_nan_loi_sach,vung,string,đặc trưng,0.0,4
+tai_nan_loi_sach,mua,string,đặc trưng,0.0,2
+tai_nan_loi_sach,dip_tet,string,đặc trưng,0.0,4
+tai_nan_loi_sach,giai_doan_covid,string,đặc trưng,0.0,3
+tai_nan_loi_sach,cap_duong,string,đặc trưng,0.0,7
+tai_nan_loi_sach,khu_vuc,string,đặc trưng,0.0,3
+tai_nan_loi_sach,co_nguoi_chet,Int64,nhãn,0.0,2
+tai_nan_loi_sach,gio_da_sua,Int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_loi_sach,co_gio_mac_dinh,Int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_loi_sach,thang_khong_tron,Int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_mo_rong_sach,nguon,str,khoá / truy vết,0.0,2
+tai_nan_mo_rong_sach,dong_goc,int64,khoá / truy vết,0.0,14272
+tai_nan_mo_rong_sach,so_thuong_nang,float64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,9
+tai_nan_mo_rong_sach,so_thuong_nhe,float64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,13
+tai_nan_mo_rong_sach,thiet_hai,float64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,162
+tai_nan_mo_rong_sach,phan_loai,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,5
+tai_nan_mo_rong_sach,pt1_nhom,string,đặc trưng,5.9,9
+tai_nan_mo_rong_sach,pt1_loai,string,đặc trưng,7.9,110
+tai_nan_mo_rong_sach,pt1_tinh_trang,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,58.8,3
+tai_nan_mo_rong_sach,pt1_gay_tn,float64,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",5.4,2
+tai_nan_mo_rong_sach,pt2_nhom,string,đặc trưng,26.5,9
+tai_nan_mo_rong_sach,pt2_loai,string,đặc trưng,28.3,108
+tai_nan_mo_rong_sach,pt2_tinh_trang,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,68.5,3
+tai_nan_mo_rong_sach,pt2_gay_tn,float64,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",25.8,2
+tai_nan_mo_rong_sach,pt3_nhom,string,đặc trưng,93.4,9
+tai_nan_mo_rong_sach,pt3_loai,string,đặc trưng,93.6,68
+tai_nan_mo_rong_sach,pt3_tinh_trang,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,97.3,3
+tai_nan_mo_rong_sach,pt3_gay_tn,float64,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",92.8,2
+tai_nan_mo_rong_sach,pt4_nhom,string,đặc trưng,98.9,7
+tai_nan_mo_rong_sach,pt4_loai,string,đặc trưng,98.9,32
+tai_nan_mo_rong_sach,pt4_tinh_trang,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,99.6,3
+tai_nan_mo_rong_sach,pt4_gay_tn,float64,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",98.8,2
+tai_nan_mo_rong_sach,pt5_nhom,string,đặc trưng,99.6,6
+tai_nan_mo_rong_sach,pt5_loai,string,đặc trưng,99.6,15
+tai_nan_mo_rong_sach,pt5_tinh_trang,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,99.8,3
+tai_nan_mo_rong_sach,pt5_gay_tn,float64,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",99.5,2
+tai_nan_mo_rong_sach,thoi_tiet,string,đặc trưng,0.0,8
+tai_nan_mo_rong_sach,mat_do_gt,string,đặc trưng,0.0,4
+tai_nan_mo_rong_sach,hinh_thuc_va_cham,string,đặc trưng,0.0,5
+tai_nan_mo_rong_sach,kieu_va_cham,string,đặc trưng,0.0,55
+tai_nan_mo_rong_sach,bo_tron,string,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",0.0,3
+tai_nan_mo_rong_sach,dang_duong,string,đặc trưng,0.0,14
+tai_nan_mo_rong_sach,loai_mat_duong,string,đặc trưng,0.0,5
+tai_nan_mo_rong_sach,do_rong_duong,string,đặc trưng,0.0,7
+tai_nan_mo_rong_sach,tinh_trang_mat_duong,string,đặc trưng,0.0,7
+tai_nan_mo_rong_sach,to_chuc_gt,string,đặc trưng,0.0,5
+tai_nan_mo_rong_sach,nut_gt,string,đặc trưng,0.0,8
+tai_nan_mo_rong_sach,vong_xuyen,string,đặc trưng,0.0,2
+tai_nan_mo_rong_sach,giao_duong_sat,string,đặc trưng,99.7,5
+tai_nan_mo_rong_sach,den_tin_hieu,string,đặc trưng,96.7,4
+tai_nan_mo_rong_sach,bien_bao,string,đặc trưng,0.0,3
+tai_nan_mo_rong_sach,den_chieu_sang,string,đặc trưng,0.0,3
+tai_nan_mo_rong_sach,nguyen_nhan,string,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",0.0,303
+tai_nan_mo_rong_sach,loi_vi_pham,string,"biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán",37.2,235
+tai_nan_mo_rong_sach,hinh_thuc_xu_ly,string,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,6
+tai_nan_mo_rong_sach,so_bi_can,float64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,4
+tai_nan_mo_rong_sach,co_lech_thuong_vong,int64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,2
+tai_nan_mo_rong_sach,thiet_hai_ngoai_lai,Int64,rò rỉ nhãn — không dùng làm đầu vào dự đoán,0.0,2
+tai_nan_mo_rong_sach,so_bi_can_ngoai_lai,Int64,cờ kiểm tra / lọc,0.0,2
+tai_nan_mo_rong_sach,tinh_nhap_day_du,Int64,cờ kiểm tra / lọc,0.0,2

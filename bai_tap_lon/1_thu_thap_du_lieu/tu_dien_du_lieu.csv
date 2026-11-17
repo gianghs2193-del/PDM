@@ -1,0 +1,56 @@
+﻿ten_cot_goc,ten_cot,nhom,kieu,mo_ta,co_o_nguon,ty_le_thieu_%,bang
+Ngày xảy ra tai nạn,ngay,Thời gian,ngày,Ngày xảy ra (dd/mm/yyyy),"2020, 2021, 8T2022",0.0,bang_loi
+Thời gian xảy ra tai nạn,gio,Thời gian,giờ,Giờ xảy ra (HH:MM:SS),"2020, 2021, 8T2022",0.2,bang_loi
+Địa điểm xảy ra tai nạn | Tỉnh/Thành phố,tinh,Địa điểm,phân loại,Tỉnh/thành phố,"2020, 2021, 8T2022",0.0,bang_loi
+Địa điểm xảy ra tai nạn | Quận/Huyện,huyen,Địa điểm,phân loại,Quận/huyện,"2020, 2021, 8T2022",0.0,bang_loi
+Địa điểm xảy ra tai nạn | Phường/Xã,xa,Địa điểm,phân loại,Phường/xã,"2020, 2021, 8T2022",2.5,bang_loi
+Địa điểm xảy ra tai nạn | Loại đường,loai_duong,Địa điểm,phân loại,Cấp đường (+ Nội thị/Nông thôn),"2020, 2021, 8T2022",12.4,bang_loi
+Địa điểm xảy ra tai nạn | Tên đường,ten_duong,Địa điểm,văn bản,Tên đường,"2020, 2021, 8T2022",28.0,bang_loi
+Địa điểm xảy ra tai nạn | KM,km,Địa điểm,văn bản,Lý trình / số nhà,"2020, 2021, 8T2022",26.6,bang_loi
+Địa điểm xảy ra tai nạn | Địa điểm,dia_diem,Địa điểm,văn bản,Địa chỉ đầy đủ,"2020, 2021, 8T2022",0.0,bang_loi
+Số người chết và bị thương | Số người chết,so_chet,Hậu quả,số nguyên,Số người chết,"2020, 2021, 8T2022",0.0,bang_loi
+Số người chết và bị thương | Số người bị thương,so_bi_thuong,Hậu quả,số nguyên,Tổng số người bị thương,"2020, 2021, 8T2022",0.0,bang_loi
+Số người chết và bị thương | Số người thương nặng,so_thuong_nang,Hậu quả,số nguyên,Số người bị thương nặng,"2020, 2021",0.0,bang_mo_rong
+Số người chết và bị thương | Số người thương nhẹ,so_thuong_nhe,Hậu quả,số nguyên,Số người bị thương nhẹ,"2020, 2021",0.0,bang_mo_rong
+Thiệt hại ước tính | Bằng số,thiet_hai,Hậu quả,số thực,Thiệt hại tài sản ước tính (triệu đồng — cột 'Bằng chữ' ghi 'Bốn triệu đồng chẵn' ứng với 4),"2020, 2021",0.0,bang_mo_rong
+Phân loại tai nạn,phan_loai,Hậu quả,phân loại có thứ tự,Mức độ: Va chạm GT → Đặc biệt nghiêm trọng,"2020, 2021",0.0,bang_mo_rong
+Phương tiện liên quan - PT1 | Nhóm PT,pt1_nhom,Phương tiện,phân loại,PT1: nhóm phương tiện,"2020, 2021",5.9,bang_mo_rong
+Phương tiện liên quan - PT1 | Phương tiện,pt1_loai,Phương tiện,phân loại,PT1: loại phương tiện chi tiết,"2020, 2021",7.9,bang_mo_rong
+Phương tiện liên quan - PT1 | Tình trạng phương tiện,pt1_tinh_trang,Phương tiện,phân loại,PT1: mức hư hỏng,"2020, 2021",58.8,bang_mo_rong
+Phương tiện liên quan - PT1 | Là Phương tiện gây TN,pt1_gay_tn,Phương tiện,nhị phân 0/1,PT1: 1 = phương tiện gây tai nạn,"2020, 2021",5.4,bang_mo_rong
+Phương tiện liên quan - PT2 | Nhóm PT,pt2_nhom,Phương tiện,phân loại,PT2: nhóm phương tiện,"2020, 2021",26.5,bang_mo_rong
+Phương tiện liên quan - PT2 | Phương tiện,pt2_loai,Phương tiện,phân loại,PT2: loại phương tiện chi tiết,"2020, 2021",28.3,bang_mo_rong
+Phương tiện liên quan - PT2 | Tình trạng phương tiện,pt2_tinh_trang,Phương tiện,phân loại,PT2: mức hư hỏng,"2020, 2021",68.5,bang_mo_rong
+Phương tiện liên quan - PT2 | Là Phương tiện gây TN,pt2_gay_tn,Phương tiện,nhị phân 0/1,PT2: 1 = phương tiện gây tai nạn,"2020, 2021",25.8,bang_mo_rong
+Phương tiện liên quan - PT3 | Nhóm PT,pt3_nhom,Phương tiện,phân loại,PT3: nhóm phương tiện,"2020, 2021",93.4,bang_mo_rong
+Phương tiện liên quan - PT3 | Phương tiện,pt3_loai,Phương tiện,phân loại,PT3: loại phương tiện chi tiết,"2020, 2021",93.6,bang_mo_rong
+Phương tiện liên quan - PT3 | Tình trạng phương tiện,pt3_tinh_trang,Phương tiện,phân loại,PT3: mức hư hỏng,"2020, 2021",97.3,bang_mo_rong
+Phương tiện liên quan - PT3 | Là Phương tiện gây TN,pt3_gay_tn,Phương tiện,nhị phân 0/1,PT3: 1 = phương tiện gây tai nạn,"2020, 2021",92.8,bang_mo_rong
+Phương tiện liên quan - PT4 | Nhóm PT,pt4_nhom,Phương tiện,phân loại,PT4: nhóm phương tiện,"2020, 2021",98.9,bang_mo_rong
+Phương tiện liên quan - PT4 | Phương tiện,pt4_loai,Phương tiện,phân loại,PT4: loại phương tiện chi tiết,"2020, 2021",98.9,bang_mo_rong
+Phương tiện liên quan - PT4 | Tình trạng phương tiện,pt4_tinh_trang,Phương tiện,phân loại,PT4: mức hư hỏng,"2020, 2021",99.6,bang_mo_rong
+Phương tiện liên quan - PT4 | Là Phương tiện gây TN,pt4_gay_tn,Phương tiện,nhị phân 0/1,PT4: 1 = phương tiện gây tai nạn,"2020, 2021",98.8,bang_mo_rong
+Phương tiện liên quan - PT5 | Nhóm PT,pt5_nhom,Phương tiện,phân loại,PT5: nhóm phương tiện,"2020, 2021",99.6,bang_mo_rong
+Phương tiện liên quan - PT5 | Phương tiện,pt5_loai,Phương tiện,phân loại,PT5: loại phương tiện chi tiết,"2020, 2021",99.6,bang_mo_rong
+Phương tiện liên quan - PT5 | Tình trạng phương tiện,pt5_tinh_trang,Phương tiện,phân loại,PT5: mức hư hỏng,"2020, 2021",99.8,bang_mo_rong
+Phương tiện liên quan - PT5 | Là Phương tiện gây TN,pt5_gay_tn,Phương tiện,nhị phân 0/1,PT5: 1 = phương tiện gây tai nạn,"2020, 2021",99.5,bang_mo_rong
+Tình trạng thời tiết,thoi_tiet,Môi trường,phân loại,Thời tiết / ánh sáng,"2020, 2021",45.6,bang_mo_rong
+Mật độ giao thông,mat_do_gt,Môi trường,phân loại có thứ tự,Vắng / Bình thường / Đông,"2020, 2021",57.1,bang_mo_rong
+Hình thức va chạm | Hình thức,hinh_thuc_va_cham,Va chạm,phân loại,"Xe-xe, người-xe, tự gây...","2020, 2021",25.7,bang_mo_rong
+Hình thức va chạm | Va chạm,kieu_va_cham,Va chạm,phân loại,Kiểu va chạm chi tiết,"2020, 2021",29.2,bang_mo_rong
+Gây tai nạn và bỏ trốn,bo_tron,Va chạm,phân loại,Có bỏ trốn / đã tìm thấy chưa,"2020, 2021",97.4,bang_mo_rong
+Hiện trạng đường | Dạng đường,dang_duong,Hạ tầng,phân loại,"Thẳng, cong, đèo dốc, cầu...","2020, 2021",41.7,bang_mo_rong
+Hiện trạng đường | Loại mặt đường,loai_mat_duong,Hạ tầng,phân loại,"Bê tông nhựa, xi măng, đất...","2020, 2021",41.4,bang_mo_rong
+Hiện trạng đường | Độ rộng đường,do_rong_duong,Hạ tầng,phân loại có thứ tự,Khoảng độ rộng,"2020, 2021",50.0,bang_mo_rong
+Hiện trạng đường | Tình trạng mặt đường,tinh_trang_mat_duong,Hạ tầng,phân loại,"Khô, ướt trơn...","2020, 2021",46.0,bang_mo_rong
+Hiện trạng đường | Tổ chức giao thông,to_chuc_gt,Hạ tầng,phân loại,"1 chiều, 2 chiều, đường đôi","2020, 2021",52.1,bang_mo_rong
+Hiện trạng đường | Nút giao thông,nut_gt,Hạ tầng,phân loại,"Ngã 3, ngã 4...","2020, 2021",78.7,bang_mo_rong
+Hiện trạng đường | Vòng xuyến,vong_xuyen,Hạ tầng,phân loại,Có / không,"2020, 2021",0.0,bang_mo_rong
+Hiện trạng đường | Giao cắt với đường sắt,giao_duong_sat,Hạ tầng,phân loại,Loại giao cắt,"2020, 2021",99.7,bang_mo_rong
+Báo hiệu giao thông | Đèn tín hiệu,den_tin_hieu,Báo hiệu,phân loại,Trạng thái đèn tín hiệu,"2020, 2021",96.7,bang_mo_rong
+Báo hiệu giao thông | Biển báo hiệu,bien_bao,Báo hiệu,phân loại,Có / không,"2020, 2021",79.5,bang_mo_rong
+Báo hiệu giao thông | Đèn chiếu sáng công cộng,den_chieu_sang,Báo hiệu,phân loại,Có / không,"2020, 2021",71.0,bang_mo_rong
+Nguyên nhân,nguyen_nhan,Nguyên nhân,phân loại,Nguyên nhân chính,"2020, 2021",32.2,bang_mo_rong
+Lỗi vi phạm,loi_vi_pham,Nguyên nhân,đa trị (ngăn bởi ;),Các lỗi vi phạm,"2020, 2021",37.2,bang_mo_rong
+Phương pháp xử lý | Hình thức xử lý,hinh_thuc_xu_ly,Xử lý,phân loại,Hình sự / hành chính...,"2020, 2021",63.9,bang_mo_rong
+Phương pháp xử lý | Số bị can,so_bi_can,Xử lý,số nguyên,Số bị can bị khởi tố,"2020, 2021",94.6,bang_mo_rong

@@ -1,0 +1,139 @@
+BÁO CÁO KIỂM TRA DỮ LIỆU THU THẬP
+======================================================================
+[4] Đọc bcthdb_thong_tin_tong_hop(2020).xlsx: sheet DSTN, 14,276 dòng × 138 cột
+[4] Đọc bcthdb_thong_tin_tong_hop(2021).xlsx: sheet DSTN, 11,408 dòng × 138 cột
+  Sheet 'TPHCM': 1766 bản ghi, 1766 trùng với DSTN -> tập con, KHÔNG lấy thêm
+  Sheet 'QL1': 163 bản ghi, 163 trùng với DSTN -> tập con, KHÔNG lấy thêm
+[4] Đọc bcthdb_thong_tin_tong_hop(8T2022).xlsx: sheet DSTN, 7,402 dòng × 12 cột
+[5] Tích hợp: 55 thuộc tính chung + 3 cột truy vết (nguon, file_goc, dong_goc) -> 33,086 bản ghi
+    2020: có 55/55 thuộc tính
+    2021: có 55/55 thuộc tính
+    8T2022: có 11/55 thuộc tính
+
+[6.1] Số bản ghi theo nguồn
+  2020   : 14,276 bản ghi | 138 cột gốc | ngày 15/12/2019 – 14/12/2020 (kỳ báo cáo 15/12/2019 – 14/12/2020)
+  2021   : 11,408 bản ghi | 138 cột gốc | ngày 15/12/2020 – 14/12/2021 (kỳ báo cáo 15/12/2020 – 14/12/2021)
+  8T2022 :  7,402 bản ghi | 12 cột gốc | ngày 15/12/2021 – 14/08/2022 (kỳ báo cáo 15/12/2021 – 14/08/2022)
+  TỔNG   : 33,086 bản ghi × 58 cột
+
+[6.2] Kiểu dữ liệu sau tích hợp
+  string         : 43 cột
+  float64        : 9 cột
+  int64          : 3 cột
+  str            : 2 cột
+  datetime64[us] : 1 cột
+
+[6.3] Dữ liệu thiếu (% ô trống) — chỉ tính trên nguồn CÓ cột đó
+  thuộc tính               2020    2021  8T2022   ('–' = nguồn không có cột này)
+  ngay                     0.0%   0.0%   0.0%
+  gio                      0.3%   0.1%   0.4%
+  tinh                     0.0%   0.0%   0.0%
+  huyen                    0.1%   0.0%   0.0%
+  xa                       1.7%   3.1%   3.3%
+  loai_duong              14.1%  11.6%  10.5%
+  ten_duong               31.8%  26.2%  23.4%
+  km                      29.0%  25.4%  23.8%
+  dia_diem                 0.0%   0.0%   0.0%
+  so_chet                  0.0%   0.0%   0.0%
+  so_bi_thuong             0.0%   0.0%   0.0%
+  so_thuong_nang           0.0%   0.0%    –   
+  so_thuong_nhe            0.0%   0.0%    –   
+  thiet_hai                0.0%   0.0%    –   
+  phan_loai                0.0%   0.0%    –   
+  pt1_nhom                 6.6%   5.0%    –   
+  pt1_loai                 8.7%   6.9%    –   
+  pt1_tinh_trang          56.2%  62.0%    –   
+  pt1_gay_tn               5.9%   4.6%    –   
+  pt2_nhom                27.3%  25.5%    –   
+  pt2_loai                29.1%  27.3%    –   
+  pt2_tinh_trang          66.5%  71.0%    –   
+  pt2_gay_tn              26.5%  25.0%    –   
+  pt3_nhom                93.7%  93.1%    –   
+  pt3_loai                93.9%  93.3%    –   
+  pt3_tinh_trang          97.1%  97.5%    –   
+  pt3_gay_tn              93.0%  92.6%    –   
+  pt4_nhom                99.0%  98.8%    –   
+  pt4_loai                99.0%  98.9%    –   
+  pt4_tinh_trang          99.5%  99.7%    –   
+  pt4_gay_tn              98.8%  98.7%    –   
+  pt5_nhom                99.6%  99.7%    –   
+  pt5_loai                99.6%  99.7%    –   
+  pt5_tinh_trang          99.8%  99.9%    –   
+  pt5_gay_tn              99.6%  99.5%    –   
+  thoi_tiet               46.2%  44.9%    –   
+  mat_do_gt               59.4%  54.1%    –   
+  hinh_thuc_va_cham       25.5%  25.9%    –   
+  kieu_va_cham            28.5%  30.0%    –   
+  bo_tron                 97.2%  97.6%    –   
+  dang_duong              42.5%  40.7%    –   
+  loai_mat_duong          42.2%  40.4%    –   
+  do_rong_duong           51.0%  48.8%    –   
+  tinh_trang_mat_duong    46.8%  44.9%    –   
+  to_chuc_gt              52.7%  51.3%    –   
+  nut_gt                  79.0%  78.3%    –   
+  vong_xuyen               0.0%   0.0%    –   
+  giao_duong_sat          99.7%  99.7%    –   
+  den_tin_hieu            97.0%  96.2%    –   
+  bien_bao                79.6%  79.3%    –   
+  den_chieu_sang          71.4%  70.5%    –   
+  nguyen_nhan             32.7%  31.5%    –   
+  loi_vi_pham             36.8%  37.7%    –   
+  hinh_thuc_xu_ly         65.9%  61.4%    –   
+  so_bi_can               95.8%  93.0%    –   
+  -> 24 thuộc tính thiếu > 50%: pt1_tinh_trang, pt2_tinh_trang, pt3_nhom, pt3_loai, pt3_tinh_trang, pt3_gay_tn, pt4_nhom, pt4_loai, pt4_tinh_trang, pt4_gay_tn, pt5_nhom, pt5_loai, pt5_tinh_trang, pt5_gay_tn, mat_do_gt, bo_tron, to_chuc_gt, nut_gt, giao_duong_sat, den_tin_hieu, bien_bao, den_chieu_sang, hinh_thuc_xu_ly, so_bi_can
+
+[6.4] Trùng lặp
+  Trùng hoàn toàn mọi thuộc tính      : 7 bản ghi
+  Trùng theo khoá (ngày, giờ, tỉnh, huyện, địa điểm, số chết, số bị thương): 22 bản ghi
+  Nhóm trùng nằm ở 2 nguồn khác nhau  : 0
+
+[6.5] Tính hợp lệ
+  Thiếu / sai định dạng ngày                                : 0
+  Ngày nằm ngoài kỳ báo cáo                                 : 0
+  Giờ sai định dạng                                         : 90
+  Giá trị số âm                                             : 0
+  Bị thương ≠ thương nặng + thương nhẹ                      : 103
+  Phân loại nhẹ nhưng có người chết                         : 16
+  Phân loại rất/đặc biệt nghiêm trọng nhưng 0 thương vong   : 3
+  'Là PT gây TN' khác 0/1                                   : 0
+  Thiệt hại (triệu đồng): trung vị 2, P99 100, lớn nhất 26,599,590 | > 10.000 triệu (10 tỷ): 2 bản ghi -> nghi nhập sai, xử lý ở bước tiền xử lý
+  Số tỉnh/thành xuất hiện: 63 (Việt Nam có 63 tỉnh/thành trước 07/2025)
+  Giá trị 'Phân loại tai nạn': {'Nghiêm trọng': 11461, 'Va chạm giao thông': 10065, 'Ít nghiêm trọng': 3419, 'Rất nghiêm trọng': 677, 'Đặc biệt nghiêm trọng': 62}
+
+[6.6] Đối chiếu số liệu chính
+  2020   : 14,276 vụ | 6,584 người chết | 10,636 người bị thương
+  2021   : 11,408 vụ | 5,716 người chết |  8,043 người bị thương
+  8T2022 :  7,402 vụ | 4,204 người chết |  4,943 người bị thương
+
+[7] Đã lưu: du_lieu_tich_hop.csv, du_lieu_tich_hop.parquet, tu_dien_du_lieu.csv, kiem_tra.txt (33,086 dòng × 62 cột)
+[7] Lược đồ hai tầng (bang_loi + bang_mo_rong, mỗi bảng có .csv và .parquet):
+    bang_loi    : 33,086 dòng × 17 cột = 3 cột truy vết + 11 thuộc tính chung + 3 cờ | nguồn: 2020, 2021, 8T2022
+                  thuộc tính: ngay, gio, tinh, huyen, xa, loai_duong, ten_duong, km, dia_diem, so_chet, so_bi_thuong
+    bang_mo_rong: 25,684 dòng × 47 cột = 2 cột khoá + 44 thuộc tính + 1 cờ | nguồn: 2020, 2021
+    Khoá nối (nguon, dong_goc): duy nhất trên 33,086 bản ghi; nối 2 bảng tái tạo đúng bảng phẳng 33,086 × 62
+[7] Đặc trưng suy ra (nhóm A — chỉ từ thuộc tính có ở cả 3 nguồn):
+    Thêm 12 đặc trưng suy ra vào bang_loi -> 33,086 dòng × 29 cột (cột gốc giữ nguyên):
+    - gio_so (từ gio): giờ trong ngày 0–23 = số đứng trước dấu ':' đầu tiên; trống nếu gio trống
+        phân bố: 0=929; 1=621; 2=439; 3=395; 4=507; 5=766; 6=963; 7=1,053; 8=1,018; 9=1,064; 10=1,125; 11=1,235; 12=1,069; 13=1,372; 14=1,676; 15=1,814; 16=1,817; 17=1,710; 18=2,267; 19=2,446; 20=2,556; 21=2,486; 22=2,108; 23=1,578; (trống)=72
+    - khung_gio (từ gio_so): 00-04, 04-06, 06-09, 09-16, 16-19, 19-22, 22-24 (gồm mốc đầu, không gồm mốc cuối)
+        phân bố: 00-04=2,384; 04-06=1,273; 06-09=3,034; 09-16=9,355; 16-19=5,794; 19-22=7,488; 22-24=3,686; (trống)=72
+    - thu (từ ngay): thứ trong tuần: 1 = Thứ Hai … 7 = Chủ nhật
+        phân bố: 1=4,381; 2=4,451; 3=4,362; 4=4,391; 5=4,558; 6=5,360; 7=5,583
+    - cuoi_tuan (từ ngay): 1 nếu Thứ Bảy hoặc Chủ nhật
+        phân bố: 0=22,143; 1=10,943
+    - thang (từ ngay): tháng dương lịch 1–12
+        phân bố: 1=3,329; 2=2,478; 3=3,141; 4=3,068; 5=3,077; 6=2,852; 7=2,806; 8=2,132; 9=1,849; 10=2,463; 11=2,679; 12=3,212
+    - vung (từ tinh): Bắc / Duyên hải miền Trung / Tây Nguyên / Nam Bộ
+        phân bố: Bắc=8,517; Duyên hải miền Trung=7,435; Nam Bộ=14,882; Tây Nguyên=2,251; (trống)=1
+    - mua (từ vung, thang): Mùa mưa nếu tháng thuộc: Bắc 5–10, DH miền Trung 9–12, Tây Nguyên 5–10, Nam Bộ 5–11; còn lại Mùa khô (xấp xỉ)
+        phân bố: Mùa khô=17,771; Mùa mưa=15,314; (trống)=1
+    - dip_tet (từ ngay): Trong đợt nghỉ / Trước Tết 7 ngày / Sau Tết 7 ngày / Không; đợt nghỉ: 23–29/01/2020, 10–16/02/2021, 29/01–06/02/2022
+        phân bố: Không=31,056; Sau Tết 7 ngày=542; Trong đợt nghỉ=782; Trước Tết 7 ngày=706
+    - giai_doan_covid (từ ngay): Giãn cách 04/2020 (01–22/04/2020) / Giãn cách 07-09/2021 (19/07–30/09/2021) / Không — mốc cấp quốc gia, xấp xỉ
+        phân bố: Giãn cách 04/2020=622; Giãn cách 07-09/2021=1,291; Không=31,173
+    - cap_duong (từ loai_duong): phần trước ' - ': Cao tốc, Quốc lộ, Đường tỉnh, Đường huyện, Đường xã, Khác
+        phân bố: Cao tốc=491; Khác=582; Quốc lộ=11,735; Đường huyện=7,517; Đường tỉnh=6,201; Đường xã=2,450; (trống)=4,110
+    - khu_vuc (từ loai_duong): phần sau ' - ': Nội thị / Nông thôn; trống nếu nguồn không ghi
+        phân bố: Nông thôn=3,592; Nội thị=5,193; (trống)=24,301
+    - co_nguoi_chet (từ so_chet): 1 nếu so_chet > 0
+        phân bố: 0=17,567; 1=15,519

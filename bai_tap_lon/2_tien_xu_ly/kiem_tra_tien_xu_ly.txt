@@ -1,0 +1,120 @@
+BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU
+======================================================================
+[0] Đọc đầu vào từ D:\PDM\bai_tap_lon\1_thu_thap_du_lieu
+    bang_loi: 33,086 dòng × 29 cột | bang_mo_rong: 25,684 dòng × 47 cột
+
+[1] Bản ghi trùng hoàn toàn
+    So trên 66 cột nội dung (bỏ khoá, tên file, cờ): 7 bản lặp -> XOÁ, giữ bản đầu
+      xoá: nguồn 2020, dòng Excel 10860
+      xoá: nguồn 2020, dòng Excel 11625
+      xoá: nguồn 2020, dòng Excel 11630
+      xoá: nguồn 2020, dòng Excel 11787
+      xoá: nguồn 2020, dòng Excel 13926
+      xoá: nguồn 8T2022, dòng Excel 119
+      xoá: nguồn 8T2022, dòng Excel 6176
+    Bảng lõi: 33,086 -> 33,079 | bảng mở rộng: 25,684 -> 25,679
+    Trùng theo khoá (co_trung_khoa = 1) còn lại: 15 bản ghi -> GIỮ, chỉ gắn cờ (có thể là hai vụ khác nhau)
+
+[2] Giờ xảy ra
+    Sai định dạng: 90 | sửa được (chèn dấu ':' thiếu): 90, vd 18:0030 -> 18:00:30; 15:0030 -> 15:00:30; 11:0000 -> 11:00:00; 22:0000 -> 22:00:00; 13:0000 -> 13:00:00
+    Không sửa được, giữ nguyên: 0
+    Đối chiếu với đặc trưng gio_so đã rút ở bước 1: 0 giá trị lệch
+    Giờ đúng 00:00:00 (nghi là giá trị mặc định khi không rõ giờ): 66 -> gắn cờ co_gio_mac_dinh, không sửa | giờ trống: 72 -> giữ trống
+
+[3] Tháng không trọn
+    Dữ liệu từ 15/12/2019 đến 14/08/2022 -> tháng không trọn: 2019-12, 2022-08 | 1,043 bản ghi gắn cờ thang_khong_tron (loại hoặc chú thích khi vẽ theo tháng)
+    cap_duong: 4,110 ô trống -> 'Không rõ' (cột gốc loai_duong giữ nguyên)
+    khu_vuc: 24,299 ô trống -> 'Không rõ' (cột gốc loai_duong giữ nguyên)
+
+[4] Chuẩn hoá nhãn và văn bản (chỉ đổi cách viết, không đổi nghĩa)
+  a) Gộp cách viết chỉ khác chữ hoa / thường, khoảng trắng, vị trí dấu thanh (Hòa / Hoà) -> cách viết hay gặp nhất:
+    tinh      : 63 -> 63 giá trị khác nhau | 0 ô đổi
+    huyen     : sửa dấu thanh đặt sai ở 394 ô, vd “Hòai Nhơn” -> “Hoài Nhơn”; “Hòai Ân” -> “Hoài Ân”
+    huyen     : 674 -> 674 giá trị khác nhau | 0 ô đổi
+    xa        : sửa dấu thanh đặt sai ở 191 ô, vd “Cẩm Hòang” -> “Cẩm Hoàng”; “Hòai Châu Bắc” -> “Hoài Châu Bắc”
+    xa        : 4,905 -> 4,903 giá trị khác nhau | 15 ô đổi | vd “Phú GIa” / “Phú Gia” -> “Phú Gia”; “Sơn Thuỷ” / “Sơn Thủy” -> “Sơn Thủy”
+    ten_duong : chuẩn hoá mã Unicode (NFC) ở 256 ô — chữ nhìn giống hệt nhưng máy coi là khác
+    ten_duong : sửa dấu thanh đặt sai ở 5 ô, vd “Giao lộ Bùi Công Minh - Đường quy họach số 16” -> “Giao lộ Bùi Công Minh - Đường quy hoạch số 16”; “Giao lộ TL44A - Đường quy họach số 7” -> “Giao lộ TL44A - Đường quy hoạch số 7”
+    ten_duong : 6,469 -> 5,793 giá trị khác nhau | 1,779 ô đổi | vd “22 THÁNG 12” / “22 tháng 12” -> “22 tháng 12”; “23 Tháng 8” / “23 tháng 8” -> “23 tháng 8”; “2C” / “2c” -> “2c”
+    km        : chuẩn hoá mã Unicode (NFC) ở 342 ô — chữ nhìn giống hệt nhưng máy coi là khác
+    km        : sửa dấu thanh đặt sai ở 1 ô, vd “Đọan 4 Tuyến Tránh Quốc Lộ 60 Thuộc Ấp Bình Thới” -> “Đoạn 4 Tuyến Tránh Quốc Lộ 60 Thuộc Ấp Bình Thới”
+    km        : 21,027 -> 20,876 giá trị khác nhau | 163 ô đổi | vd “220 BIS Nguyễn Hữu Cảnh” / “220 Bis Nguyễn Hữu Cảnh” -> “220 Bis Nguyễn Hữu Cảnh”; “CẦU BÌNH LỢI” / “Cầu Bình Lợi” -> “Cầu Bình Lợi”; “CẦU BÌNH ĐIỀN” / “Cầu Bình Điền” -> “Cầu Bình Điền”
+    dia_diem  : chuẩn hoá mã Unicode (NFC) ở 422 ô — chữ nhìn giống hệt nhưng máy coi là khác
+    dia_diem  : sửa dấu thanh đặt sai ở 491 ô, vd “0 + 500, Hòan Lão, Bố Trạch, Quảng Bình” -> “0 + 500, Hoàn Lão, Bố Trạch, Quảng Bình”; “11 + 700, Quốc Lộ 1A, Hòang Đồng, Lạng Sơn, Lạng Sơn” -> “11 + 700, Quốc Lộ 1A, Hoàng Đồng, Lạng Sơn, Lạng Sơn”
+    dia_diem  : 30,744 -> 30,689 giá trị khác nhau | 52 ô đổi | vd “10B, TÔN ĐỨC THẮNG, Bến Nghé, 1, Hồ Chí Minh” / “10B, Tôn Đức Thắng, Bến Nghé, 1, Hồ Chí Minh” -> “10B, Tôn Đức Thắng, Bến Nghé, 1, Hồ Chí Minh”; “1A, TÔN ĐỨC THẮNG, Bến Nghé, 1, Hồ Chí Minh” / “1A, Tôn Đức Thắng, Bến Nghé, 1, Hồ Chí Minh” -> “1A, Tôn Đức Thắng, Bến Nghé, 1, Hồ Chí Minh”; “220 BIS Nguyễn Hữu Cảnh, 22, Bình Thạnh, Hồ Chí Minh” / “220 Bis Nguyễn Hữu Cảnh, 22, Bình Thạnh, Hồ Chí Minh” -> “220 Bis Nguyễn Hữu Cảnh, 22, Bình Thạnh, Hồ Chí Minh”
+  b) Cột nhiều giá trị (ngăn bởi ';'): tách, sửa chính tả, bỏ phần lặp, ghép lại:
+    nguyen_nhan : 367 -> 302 giá trị khác nhau | 4,289 ô đổi | vd “Đi không đúng chiều đường, phần đương, làn đường quy định” -> “Đi không đúng chiều đường, phần đường, làn đường quy định”; “Đi không đúng chiều đường, phần đương, làn đường quy định” -> “Đi không đúng chiều đường, phần đường, làn đường quy định”
+    loi_vi_pham : 301 -> 235 giá trị khác nhau | 397 ô đổi | vd “Không giữ khoảng cách an toàn với xe chạy liền trước; Không giữ khoảng cách an toàn với xe chạy liền trước” -> “Không giữ khoảng cách an toàn với xe chạy liền trước”; “Không chú ý quan sát; Không chú ý quan sát” -> “Không chú ý quan sát”
+    Sửa chính tả: 'phần đương' -> 'phần đường'; 'rẻ phải' -> 'rẽ phải'
+  c) Nhãn đồng nghĩa và lỗi chính tả trong cột phân loại:
+    kieu_va_cham: “Các trường hợp khác” -> “Trường hợp khác” (416 ô)
+    kieu_va_cham: sửa chính tả ở 121 ô
+  d) Bản ghi cần nhóm xem tay (không tự sửa):
+    Trùng theo khoá: 15 bản ghi (cùng ngày, giờ, tỉnh, huyện, địa điểm, số chết, số bị thương với một bản ghi trước đó)
+      nguồn 2020, dòng Excel 1594: 13/11/2020 15:30:00, Đông Anh, Hà Nội, chết 1, bị thương 0
+      nguồn 2020, dòng Excel 2606: 22/10/2020 23:45:00, Tân Bình, Hồ Chí Minh, chết 0, bị thương 0
+      nguồn 2020, dòng Excel 2885: 16/10/2020 01:45:00, Ba Đình, Hà Nội, chết 0, bị thương 1
+      nguồn 2020, dòng Excel 2902: 15/10/2020 21:30:00, Mê Linh, Hà Nội, chết 1, bị thương 0
+      nguồn 2020, dòng Excel 3124: 10/10/2020 15:45:00, 6, Hồ Chí Minh, chết 0, bị thương 1
+      nguồn 2020, dòng Excel 4076: 19/09/2020 14:40:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
+      nguồn 2020, dòng Excel 8741: 27/05/2020 09:30:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
+      nguồn 2020, dòng Excel 8742: 27/05/2020 09:30:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
+      nguồn 2020, dòng Excel 10888: 27/03/2020 19:00:00, Cái Bè, Tiền Giang, chết 0, bị thương 1
+      nguồn 2020, dòng Excel 10993: 24/03/2020 21:45:00, Hoàng Mai, Hà Nội, chết 0, bị thương 1
+      nguồn 2020, dòng Excel 12354: 14/02/2020 07:30:00, Chương Mỹ, Hà Nội, chết 1, bị thương 0
+      nguồn 2020, dòng Excel 13362: 09/01/2020 02:30:00, 1, Hồ Chí Minh, chết 0, bị thương 0
+      nguồn 2020, dòng Excel 14188: 17/12/2019 12:10:00, Bình Chánh, Hồ Chí Minh, chết 0, bị thương 1
+      nguồn 2021, dòng Excel 10581: 03/01/2021 22:45:00, Thủ Đức, Hồ Chí Minh, chết 0, bị thương 1
+      nguồn 2021, dòng Excel 10728: 01/01/2021 05:00:00, Bắc Tân Uyên, Bình Dương, chết 1, bị thương 0
+    Thiếu tỉnh: nguồn 8T2022, dòng Excel 6464 -> giữ, vùng và mùa để trống
+
+[5] Ngoại lai
+    nguồn 2021, dòng Excel 4703: 64,990 triệu đồng -> để trống
+    nguồn 2021, dòng Excel 7916: 26,599,590 triệu đồng -> để trống
+    2 giá trị > 10,000 triệu đồng -> trống, gắn cờ thiet_hai_ngoai_lai; giữ bản ghi
+    Mâu thuẫn thương vong / phân loại (co_lech_thuong_vong = 1): 121 bản ghi -> KHÔNG sửa số liệu; loại khỏi phân tích dùng phan_loai
+    nguồn 2021, dòng Excel 5713: 33 bị can trong một vụ -> để trống
+    nguồn 2021, dòng Excel 8319: 34 bị can trong một vụ -> để trống
+    nguồn 2021, dòng Excel 10306: 85 bị can trong một vụ -> để trống
+    3 giá trị so_bi_can > 10 -> trống, gắn cờ so_bi_can_ngoai_lai; giữ bản ghi
+
+[6] Tỉnh nhập đủ thông tin điều kiện
+    Tiêu chí: tỉ lệ trống của thoi_tiet theo tỉnh < 20% -> 16/63 tỉnh, 4,041/25,679 bản ghi (cờ tinh_nhap_day_du)
+    Tỉnh nhập đủ: An Giang, Bà Rịa - Vũng Tàu, Bình Phước, Bắc Kạn, Bắc Ninh, Hà Tĩnh, Hòa Bình, Hậu Giang, Kiên Giang, Long An, Lâm Đồng, Ninh Thuận, Quảng Nam, Sơn La, Trà Vinh, Điện Biên
+    Tỉnh trống > 90%: Bến Tre, Hưng Yên, Ninh Bình, Quảng Ninh, Sóc Trăng, Thanh Hóa, Vĩnh Long
+
+[7] Ô trống
+  a) Trống mang nghĩa 'không có' (giả định theo cách nhập liệu của nguồn):
+    so_bi_can: 24,283 ô trống -> 0 (không có bị can); 3 ô ngoại lai giữ trống
+    bo_tron: 25,004 ô trống -> 'Không bỏ trốn'
+    pt1..pt5 trống = không có phương tiện thứ i -> giữ trống
+    giao_duong_sat, den_tin_hieu: không phân biệt được 'không có' với 'không nhập' -> giữ trống
+  b) Trống do đơn vị không nhập -> 'Không rõ' (14 thuộc tính phân loại):
+    thoi_tiet             : 11,708 ô (45.6%)
+    mat_do_gt             : 14,650 ô (57.1%)
+    hinh_thuc_va_cham     :  6,589 ô (25.7%)
+    kieu_va_cham          :  7,496 ô (29.2%)
+    dang_duong            : 10,706 ô (41.7%)
+    loai_mat_duong        : 10,634 ô (41.4%)
+    do_rong_duong         : 12,843 ô (50.0%)
+    tinh_trang_mat_duong  : 11,801 ô (46.0%)
+    to_chuc_gt            : 13,374 ô (52.1%)
+    nut_gt                : 20,202 ô (78.7%)
+    bien_bao              : 20,405 ô (79.5%)
+    den_chieu_sang        : 18,225 ô (71.0%)
+    nguyen_nhan           :  8,266 ô (32.2%)
+    hinh_thuc_xu_ly       : 16,398 ô (63.9%)
+
+[8] Kiểm tra toàn vẹn và lưu
+    Khoá duy nhất ở cả hai bảng; mọi bản ghi bảng mở rộng đều có trong bảng lõi
+    tai_nan_loi_sach    : 33,079 dòng × 32 cột (trước: 33,086 dòng)
+    tai_nan_mo_rong_sach: 25,679 dòng × 50 cột (trước: 25,684 dòng)
+    Vụ có người chết: 15,518/33,079 (46.9%)
+    [khoá / truy vết] 5 cột: nguon, file_goc, dong_goc, nguon, dong_goc
+    [thuộc tính gốc — đã có đặc trưng suy ra thay thế] 3 cột: ngay, gio, loai_duong
+    [đặc trưng] 37 cột: tinh, gio_so, khung_gio, thu, cuoi_tuan, thang, vung, mua, dip_tet, giai_doan_covid, cap_duong, khu_vuc, pt1_nhom, pt1_loai, pt2_nhom, pt2_loai, pt3_nhom, pt3_loai, pt4_nhom, pt4_loai, pt5_nhom, pt5_loai, thoi_tiet, mat_do_gt, hinh_thuc_va_cham, kieu_va_cham, dang_duong, loai_mat_duong, do_rong_duong, tinh_trang_mat_duong, to_chuc_gt, nut_gt, vong_xuyen, giao_duong_sat, den_tin_hieu, bien_bao, den_chieu_sang
+    [địa bàn chi tiết / văn bản — không dùng trực tiếp] 5 cột: huyen, xa, ten_duong, km, dia_diem
+    [rò rỉ nhãn — không dùng làm đầu vào dự đoán] 15 cột: so_chet, so_bi_thuong, so_thuong_nang, so_thuong_nhe, thiet_hai, phan_loai, pt1_tinh_trang, pt2_tinh_trang, pt3_tinh_trang, pt4_tinh_trang, pt5_tinh_trang, hinh_thuc_xu_ly, so_bi_can, co_lech_thuong_vong, thiet_hai_ngoai_lai
+    [cờ kiểm tra / lọc] 8 cột: co_trung_khoa, co_ngay_loi, co_gio_loi, gio_da_sua, co_gio_mac_dinh, thang_khong_tron, so_bi_can_ngoai_lai, tinh_nhap_day_du
+    [nhãn] 1 cột: co_nguoi_chet
+    [biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán] 8 cột: pt1_gay_tn, pt2_gay_tn, pt3_gay_tn, pt4_gay_tn, pt5_gay_tn, bo_tron, nguyen_nhan, loi_vi_pham

@@ -1,0 +1,50 @@
+BÁO CÁO PIPELINE TIỀN XỬ LÝ
+======================================================================
+[0] Đọc dữ liệu | scikit-learn 1.9.1
+    bảng lõi 33,079 vụ -> train 26,463, test 6,616 (cùng cách chia bước 3)
+    Pipeline chỉ gồm tiền xử lý; KHÔNG huấn luyện mô hình, KHÔNG đánh giá trên test ở bước này
+
+[1] Hướng du_bao: dựng pipeline 2 bước
+    dac_trung_dong : TaoDacTrungDong
+    chon_ma_hoa    : ColumnTransformer
+    Nhóm đặc trưng đầu vào (10): mua, cap_duong, gio_so, thang, giao_lo, so_nha, dem_x_quoc_lo, tinh, khoa_huyen, khoa_duong
+[2] Học (fit) trên 26,463 dòng train, kiểm tra khớp với ky_nghe_dac_trung.py
+    xong sau 1.0 giây | đầu ra 22 cột
+    ma trận test từ pipeline (6616, 22) vs test_fe (6616, 22): TRÙNG KHỚP
+[3] Lưu, nạp lại, biến đổi thử một bản ghi mới (không có nhãn)
+    Lưu pipeline_tien_xu_ly_du_bao.joblib (691 KB); nạp lại cho kết quả trùng bản gốc
+    Bản ghi mới: 21h30 02/09/2022, Quốc lộ 3, Km 25+300, Ngã tư Phù Lỗ, Sóc Sơn, Hà Nội ->
+      mua_Mùa mưa                      = 1
+      cap_duong_Quốc lộ                = 1
+      gio_so_sin                       = -0.7071
+      gio_so_cos                       = 0.7071
+      thang_sin                        = -0.866
+      thang_cos                        = -0.5
+      giao_lo                          = 1
+      dem_x_quoc_lo                    = 1
+      tinh                             = 0.4153
+      khoa_huyen                       = 0.6166
+      khoa_duong                       = 0.1924
+      tan_suat_khoa_huyen              = 4.92
+      tan_suat_khoa_duong              = 1.946
+      (9 cột còn lại = 0)
+
+[4] Hướng khong_dia_ly: dựng pipeline 2 bước
+    dac_trung_dong : TaoDacTrungDong
+    chon_ma_hoa    : ColumnTransformer
+    Nhóm đặc trưng đầu vào (9): vung, dip_tet, cap_duong, khu_vuc, thang, giao_lo, cau, ly_trinh, so_nha
+[5] Học (fit) trên 26,463 dòng train, kiểm tra khớp với ky_nghe_dac_trung.py
+    xong sau 0.7 giây | đầu ra 25 cột
+    ma trận test từ pipeline (6616, 25) vs test_fe_khong_dia_ly (6616, 25): TRÙNG KHỚP
+[6] Lưu, nạp lại, biến đổi thử một bản ghi mới (không có nhãn)
+    Lưu pipeline_tien_xu_ly_khong_dia_ly.joblib (4 KB); nạp lại cho kết quả trùng bản gốc
+    Bản ghi mới: 21h30 02/09/2022, Quốc lộ 3, Km 25+300, Ngã tư Phù Lỗ, Sóc Sơn, Hà Nội ->
+      vung_Bắc                         = 1
+      dip_tet_Không                    = 1
+      cap_duong_Quốc lộ                = 1
+      khu_vuc_Nông thôn                = 1
+      thang_sin                        = -0.866
+      thang_cos                        = -0.5
+      giao_lo                          = 1
+      ly_trinh                         = 1
+      (17 cột còn lại = 0)
