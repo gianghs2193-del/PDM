@@ -19,7 +19,7 @@ giãn cách COVID, cấp đường, khu vực, có người chết). Đây là c
 
 Chạy (từ thư mục D:/PDM):
        python -m venv .venv
-       .venv/Scripts/python -m pip install -r requirements.txt   # pandas openpyxl pyarrow gdown
+       .venv/Scripts/python -m pip install -r requirements.txt   # pandas openpyxl gdown sqlalchemy psycopg
        .venv/Scripts/python bai_tap_lon/1_thu_thap_du_lieu/thu_thap.py
 """
 from __future__ import annotations
@@ -35,6 +35,8 @@ from pathlib import Path
 import pandas as pd
 
 GOC = Path(__file__).resolve().parent
+sys.path.insert(0, str(GOC.parent))  # để import csdl.py (bai_tap_lon/) — đọc/ghi bảng trong PostgreSQL
+import csdl  # noqa: E402
 log = logging.getLogger("thu_thap")
 THU_MUC_GOC = GOC.parent.parent / "data_drive"  # D:\PDM\data_drive — nơi lưu file Excel gốc
 DRIVE_URL = "https://drive.google.com/drive/folders/1V--WoKpABVX5qaAwLwhHRF_dTOqM-1LI"
@@ -478,7 +480,7 @@ def rut_dac_trung_chung(loi: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
 
 def luu_bang(df: pd.DataFrame, ten: str) -> None:
     df.to_csv(GOC / f"{ten}.csv", index=False, encoding="utf-8-sig")
-    df.to_parquet(GOC / f"{ten}.parquet", index=False)
+    csdl.ghi(df, "thu_thap", ten)                      # PostgreSQL: thu_thap.<ten>
 
 
 # ---------------------------------------------------------------------------
@@ -547,18 +549,20 @@ def main() -> None:
         lambda c: round(df.loc[df["nguon"].isin(nguon_co[c]), c].isna().mean() * 100, 1))
     tu_dien["bang"] = tu_dien["ten_cot"].map(lambda c: "bang_loi" if c in loi.columns else "bang_mo_rong")
     tu_dien.to_csv(GOC / "tu_dien_du_lieu.csv", index=False, encoding="utf-8-sig")
-    bc.append("\n[7] Đã lưu: du_lieu_tich_hop.csv, du_lieu_tich_hop.parquet, tu_dien_du_lieu.csv, kiem_tra.txt"
+    csdl.ghi(tu_dien, "thu_thap", "tu_dien_du_lieu")
+    bc.append(f"\n[7] Đã lưu: du_lieu_tich_hop.csv, tu_dien_du_lieu.csv, kiem_tra.txt + bảng thu_thap.* trong {csdl.mo_ta()}"
               f" ({df.shape[0]:,d} dòng × {df.shape[1]} cột)")
-    bc.append("[7] Lược đồ hai tầng (bang_loi + bang_mo_rong, mỗi bảng có .csv và .parquet):")
+    bc.append("[7] Lược đồ hai tầng (bang_loi + bang_mo_rong, mỗi bảng có file .csv và bảng thu_thap.<tên> trong CSDL):")
     bc += dong_tach
     bc.append("[7] Đặc trưng suy ra (nhóm A — chỉ từ thuộc tính có ở cả 3 nguồn):")
     bc += dong_dt
     (GOC / "kiem_tra.txt").write_text("\n".join(bc), encoding="utf-8")
-    log.info("    Dữ liệu tích hợp: %s dòng × %d cột (CSV UTF-8 có BOM + Parquet); từ điển: %d thuộc tính",
+    log.info("    Dữ liệu tích hợp: %s dòng × %d cột (CSV UTF-8 có BOM + PostgreSQL); từ điển: %d thuộc tính",
              f"{df.shape[0]:,d}", df.shape[1], len(tu_dien))
-    for ten in ("du_lieu_tich_hop.csv", "du_lieu_tich_hop.parquet", "bang_loi.csv", "bang_loi.parquet",
-                "bang_mo_rong.csv", "bang_mo_rong.parquet", "tu_dien_du_lieu.csv", "kiem_tra.txt"):
+    for ten in ("du_lieu_tich_hop.csv", "bang_loi.csv", "bang_mo_rong.csv", "tu_dien_du_lieu.csv", "kiem_tra.txt"):
         ghi_file_da_luu(GOC / ten)
+    log.info("    CSDL %s: thu_thap.du_lieu_tich_hop, thu_thap.bang_loi, thu_thap.bang_mo_rong, "
+             "thu_thap.tu_dien_du_lieu", csdl.mo_ta())
 
 
 if __name__ == "__main__":

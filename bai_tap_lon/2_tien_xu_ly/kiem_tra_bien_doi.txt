@@ -1,7 +1,7 @@
 BÁO CÁO BIẾN ĐỔI DỮ LIỆU
 ======================================================================
-[0] Đọc D:\PDM\bai_tap_lon\2_tien_xu_ly\tai_nan_loi_sach.parquet
-    33,079 vụ × 32 cột | scikit-learn 1.9.1, pandas 3.1.1
+[0] Đọc bảng tien_xu_ly.tai_nan_loi_sach trong postgresql+psycopg://postgres@localhost:5432/tngt
+    33,062 vụ × 33 cột | scikit-learn 1.9.1, pandas 3.1.1
 
 [1] Chọn đặc trưng đầu vào (chỉ bảng lõi)
     Danh nghĩa -> One-Hot (8): khung_gio, vung, mua, dip_tet, giai_doan_covid, cap_duong, khu_vuc, tinh
@@ -10,16 +10,13 @@ BÁO CÁO BIẾN ĐỔI DỮ LIỆU
     Không dùng so_chet, so_bi_thuong: rò rỉ nhãn (nhãn được tính từ so_chet)
     Không dùng huyen, xa, ten_duong, km, dia_diem: văn bản / quá chi tiết (hàng nghìn giá trị)
     Không dùng ngay, gio, loai_duong: đã có đặc trưng suy ra thay thế
-    Không dùng co_*, gio_da_sua, thang_khong_tron, tinh_nhap_day_du: cờ kiểm tra, chỉ dùng để lọc
+    Không dùng co_*, gio_da_sua, thang_khong_tron, tinh_ghi_ca_vu_nhe: cờ kiểm tra, chỉ dùng để lọc
 
 [2] Chuẩn bị: điền 'Không rõ' cho biến phân loại, biến chu kỳ -> sin/cos
-    khung_gio: 72 ô 'Không rõ' -> thành một cột one-hot riêng
-    vung: 1 ô 'Không rõ' -> thành một cột one-hot riêng
-    mua: 1 ô 'Không rõ' -> thành một cột one-hot riêng
-    cap_duong: 4,110 ô 'Không rõ' -> thành một cột one-hot riêng
-    khu_vuc: 24,299 ô 'Không rõ' -> thành một cột one-hot riêng
-    tinh: 1 ô 'Không rõ' -> thành một cột one-hot riêng
-    gio_so trống 72 vụ -> sin = cos = 0, cờ gio_thieu = 1
+    khung_gio: 71 ô 'Không rõ' -> thành một cột one-hot riêng
+    cap_duong: 4,107 ô 'Không rõ' -> thành một cột one-hot riêng
+    khu_vuc: 24,290 ô 'Không rõ' -> thành một cột one-hot riêng
+    gio_so trống 71 vụ -> sin = cos = 0, cờ gio_thieu = 1
     vd giờ  0: sin = +0.000, cos = +1.000
     vd giờ  6: sin = +1.000, cos = +0.000
     vd giờ 12: sin = +0.000, cos = -1.000
@@ -28,26 +25,26 @@ BÁO CÁO BIẾN ĐỔI DỮ LIỆU
 
 [3] Chia train / test — làm TRƯỚC khi học bộ mã hoá
     Cách chia: ngẫu nhiên 80%/20%, phân tầng theo co_nguoi_chet, random_state=42
-    train: 26,463 vụ | có người chết 46.9%
-    test :  6,616 vụ | có người chết 46.9%
+    train: 26,449 vụ | có người chết 46.9%
+    test :  6,613 vụ | có người chết 46.9%
 
 [4] Mã hoá One-Hot: học (fit) trên train, áp dụng (transform) cho cả train và test
     khung_gio       :  8 giá trị ->  8 cột | vd 00-04, 04-06, 06-09, 09-16…
-    vung            :  5 giá trị ->  5 cột | vd Bắc, Duyên hải miền Trung, Không rõ, Nam Bộ…
-    mua             :  3 giá trị ->  3 cột | Không rõ, Mùa khô, Mùa mưa
+    vung            :  4 giá trị ->  4 cột | Bắc, Duyên hải miền Trung, Nam Bộ, Tây Nguyên
+    mua             :  2 giá trị ->  2 cột | Mùa khô, Mùa mưa
     dip_tet         :  4 giá trị ->  4 cột | Không, Sau Tết 7 ngày, Trong đợt nghỉ, Trước Tết 7 ngày
     giai_doan_covid :  3 giá trị ->  3 cột | Giãn cách 04/2020, Giãn cách 07-09/2021, Không
     cap_duong       :  7 giá trị ->  7 cột | vd Cao tốc, Khác, Không rõ, Quốc lộ…
     khu_vuc         :  3 giá trị ->  3 cột | Không rõ, Nông thôn, Nội thị
-    tinh            : 64 giá trị -> 64 cột | vd An Giang, Bà Rịa - Vũng Tàu, Bình Dương, Bình Phước…
-    Tổng: 105 cột đặc trưng = 97 cột one-hot + 8 cột số
+    tinh            : 63 giá trị -> 63 cột | vd An Giang, Bà Rịa - Vũng Tàu, Bình Dương, Bình Phước…
+    Tổng: 102 cột đặc trưng = 94 cột one-hot + 8 cột số
     handle_unknown='ignore': giá trị chỉ có ở test (chưa thấy khi học) -> toàn 0, không làm lỗi
     Không dùng Label Encoding cho biến danh nghĩa: sẽ tạo thứ tự giả (vd Bắc=0 < Nam Bộ=3)
     Không StandardScaler ở ma trận này: one-hot là 0/1, sin/cos đã nằm trong [-1, 1]
-    Lưu train (26,463 × 105), test (6,616 × 105), bo_ma_hoa.joblib
+    Lưu train (26,449 × 102), test (6,613 × 102), bo_ma_hoa.joblib
 
 [5] Dạng giao dịch cho luật kết hợp (toàn bộ dữ liệu, không cần chia)
-    33,079 giao dịch × 94 item; bỏ 6 item 'Không rõ' (ô trống không phải một điều kiện)
+    33,062 giao dịch × 94 item; bỏ 3 item 'Không rõ' (ô trống không phải một điều kiện)
     Trung bình mỗi giao dịch có 8.5 item
 
 [6] Hồ sơ tỉnh + chuẩn hoá z-score cho phân cụm
@@ -55,10 +52,10 @@ BÁO CÁO BIẾN ĐỔI DỮ LIỆU
     log_so_vu = log(1 + số vụ): số vụ lệch mạnh (TP.HCM, Hà Nội rất lớn)
     StandardScaler: z = (x - trung bình) / độ lệch chuẩn -> mọi chỉ số cùng thang đo, trung bình 0, độ lệch 1
     Vì sao Standard mà không Min-Max: phân cụm dựa trên khoảng cách; Min-Max bị một tỉnh cực trị kéo dãn cả thang
-      log_so_vu       : gốc 4.043–8.681 -> z -2.09–+3.40
+      log_so_vu       : gốc 4.043–8.680 -> z -2.09–+3.40
       ti_le_co_chet   : gốc 0.216–0.980 -> z -1.89–+2.11
       chet_moi_vu     : gốc 0.230–1.064 -> z -1.87–+2.13
       ti_le_dem       : gốc 0.307–0.621 -> z -2.91–+2.04
-      ti_le_cuoi_tuan : gốc 0.224–0.385 -> z -3.12–+1.89
+      ti_le_cuoi_tuan : gốc 0.224–0.386 -> z -3.12–+1.90
       ti_le_quoc_lo   : gốc 0.145–0.845 -> z -2.27–+1.73
       ti_le_dip_tet   : gốc 0.018–0.172 -> z -1.81–+3.91

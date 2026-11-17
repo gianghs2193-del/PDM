@@ -1,6 +1,10 @@
 pandas
+numpy
 openpyxl
-pyarrow
+sqlalchemy
+psycopg[binary]
 gdown
+scikit-learn
+joblib
 streamlit
 altair

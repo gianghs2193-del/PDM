@@ -1,0 +1,146 @@
+BÁO CÁO PHÂN LOẠI
+======================================================================
+[0] Đọc dữ liệu | scikit-learn 1.9.1
+    bảng lõi 33,062 vụ -> train 26,449, test 6,613
+    Lưu ý: test chỉ được dùng ở bước [4], sau khi đã chọn xong mô hình và tham số
+
+######################################################################
+HƯỚNG DU_BAO — 19 cột đặc trưng sau tiền xử lý
+
+[1] Chia dữ liệu: dùng lại cách chia của bien_doi.py
+    train 26,449 vụ (46.9% có người chết) | test 6,613 vụ (46.9%)
+
+[2] Chọn mô hình
+    Dummy (luôn đoán lớp nhiều nhất): mốc tối thiểu, mô hình nào không vượt mốc này là vô dụng
+    Logistic Regression: tuyến tính, dễ giải thích (hệ số) — cần chuẩn hoá
+    Decision Tree: luật if-else, xử lý phi tuyến, dễ quá khớp
+    Random Forest: nhiều cây bỏ phiếu, giảm quá khớp, khó giải thích hơn
+    SVM nhân RBF: tìm biên phân tách phi tuyến — cần chuẩn hoá, chậm với dữ liệu lớn (mẫu 6,000 vụ)
+
+[3]+[5] Huấn luyện và kiểm định chéo 5 lần trên train (tham số mặc định)
+    mô hình                 Accuracy Precision    Recall        F1       AUC   thời gian
+    Dummy                      0.531     0.000     0.000     0.000     0.500       1 giây
+    Logistic Regression        0.697     0.688     0.649     0.668     0.762       1 giây
+    Decision Tree              0.607     0.582     0.579     0.580     0.606       1 giây
+    Random Forest              0.689     0.678     0.643     0.660     0.753       8 giây
+    SVM (RBF)                  0.674     0.658     0.638     0.648     0.723       6 giây  (mẫu)
+
+[6] Tinh chỉnh siêu tham số: GridSearchCV, 3 lần chia, chấm theo ROC-AUC, chỉ trên train
+    Logistic Regression   : 4 tổ hợp -> tốt nhất {'C': 10} | AUC kiểm định 0.7594 | 10 giây
+    Decision Tree         : 8 tổ hợp -> tốt nhất {'max_depth': 6, 'min_samples_leaf': 20} | AUC kiểm định 0.7505 | 5 giây
+    Random Forest         : 6 tổ hợp -> tốt nhất {'max_depth': 10, 'min_samples_leaf': 5} | AUC kiểm định 0.7640 | 21 giây
+    SVM (RBF)             : 4 tổ hợp -> tốt nhất {'C': 0.5, 'gamma': 0.02} | AUC kiểm định 0.7360 | 5 giây  (mẫu)
+
+[4] Đánh giá MỘT lần trên test (mô hình đã tinh chỉnh, học lại trên toàn bộ train)
+    mô hình                 Accuracy Precision    Recall        F1       AUC
+    Dummy                      0.531     0.000     0.000     0.000     0.500
+    Logistic Regression        0.701     0.691     0.657     0.674     0.764
+    Decision Tree              0.698     0.699     0.626     0.660     0.760
+    Random Forest              0.703     0.694     0.658     0.676     0.771
+    SVM (RBF)                  0.701     0.693     0.650     0.671     0.762
+    -> Mô hình được chọn (AUC kiểm định cao nhất, không dựa vào test): Random Forest
+    Ma trận nhầm lẫn của mô hình được chọn (ngưỡng 0,5):
+                       đoán KHÔNG chết   đoán CÓ chết
+      thật KHÔNG chết             2,610            900
+      thật CÓ chết                1,061          2,042
+    Bỏ sót 1,061/3,103 vụ có người chết (34%); báo nhầm 900/3,510 vụ không chết
+
+[7] Diễn giải mô hình
+    Random Forest: 10 đặc trưng quan trọng nhất (mức giảm tạp chất Gini):
+      khoa_huyen                         0.366
+      tinh                               0.204
+      tan_suat_khoa_huyen                0.133
+      khoa_duong                         0.092
+      tan_suat_khoa_duong                0.033
+      gio_so_cos                         0.027
+      thang_sin                          0.026
+      gio_so_sin                         0.024
+      cap_duong_Đường huyện              0.021
+      thang_cos                          0.018
+    Logistic Regression (đặc trưng đã chuẩn hoá): hệ số dương = tăng khả năng có người chết
+      khoa_huyen                         +0.740
+      tinh                               +0.201
+      thang_sin                          +0.113
+      gio_so_cos                         +0.098
+      khoa_duong                         +0.096
+      cap_duong_Cao tốc                  -0.151
+      tan_suat_khoa_huyen                -0.104
+      cap_duong_Không rõ                 -0.035
+      cap_duong_Đường huyện              -0.032
+      khu_vuc_Nội thị                    -0.020
+    Lưu mo_hinh_phan_loai_du_bao.joblib = tiền xử lý + Random Forest (dùng: .predict_proba(dòng bảng lõi sạch))
+
+######################################################################
+HƯỚNG KHONG_DIA_LY — 40 cột đặc trưng sau tiền xử lý
+
+[1] Chia dữ liệu: dùng lại cách chia của bien_doi.py
+    train 26,449 vụ (46.9% có người chết) | test 6,613 vụ (46.9%)
+
+[2] Chọn mô hình
+    Dummy (luôn đoán lớp nhiều nhất): mốc tối thiểu, mô hình nào không vượt mốc này là vô dụng
+    Logistic Regression: tuyến tính, dễ giải thích (hệ số) — cần chuẩn hoá
+    Decision Tree: luật if-else, xử lý phi tuyến, dễ quá khớp
+    Random Forest: nhiều cây bỏ phiếu, giảm quá khớp, khó giải thích hơn
+    SVM nhân RBF: tìm biên phân tách phi tuyến — cần chuẩn hoá, chậm với dữ liệu lớn (mẫu 6,000 vụ)
+
+[3]+[5] Huấn luyện và kiểm định chéo 5 lần trên train (tham số mặc định)
+    mô hình                 Accuracy Precision    Recall        F1       AUC   thời gian
+    Dummy                      0.531     0.000     0.000     0.000     0.500       0 giây
+    Logistic Regression        0.607     0.582     0.578     0.580     0.653       1 giây
+    Decision Tree              0.546     0.517     0.492     0.504     0.548       1 giây
+    Random Forest              0.582     0.557     0.537     0.547     0.606       7 giây
+    SVM (RBF)                  0.596     0.568     0.574     0.570     0.633       7 giây  (mẫu)
+
+[6] Tinh chỉnh siêu tham số: GridSearchCV, 3 lần chia, chấm theo ROC-AUC, chỉ trên train
+    Logistic Regression   : 4 tổ hợp -> tốt nhất {'C': 0.1} | AUC kiểm định 0.6525 | 1 giây
+    Decision Tree         : 8 tổ hợp -> tốt nhất {'max_depth': 6, 'min_samples_leaf': 100} | AUC kiểm định 0.6486 | 2 giây
+    Random Forest         : 6 tổ hợp -> tốt nhất {'max_depth': 10, 'min_samples_leaf': 5} | AUC kiểm định 0.6613 | 16 giây
+    SVM (RBF)             : 4 tổ hợp -> tốt nhất {'C': 0.5, 'gamma': 0.02} | AUC kiểm định 0.6368 | 7 giây  (mẫu)
+
+[4] Đánh giá MỘT lần trên test (mô hình đã tinh chỉnh, học lại trên toàn bộ train)
+    mô hình                 Accuracy Precision    Recall        F1       AUC
+    Dummy                      0.531     0.000     0.000     0.000     0.500
+    Logistic Regression        0.600     0.574     0.568     0.571     0.644
+    Decision Tree              0.606     0.565     0.702     0.626     0.648
+    Random Forest              0.609     0.583     0.586     0.585     0.653
+    SVM (RBF)                  0.602     0.579     0.559     0.569     0.643
+    -> Mô hình được chọn (AUC kiểm định cao nhất, không dựa vào test): Random Forest
+    Ma trận nhầm lẫn của mô hình được chọn (ngưỡng 0,5):
+                       đoán KHÔNG chết   đoán CÓ chết
+      thật KHÔNG chết             2,213          1,297
+      thật CÓ chết                1,286          1,817
+    Bỏ sót 1,286/3,103 vụ có người chết (41%); báo nhầm 1,297/3,510 vụ không chết
+
+[7] Diễn giải mô hình
+    Random Forest: 10 đặc trưng quan trọng nhất (mức giảm tạp chất Gini):
+      cap_duong_Đường huyện              0.115
+      ly_trinh                           0.101
+      cap_duong_Quốc lộ                  0.073
+      khu_vuc_Nội thị                    0.064
+      so_nha                             0.062
+      gio_so_sin                         0.046
+      gio_so_cos                         0.045
+      thang_sin                          0.044
+      vung_Tây Nguyên                    0.038
+      thu_sin                            0.037
+    Logistic Regression (đặc trưng đã chuẩn hoá): hệ số dương = tăng khả năng có người chết
+      ly_trinh                           +0.143
+      gio_so_cos                         +0.133
+      vung_Tây Nguyên                    +0.131
+      cap_duong_Quốc lộ                  +0.111
+      khu_vuc_Nông thôn                  +0.105
+      so_nha                             -0.181
+      cap_duong_Cao tốc                  -0.163
+      cap_duong_Đường huyện              -0.162
+      khu_vuc_Nội thị                    -0.128
+      khung_gio_19-22                    -0.069
+    Lưu mo_hinh_phan_loai_khong_dia_ly.joblib = tiền xử lý + Random Forest (dùng: .predict_proba(dòng bảng lõi sạch))
+
+[8] Tóm tắt AUC trên test
+huong                du_bao  khong_dia_ly
+mo_hinh                                  
+Decision Tree         0.760         0.648
+Dummy                 0.500         0.500
+Logistic Regression   0.764         0.644
+Random Forest         0.771         0.653
+SVM (RBF)             0.762         0.643

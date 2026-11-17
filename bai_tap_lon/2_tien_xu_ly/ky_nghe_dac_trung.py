@@ -1,8 +1,8 @@
 """KỸ NGHỆ ĐẶC TRƯNG (Feature Engineering) — Tai nạn giao thông đường bộ Việt Nam (2020 – 8 tháng 2022)
 
 Giai đoạn: 2 – Tiền xử lý (phần kỹ nghệ đặc trưng, chạy sau bien_doi.py trong cùng thư mục)
-Đầu vào  : tai_nan_loi_sach.parquet (tien_xu_ly.py) — chỉ BẢNG LÕI
-           train.parquet / test.parquet (bien_doi.py) — chỉ lấy khoá để giữ ĐÚNG cách chia train/test
+Đầu vào  : bảng tien_xu_ly.tai_nan_loi_sach (tien_xu_ly.py) — chỉ BẢNG LÕI
+           bảng tien_xu_ly.train / tien_xu_ly.test (bien_doi.py) — chỉ lấy khoá để giữ ĐÚNG cách chia train/test
 Đầu ra   : train_fe / test_fe       hướng "du_bao": bộ đặc trưng dự báo tốt nhất (có mã hoá địa lý) + nhãn
            train_fe_khong_dia_ly / test_fe_khong_dia_ly   hướng giải thích: bỏ hẳn tỉnh/huyện/đường
            bo_dac_trung.joblib      bộ biến đổi đã học trên train (bước mô hình dùng lại)
@@ -17,8 +17,9 @@ Các thao tác:
     2. Mã hoá có học (chỉ học trên phần train của từng lần kiểm định):
          - Target Encoding cho tỉnh / huyện / đường (sklearn TargetEncoder, tự chia chéo bên trong)
          - Mã hoá tần suất: số vụ cùng huyện / cùng đường trong tập học (lớp BoDemTanSuat)
-    3. So sánh 4 bộ đặc trưng bằng kiểm định chéo 5 lần trên TRAIN (không đụng test)
-    4. Chọn lọc đặc trưng: tráo từng nhóm cột (permutation) trên tập kiểm định nội bộ, bỏ nhóm không đóng góp
+    3. So sánh 4 bộ đặc trưng bằng kiểm định chéo 5 lần trên TRAIN (không đụng test), thêm kiểm định theo thời gian
+       trong train (học 2020–2021, chấm phần 8T2022 của train)
+    4. Chọn lọc đặc trưng: tráo từng nhóm cột (permutation) trên 3 cách chia × 10 lần, bỏ nhóm không đóng góp rõ
     5. Với từng hướng: học bộ biến đổi cuối trên toàn bộ train, áp dụng cho test, lưu
 
 Chạy (từ D:/PDM, sau bien_doi.py):
@@ -47,6 +48,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, TargetEncoder
 
 GOC = Path(__file__).resolve().parent
+sys.path.insert(0, str(GOC.parent))  # để import csdl.py (bai_tap_lon/) — đọc/ghi bảng trong PostgreSQL
+import csdl  # noqa: E402
 VAO = GOC                       # cùng thư mục với tien_xu_ly.py
 BC: list[str] = ["BÁO CÁO KỸ NGHỆ ĐẶC TRƯNG", "=" * 70]
 
@@ -54,7 +57,10 @@ KHOA = ["nguon", "dong_goc"]
 NHAN = "co_nguoi_chet"
 KHONG_RO = "Không rõ"
 HAT_GIONG, SO_FOLD = 42, 5
-NGUONG_BO = 0.0001          # nhóm cột bị bỏ nếu AUC giảm không vượt quá max(2 × độ lệch chuẩn, mức này)
+NGUONG_BO = 0.0005          # nhóm cột bị bỏ nếu AUC giảm trung bình không vượt quá max(2 × sai số chuẩn, mức này);
+                            # 0,0005 AUC = mức đóng góp nhỏ nhất coi là có ý nghĩa thực tế
+SO_CACH_CHIA, SO_LAN_TRAO = 3, 10   # tráo cột trên 3 cách chia 80/20 khác nhau × 10 lần mỗi cách -> 30 phép đo
+NGUON_THU_TG = "8T2022"     # kiểm định theo thời gian TRONG train: học 2020–2021, thử trên phần 8T2022 của train
 DUNG_SAI_AUC = 0.002        # bản rút gọn được chấp nhận nếu AUC không thấp hơn bản đầy đủ quá mức này
 
 DANH_NGHIA = ["khung_gio", "vung", "mua", "dip_tet", "giai_doan_covid", "cap_duong", "khu_vuc"]
@@ -90,12 +96,12 @@ def p(dong: str = "") -> None:
 
 
 def doc_bang(thu_muc: Path, ten: str) -> pd.DataFrame:
-    return pd.read_parquet(thu_muc / f"{ten}.parquet")
+    return csdl.doc(thu_muc, ten)               # thư mục 2_tien_xu_ly -> schema tien_xu_ly
 
 
 def luu_bang(df: pd.DataFrame, ten: str) -> None:
     df.to_csv(GOC / f"{ten}.csv", index=False, encoding="utf-8-sig")
-    df.to_parquet(GOC / f"{ten}.parquet", index=False)
+    csdl.ghi(df, "tien_xu_ly", ten)
 
 
 # ---------------------------------------------------------------------------
@@ -268,34 +274,52 @@ def kiem_dinh_cheo(train: pd.DataFrame, bo: str, nhom: dict[str, list[str]], ten
     return {"auc": kq["test_roc_auc"].mean(), "auc_sd": kq["test_roc_auc"].std(), "f1": kq["test_f1"].mean()}
 
 
-def trao_nhom(train: pd.DataFrame, bo: str, nhom: dict[str, list[str]], ten_mh: str) -> pd.DataFrame:
-    """Permutation importance theo NHÓM cột: tráo ngẫu nhiên giá trị của nhóm trên tập kiểm định nội bộ,
-    đo AUC giảm bao nhiêu. Cặp sin/cos được tráo cùng nhau để không phá vỡ ý nghĩa giờ/tháng/thứ."""
+def trao_nhom(train: pd.DataFrame, bo: str, nhom: dict[str, list[str]], ten_mh: str) -> tuple[pd.DataFrame, float]:
+    """Permutation importance theo NHÓM cột: trên phần giữ lại 20% của train, tráo ngẫu nhiên giá trị của một nhóm
+    giữa các vụ rồi đo AUC giảm bao nhiêu. Lặp trên SO_CACH_CHIA cách chia × SO_LAN_TRAO lần tráo để kết quả ổn định.
+    Cặp sin/cos được tráo cùng nhau để không phá vỡ ý nghĩa giờ/tháng/thứ."""
     cot = [c for cs in nhom.values() for c in cs]
-    hoc, kd = train_test_split(train, test_size=0.2, stratify=train[NHAN], random_state=HAT_GIONG)
-    mh = mo_hinh(ten_mh, bo, nhom).fit(hoc[cot], hoc[NHAN])
-    goc = roc_auc_score(kd[NHAN], mh.predict_proba(kd[cot])[:, 1])
     rng = np.random.default_rng(HAT_GIONG)
-    dong = []
-    for ten, cs in nhom.items():
-        giam = []
-        for _ in range(5):
-            x = kd[cot].copy()
-            thu_tu = rng.permutation(len(x))
-            x[cs] = x[cs].iloc[thu_tu].to_numpy()
-            giam.append(goc - roc_auc_score(kd[NHAN], mh.predict_proba(x)[:, 1]))
-        dong.append({"nhom": ten, "auc_giam": float(np.mean(giam)), "sd": float(np.std(giam))})
-    return pd.DataFrame(dong).sort_values("auc_giam", ascending=False).reset_index(drop=True), goc
+    giam: dict[str, list[float]] = {ten: [] for ten in nhom}
+    co_ich: dict[str, int] = {ten: 0 for ten in nhom}
+    goc_ds = []
+    for k in range(SO_CACH_CHIA):
+        hoc, kd = train_test_split(train, test_size=0.2, stratify=train[NHAN], random_state=HAT_GIONG + k)
+        mh = mo_hinh(ten_mh, bo, nhom).fit(hoc[cot], hoc[NHAN])
+        goc = roc_auc_score(kd[NHAN], mh.predict_proba(kd[cot])[:, 1])
+        goc_ds.append(goc)
+        for ten, cs in nhom.items():
+            lan = []
+            for _ in range(SO_LAN_TRAO):
+                x = kd[cot].copy()
+                x[cs] = x[cs].iloc[rng.permutation(len(x))].to_numpy()
+                lan.append(goc - roc_auc_score(kd[NHAN], mh.predict_proba(x)[:, 1]))
+            giam[ten] += lan
+            co_ich[ten] += int(np.mean(lan) > NGUONG_BO)
+    dong = [{"nhom": ten, "auc_giam": float(np.mean(v)), "sd": float(np.std(v, ddof=1) / np.sqrt(len(v))),
+             "so_lan_co_ich": co_ich[ten]} for ten, v in giam.items()]
+    return pd.DataFrame(dong).sort_values("auc_giam", ascending=False).reset_index(drop=True), float(np.mean(goc_ds))
+
+
+def kiem_dinh_thoi_gian(train: pd.DataFrame, bo: str, nhom: dict[str, list[str]], ten_mh: str) -> float:
+    """Học trên các vụ 2020–2021 của train, chấm trên các vụ 8 tháng 2022 của train (tập test không bị đụng tới).
+    Cho biết điểm có giữ được khi dự báo một giai đoạn CHƯA thấy, thay vì các vụ trộn lẫn cùng thời kỳ."""
+    cot = [c for cs in nhom.values() for c in cs]
+    hoc, kd = train[train["nguon"] != NGUON_THU_TG], train[train["nguon"] == NGUON_THU_TG]
+    mh = mo_hinh(ten_mh, bo, nhom).fit(hoc[cot], hoc[NHAN])
+    return float(roc_auc_score(kd[NHAN], mh.predict_proba(kd[cot])[:, 1]))
 
 
 def chon_loc(train: pd.DataFrame, bo: str, mh: str, auc_day_du: float) -> tuple[dict[str, list[str]], pd.DataFrame]:
     nhom = nhom_cua_bo(bo)
     qt, auc_goc = trao_nhom(train, bo, nhom, mh)
-    p(f"    AUC trên phần giữ lại khi chưa tráo: {auc_goc:.4f}")
+    p(f"    AUC trên phần giữ lại khi chưa tráo (trung bình {SO_CACH_CHIA} cách chia): {auc_goc:.4f}")
+    p(f"    Mỗi nhóm: {SO_CACH_CHIA} cách chia × {SO_LAN_TRAO} lần tráo = {SO_CACH_CHIA * SO_LAN_TRAO} phép đo;"
+      " ± là sai số chuẩn của trung bình")
     qt["bo"] = qt["auc_giam"] <= np.maximum(2 * qt["sd"], NGUONG_BO)
     for _, r in qt.iterrows():
-        p(f"    {r['nhom']:16s}: AUC giảm {r['auc_giam']:+.4f} (±{r['sd']:.4f})"
-          + ("   <- không đóng góp rõ ràng" if r["bo"] else ""))
+        p(f"    {r['nhom']:16s}: AUC giảm {r['auc_giam']:+.4f} (±{r['sd']:.4f}) | có ích ở {r['so_lan_co_ich']}/{SO_CACH_CHIA}"
+          " cách chia" + ("   <- không đóng góp rõ ràng" if r["bo"] else ""))
     bo_di = qt.loc[qt["bo"], "nhom"].tolist()
     if not bo_di:
         p("    Không có nhóm nào dưới ngưỡng -> giữ toàn bộ")
@@ -326,7 +350,8 @@ def luu_huong(huong: str, bo: str, mh: str, nhom: dict[str, list[str]],
         p("    TargetEncoder: train được mã hoá bằng chia chéo nội bộ (mỗi dòng nhận tỉ lệ có chết tính từ các dòng "
           "KHÁC), test dùng tỉ lệ học từ toàn bộ train -> không rò rỉ nhãn")
     for ten, t, X in ((f"train_fe{hau_to}", train, X_train), (f"test_fe{hau_to}", test, X_test)):
-        luu_bang(pd.concat([t[KHOA], pd.DataFrame(X, columns=ten_cot), t[[NHAN]]], axis=1), ten)
+        khoa = t[KHOA].astype({"dong_goc": "int64"})        # cùng kiểu với bảng lõi -> khoá ngoại trong CSDL hợp lệ
+        luu_bang(pd.concat([khoa, pd.DataFrame(X, columns=ten_cot), t[[NHAN]]], axis=1), ten)
     return {"bo_dac_trung": bd, "bo": bo, "mo_hinh_goi_y": mh, "nhom": nhom, "ten_cot": ten_cot}
 
 
@@ -377,6 +402,20 @@ def main() -> None:
         bang[bo] = kq
         p(f"    {bo:14s} {so_cot:6d} | {kq['logistic']['auc']:.4f}±{kq['logistic']['auc_sd']:.3f} "
           f"{kq['logistic']['f1']:.3f} | {kq['histgb']['auc']:.4f}±{kq['histgb']['auc_sd']:.3f} {kq['histgb']['f1']:.3f}")
+    p(f"    Kiểm định theo thời gian, vẫn chỉ trong train: học {int((train['nguon'] != NGUON_THU_TG).sum()):,d} vụ"
+      f" 2020–2021, chấm {int((train['nguon'] == NGUON_THU_TG).sum()):,d} vụ {NGUON_THU_TG}")
+    p(f"    {'bộ đặc trưng':14s} | {'Logistic: ngẫu nhiên -> thời gian':>34s} | {'HistGB: ngẫu nhiên -> thời gian':>32s}")
+    for bo in BO_DAC_TRUNG:
+        nhom = nhom_cua_bo(bo)
+        for mh in ("logistic", "histgb"):
+            bang[bo][mh]["auc_tg"] = kiem_dinh_thoi_gian(train, bo, nhom, mh)
+        p(f"    {bo:14s} | {bang[bo]['logistic']['auc']:.4f} -> {bang[bo]['logistic']['auc_tg']:.4f}"
+          f"{'':16s} | {bang[bo]['histgb']['auc']:.4f} -> {bang[bo]['histgb']['auc_tg']:.4f}")
+    giam_tg = {b: bang[b]["histgb"]["auc"] - bang[b]["histgb"]["auc_tg"] for b in bang}
+    p(f"    AUC giảm {min(giam_tg.values()):.3f}–{max(giam_tg.values()):.3f} khi chấm giai đoạn chưa thấy; thứ hạng 4 bộ"
+      + (" giữ nguyên" if sorted(bang, key=lambda b: bang[b]["histgb"]["auc"]) ==
+         sorted(bang, key=lambda b: bang[b]["histgb"]["auc_tg"]) else " THAY ĐỔI")
+      + " -> kiểm định ngẫu nhiên hơi lạc quan, nhưng kết luận so sánh không đổi")
     tot = max(((bo, mh) for bo in bang for mh in bang[bo]), key=lambda t: bang[t[0]][t[1]]["auc"])
     bo, mh = tot
     p(f"    -> Bộ tốt nhất: {bo} với {mh} (AUC {bang[bo][mh]['auc']:.4f})")
@@ -390,14 +429,14 @@ def main() -> None:
 
     ket_qua = {}
     for so, (huong, bo_h, mh_h) in enumerate((("du_bao", bo, mh), ("khong_dia_ly", "khong_dia_ly", mh_kdl)), 3):
-        p(f"\n[{so}] Chọn lọc đặc trưng — hướng {huong} (bộ {bo_h}, {mh_h}): tráo từng nhóm cột trên 20% train giữ lại")
+        p(f"\n[{so}] Chọn lọc đặc trưng — hướng {huong} (bộ {bo_h}, {mh_h}): tráo từng nhóm cột trên phần giữ lại của train")
         nhom, qt = chon_loc(train, bo_h, mh_h, bang[bo_h][mh_h]["auc"])
         ket_qua[huong] = luu_huong(huong, bo_h, mh_h, nhom, train, test)
         ket_qua[huong]["tam_quan_trong"] = qt
 
     joblib.dump({"huong": ket_qua, "ket_qua_cv": bang}, GOC / "bo_dac_trung.joblib")
     (GOC / "kiem_tra_ky_nghe_dac_trung.txt").write_text("\n".join(BC), encoding="utf-8")
-    print("    Đã lưu train_fe, test_fe, train_fe_khong_dia_ly, test_fe_khong_dia_ly (.csv/.parquet), "
+    print("    Đã lưu train_fe, test_fe, train_fe_khong_dia_ly, test_fe_khong_dia_ly (.csv + bảng tien_xu_ly.*), "
           "bo_dac_trung.joblib, kiem_tra_ky_nghe_dac_trung.txt")
 
 

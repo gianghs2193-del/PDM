@@ -10,8 +10,8 @@ Bước mô hình sau này chỉ cần gắn thêm bộ phân lớp vào cuối:
                              khoá địa lý)            đã chọn ở kỹ nghệ đặc trưng)
 
 Giai đoạn: 2 – Tiền xử lý (bước cuối, chạy sau ky_nghe_dac_trung.py trong cùng thư mục)
-Đầu vào  : tai_nan_loi_sach.parquet (tien_xu_ly.py), train/test.parquet (khoá chia, bien_doi.py),
-           bo_dac_trung.joblib + test_fe*.parquet (ky_nghe_dac_trung.py)
+Đầu vào  : bảng tien_xu_ly.tai_nan_loi_sach (tien_xu_ly.py), tien_xu_ly.train/test (khoá chia, bien_doi.py),
+           bo_dac_trung.joblib + bảng tien_xu_ly.test_fe* (ky_nghe_dac_trung.py)
 Đầu ra   : pipeline_tien_xu_ly_du_bao.joblib, pipeline_tien_xu_ly_khong_dia_ly.joblib,
            kiem_tra_pipeline.txt (cũng in ra màn hình)
 

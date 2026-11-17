@@ -1,0 +1,40 @@
+BÁO CÁO PHÂN CỤM TỈNH
+======================================================================
+[1] Dữ liệu: 63 tỉnh × 7 chỉ số z-score | scikit-learn 1.9.1
+    Chỉ số: quy mô (log số vụ), tỉ lệ vụ có người chết, số chết mỗi vụ, tỉ lệ vụ ban đêm, tỉ lệ vụ cuối tuần, tỉ lệ vụ trên quốc lộ, tỉ lệ vụ dịp Tết
+
+[2] PCA — nén về 2 chiều để quan sát
+    Phương sai giải thích: PC1 36.0%, PC2 26.5% -> 2 thành phần giữ 62.5% thông tin; cần 4 thành phần để giữ 80%
+    PC1 gắn nhiều nhất với: số chết mỗi vụ (+0.57), tỉ lệ vụ có người chết (+0.57), quy mô (log số vụ) (-0.44)
+    PC2 gắn nhiều nhất với: tỉ lệ vụ ban đêm (+0.60), tỉ lệ vụ cuối tuần (+0.49), tỉ lệ vụ trên quốc lộ (-0.40)
+
+[3] K-Means, k = 2..8 (n_init = 50)
+      k   inertia  giảm so với k-1  silhouette
+      2     339.5                        0.195
+      3     270.9              20%       0.227
+      4     232.8              14%       0.196
+      5     208.1              11%       0.215
+      6     188.0              10%       0.183
+      7     171.1               9%       0.200
+      8     157.5               8%       0.185
+    -> Chọn k = 3 (silhouette cao nhất). Silhouette: gần 1 = cụm tách bạch, gần 0 = các cụm chồng lấn
+    CHÚ Ý: silhouette 0.23 < 0,25 -> cấu trúc cụm YẾU; các tỉnh nằm liền mạch, ranh giới cụm chỉ mang tính tương đối
+
+[4] Phân cụm phân cấp (Agglomerative, liên kết Ward — gộp hai cụm làm tăng phương sai ít nhất)
+    Khoảng cách ở 6 lần gộp cuối (đọc từ dưới lên như cây dendrogram): 6.08, 6.55, 7.47, 8.07, 11.39, 13.77
+    Khoảng trống lớn nhất giữa hai lần gộp nằm ngay trên mức 3 cụm -> cây gợi ý cắt ở 3 cụm
+    Cắt cây ở k = 3 để so với K-Means: ARI = 0.48 (1 = trùng hoàn toàn, 0 = như chia ngẫu nhiên) | silhouette phân cấp 0.187
+
+[5] Hồ sơ 3 cụm K-Means (trung bình chỉ số gốc; đặc điểm theo z-score ≥ 0,5 hoặc ≤ −0,5)
+    Cụm 1: 11 tỉnh, 3,033 vụ | CAO: tỉ lệ vụ trên quốc lộ; THẤP: tỉ lệ vụ có người chết, số chết mỗi vụ, tỉ lệ vụ ban đêm, tỉ lệ vụ cuối tuần
+      số vụ TB 225 | tỉ lệ vụ có người chết 0.35 | số chết mỗi vụ 0.38 | tỉ lệ vụ ban đêm 0.41 | tỉ lệ vụ cuối tuần 0.29 | tỉ lệ vụ trên quốc lộ 0.67 | tỉ lệ vụ dịp Tết 0.07
+      Tỉnh: Thanh Hóa, Thái Nguyên, Ninh Bình, Yên Bái, Tuyên Quang, Lào Cai, Cao Bằng, Lai Châu, Cà Mau, Bắc Kạn, Điện Biên
+    Cụm 2: 38 tỉnh, 11,802 vụ | CAO: tỉ lệ vụ có người chết, số chết mỗi vụ
+      số vụ TB 263 | tỉ lệ vụ có người chết 0.70 | số chết mỗi vụ 0.75 | tỉ lệ vụ ban đêm 0.50 | tỉ lệ vụ cuối tuần 0.33 | tỉ lệ vụ trên quốc lộ 0.58 | tỉ lệ vụ dịp Tết 0.07
+      Tỉnh: Gia Lai, Đắk Lắk, Đồng Nai, Nghệ An, Bến Tre, Hải Dương, Quảng Nam, Bình Phước, Quảng Trị, Bình Định, Sóc Trăng, Phú Yên, Hưng Yên, Lâm Đồng, Quảng Bình, Hà Tĩnh, Vĩnh Long, Hà Nam, Kiên Giang, Quảng Ninh, Đồng Tháp, Khánh Hòa, Hòa Bình, Bắc Ninh, Đà Nẵng, Cần Thơ, Hậu Giang, Kon Tum, Hải Phòng, Đắk Nông, Phú Thọ, An Giang, Lạng Sơn, Trà Vinh, Sơn La, Vĩnh Phúc, Bạc Liêu, Hà Giang
+    Cụm 3: 14 tỉnh, 18,227 vụ | CAO: quy mô (log số vụ), tỉ lệ vụ ban đêm; THẤP: tỉ lệ vụ có người chết, số chết mỗi vụ, tỉ lệ vụ trên quốc lộ
+      số vụ TB 851 | tỉ lệ vụ có người chết 0.42 | số chết mỗi vụ 0.44 | tỉ lệ vụ ban đêm 0.53 | tỉ lệ vụ cuối tuần 0.34 | tỉ lệ vụ trên quốc lộ 0.34 | tỉ lệ vụ dịp Tết 0.06
+      Tỉnh: Hồ Chí Minh, Hà Nội, Bình Dương, Thừa Thiên Huế, Bà Rịa - Vũng Tàu, Tiền Giang, Bắc Giang, Bình Thuận, Quảng Ngãi, Ninh Thuận, Long An, Thái Bình, Nam Định, Tây Ninh
+
+[6] Độ nhạy: bỏ ti_le_co_chet, chet_moi_vu (dễ lệch theo cách mỗi tỉnh ghi nhận vụ nhẹ)
+    K-Means k = 3 trên 5 chỉ số còn lại: ARI so với kết quả chính = 0.16 -> cụm thay đổi nhiều: phân cụm chính bị chi phối bởi tỉ lệ người chết, tức một phần là cách báo cáo

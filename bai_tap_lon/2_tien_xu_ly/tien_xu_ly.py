@@ -1,19 +1,21 @@
 """TIỀN XỬ LÝ DỮ LIỆU — Tai nạn giao thông đường bộ Việt Nam (2020 – 8 tháng 2022)
 
-Đầu vào  : bang_loi.parquet, bang_mo_rong.parquet của bước 1 (bai_tap_lon/1_thu_thap_du_lieu) — KHÔNG ghi đè.
+Đầu vào  : bảng thu_thap.bang_loi, thu_thap.bang_mo_rong (PostgreSQL) của bước 1 (bai_tap_lon/1_thu_thap_du_lieu) — KHÔNG ghi đè.
 Đầu ra   : tai_nan_loi_sach      (mọi nguồn, 1 dòng = 1 vụ)
            tai_nan_mo_rong_sach  (2020–2021, nối với bảng lõi qua khoá nguon + dong_goc)
            tu_dien_sach.csv      (vai trò từng cột: đặc trưng / nhãn / rò rỉ nhãn / cờ ...)
            kiem_tra_tien_xu_ly.txt (số bản ghi / giá trị bị ảnh hưởng của từng thao tác; cũng in ra màn hình)
 
 Các thao tác (theo thứ tự):
-    1. Xoá bản ghi trùng hoàn toàn (giữ bản đầu) — thao tác DUY NHẤT làm giảm số bản ghi
+    1. Xoá bản ghi trùng hoàn toàn (giữ bản đầu)
     2. Sửa giờ sai định dạng; gắn cờ giờ 00:00:00 nghi là giá trị mặc định
     3. Gắn cờ tháng không trọn (đầu / cuối kỳ dữ liệu)
     4. Chuẩn hoá nhãn và văn bản: khoảng trắng, chữ hoa / thường, lỗi chính tả, nhãn đồng nghĩa,
-       lỗi lặp trong cột nhiều giá trị; liệt kê bản ghi cần xem tay (trùng theo khoá, thiếu tỉnh)
-    5. Ngoại lai: thiệt hại > 10 tỷ, số bị can > 10 -> để trống, gắn cờ
-    6. Xác định tỉnh nhập đủ thông tin điều kiện
+       lỗi lặp trong cột nhiều giá trị; gộp bản ghi trùng thực thể (một vụ nhập nhiều lần, giữ bản đầy đủ nhất);
+       xoá bản ghi không có bất kỳ thông tin địa điểm
+    5. Ngoại lai: phát hiện bằng IQR và z-score (chỉ báo cáo); giá trị vô lý (thiệt hại > 10 tỷ, số bị can > 10)
+       -> để trống, gắn cờ
+    6. Cờ theo tỉnh: nhập đủ thông tin điều kiện (2020–2021); ghi nhận cả vụ không có người chết (cả 3 năm)
     7. Ô trống: mang nghĩa "không có" -> điền giá trị tương ứng; do không nhập -> "Không rõ"
     8. Gán vai trò cột, kiểm tra toàn vẹn, lưu
 
@@ -37,7 +39,8 @@ from pathlib import Path
 import pandas as pd
 
 GOC = Path(__file__).resolve().parent
-VAO = GOC.parent / "1_thu_thap_du_lieu"
+sys.path.insert(0, str(GOC.parent))  # để import csdl.py (bai_tap_lon/) — đọc/ghi bảng trong PostgreSQL
+import csdl  # noqa: E402
 log = logging.getLogger("tien_xu_ly")
 BC: list[str] = ["BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU", "=" * 70]
 
@@ -46,6 +49,9 @@ KHONG_RO = "Không rõ"
 NGUONG_THIEU_TINH = 0.20      # tỉnh "nhập đủ" nếu tỉ lệ trống của thoi_tiet < 20%
 NGUONG_THIET_HAI = 10_000     # triệu đồng (10 tỷ) — lớn hơn thì coi là nhập sai
 NGUONG_BI_CAN = 10            # số bị can trong một vụ; lớn hơn thì coi là nhập sai (giá trị thật: 0–3, rồi 33, 34, 85)
+NGUONG_VU_NHE = 0.50          # tỉnh "ghi nhận cả vụ không có người chết" nếu tỉ lệ vụ có người chết của tỉnh <= 50%
+# Hai bản ghi trùng các thuộc tính này coi là CÙNG MỘT VỤ được nhập nhiều lần
+KHOA_THUC_THE = ["ngay", "gio", "tinh", "huyen", "dia_diem", "so_chet", "so_bi_thuong"]
 # Chuẩn hoá nhãn: lỗi chính tả và nhãn đồng nghĩa đã kiểm tra trên dữ liệu (cũ -> mới)
 SUA_CHU = {"phần đương": "phần đường", "rẻ phải": "rẽ phải"}
 NHAN_DONG_NGHIA = {"kieu_va_cham": {"Các trường hợp khác": "Trường hợp khác"}}
@@ -64,7 +70,7 @@ RO_RI = ["phan_loai", "so_chet", "so_bi_thuong", "so_thuong_nang", "so_thuong_nh
          *[f"pt{i}_tinh_trang" for i in range(1, 6)]]
 SAU_DIEU_TRA = ["nguyen_nhan", "loi_vi_pham", "bo_tron", *[f"pt{i}_gay_tn" for i in range(1, 6)]]
 CO_KIEM_TRA = ["co_trung_khoa", "co_ngay_loi", "co_gio_loi", "gio_da_sua", "co_gio_mac_dinh", "thang_khong_tron",
-               "tinh_nhap_day_du", "so_bi_can_ngoai_lai"]
+               "tinh_nhap_day_du", "tinh_ghi_ca_vu_nhe", "so_bi_can_ngoai_lai"]
 VAN_BAN = ["huyen", "xa", "ten_duong", "km", "dia_diem"]
 
 
@@ -85,12 +91,12 @@ def p(dong: str, canh_bao: bool = False) -> None:
 
 
 def doc_bang(ten: str) -> pd.DataFrame:
-    return pd.read_parquet(VAO / f"{ten}.parquet")
+    return csdl.doc("thu_thap", ten)
 
 
 def luu_bang(df: pd.DataFrame, ten: str) -> None:
     df.to_csv(GOC / f"{ten}.csv", index=False, encoding="utf-8-sig")
-    df.to_parquet(GOC / f"{ten}.parquet", index=False)
+    csdl.ghi(df, "tien_xu_ly", ten)
 
 
 def chuoi(gia_tri) -> pd.arrays.StringArray:
@@ -124,8 +130,8 @@ def xoa_trung_hoan_toan(loi: pd.DataFrame, mr: pd.DataFrame) -> tuple[pd.DataFra
     giu = lambda df: df[[k not in khoa_xoa for k in zip(df["nguon"], df["dong_goc"])]].reset_index(drop=True)
     loi2, mr2 = giu(loi), giu(mr)
     p(f"    Bảng lõi: {len(loi):,d} -> {len(loi2):,d} | bảng mở rộng: {len(mr):,d} -> {len(mr2):,d}")
-    p(f"    Trùng theo khoá (co_trung_khoa = 1) còn lại: {int(loi2['co_trung_khoa'].sum())} bản ghi -> GIỮ, chỉ gắn cờ"
-      " (có thể là hai vụ khác nhau)")
+    p(f"    Trùng theo khoá (co_trung_khoa = 1) còn lại: {int(loi2['co_trung_khoa'].sum())} bản ghi"
+      " -> xử lý ở bước [4d] sau khi chuẩn hoá văn bản")
     return loi2, mr2
 
 
@@ -292,21 +298,62 @@ def chuan_hoa_nhan(loi: pd.DataFrame, mr: pd.DataFrame) -> tuple[pd.DataFrame, p
         if n:
             p(f"    {c}: sửa chính tả ở {n:,d} ô")
 
-    p("  d) Bản ghi cần nhóm xem tay (không tự sửa):")
-    nghi = loi.loc[loi["co_trung_khoa"] == 1, [*KHOA, "ngay", "gio", "tinh", "huyen", "so_chet", "so_bi_thuong"]]
-    p(f"    Trùng theo khoá: {len(nghi)} bản ghi (cùng ngày, giờ, tỉnh, huyện, địa điểm, số chết, số bị thương"
-      " với một bản ghi trước đó)")
-    for r in nghi.itertuples(index=False):
-        p(f"      nguồn {r.nguon}, dòng Excel {r.dong_goc}: {r.ngay:%d/%m/%Y} {r.gio}, {r.huyen}, {r.tinh},"
-          f" chết {r.so_chet:g}, bị thương {r.so_bi_thuong:g}")
-    thieu = loi.loc[loi["tinh"].isna(), KHOA]
-    for ma, dong in thieu.itertuples(index=False):
-        p(f"    Thiếu tỉnh: nguồn {ma}, dòng Excel {dong} -> giữ, vùng và mùa để trống")
     return loi, mr
 
 
-def xu_ly_gia_tri(loi: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
+def gop_trung_thuc_the(loi: pd.DataFrame, mr: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Một vụ được nhập nhiều lần: trùng ngày, giờ, tỉnh, huyện, địa điểm, số chết, số bị thương.
+    Giữ bản ghi có nhiều ô có giá trị nhất (hoà thì giữ bản đầu), xoá các bản còn lại ở cả hai bảng."""
+    p(f"  d) Trùng thực thể: trùng {', '.join(KHOA_THUC_THE)} -> coi là MỘT vụ nhập nhiều lần")
+    day_du = loi.merge(mr, on=KHOA, how="left", validate="one_to_one")
+    noi_dung = [c for c in day_du.columns if c not in (*KHOA, "file_goc") and not c.startswith("co_")]
+    co_khoa = day_du[KHOA_THUC_THE].notna().all(axis=1)
+    nghi = day_du[co_khoa & day_du.duplicated(KHOA_THUC_THE, keep=False)]
+    xoa: list[tuple] = []
+    for _, g in nghi.groupby(KHOA_THUC_THE, sort=False):
+        so_o = g[noi_dung].notna().sum(axis=1)
+        giu = so_o.idxmax()
+        khac = [c for c in noi_dung if g[c].astype("string").nunique(dropna=False) > 1]
+        bo = g.drop(index=giu)
+        xoa += list(zip(bo["nguon"], bo["dong_goc"]))
+        r0 = g.loc[giu]
+        p(f"      {r0['ngay']:%d/%m/%Y} {r0['gio']}, {r0['huyen']}, {r0['tinh']}: {len(g)} bản ghi, khác ở {len(khac)} cột"
+          f" ({', '.join(khac[:3])}{', …' if len(khac) > 3 else ''}) -> giữ dòng {r0['dong_goc']}"
+          f" ({int(so_o[giu])} ô có giá trị), xoá dòng {', '.join(str(d) for d in bo['dong_goc'])}")
+    p(f"    {len(xoa)} bản ghi bị xoá. Lý do: hai vụ khác nhau gần như không thể trùng đúng phút, đúng địa điểm, đúng số"
+      " người chết và bị thương; phần khác nhau là cách mô tả của người nhập (vd đảo thứ tự phương tiện 1 và 2,"
+      " một bản ghi bỏ trống ô bản kia có). Giữ bản ghi đầy đủ hơn.")
+    khong_dia_diem = loi[["tinh", "huyen", "dia_diem"]].isna().all(axis=1)
+    for ma, dong in loi.loc[khong_dia_diem, KHOA].itertuples(index=False):
+        p(f"  e) Không có thông tin địa điểm (tỉnh, huyện, địa điểm đều trống): nguồn {ma}, dòng Excel {dong} -> XOÁ"
+          " (không gán được cho tỉnh nào, không kiểm chứng được)")
+        xoa.append((ma, dong))
+    khoa_xoa = set(xoa)
+    giu_lai = lambda df: df[[k not in khoa_xoa for k in zip(df["nguon"], df["dong_goc"])]].reset_index(drop=True)
+    loi2, mr2 = giu_lai(loi), giu_lai(mr)
+    con = loi2[KHOA_THUC_THE].notna().all(axis=1) & loi2.duplicated(KHOA_THUC_THE, keep=False)
+    if con.any():
+        raise ValueError("Vẫn còn bản ghi trùng thực thể sau khi gộp")
+    loi2["co_trung_khoa"] = pd.array([0] * len(loi2), dtype="Int64")
+    p(f"    Bảng lõi: {len(loi):,d} -> {len(loi2):,d} | bảng mở rộng: {len(mr):,d} -> {len(mr2):,d}"
+      " | không còn bản ghi trùng thực thể (co_trung_khoa = 0)")
+    return loi2, mr2
+
+
+def xu_ly_gia_tri(loi: pd.DataFrame, mr: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     p("\n[5] Ngoại lai")
+    p("  a) Phát hiện bằng thống kê (IQR và z-score) — chỉ báo cáo, không sửa:")
+    for c, df in (("so_chet", loi), ("so_bi_thuong", loi), ("thiet_hai", mr), ("so_bi_can", mr)):
+        v = pd.to_numeric(df[c], errors="coerce").dropna().astype(float)
+        q1, q3 = v.quantile(0.25), v.quantile(0.75)
+        tren = q3 + 1.5 * (q3 - q1)
+        n_iqr = int((v > tren).sum())
+        n_z = int((((v - v.mean()) / v.std()).abs() > 3).sum())
+        p(f"    {c:12s}: Q1 = {q1:g}, Q3 = {q3:g}, ngưỡng trên IQR = Q3 + 1,5×(Q3 − Q1) = {tren:g} -> {n_iqr:,d} giá trị"
+          f" ({n_iqr / len(v):.1%}) | |z| > 3: {n_z:,d} giá trị | lớn nhất {v.max():,g}")
+    p("    Không xoá theo IQR / z-score: đây là số đếm lệch phải (phần lớn bằng 0 hoặc 1), nên hai phương pháp đánh dấu"
+      " cả những vụ nhiều người chết có thật. Chỉ xử lý giá trị VÔ LÝ ở mục b.")
+    p("  b) Giá trị vô lý (nhập sai) -> để trống, gắn cờ:")
     ngoai = mr["thiet_hai"] > NGUONG_THIET_HAI
     for ma, dong, v in mr.loc[ngoai, [*KHOA, "thiet_hai"]].itertuples(index=False):
         p(f"    nguồn {ma}, dòng Excel {dong}: {v:,.0f} triệu đồng -> để trống")
@@ -322,7 +369,8 @@ def xu_ly_gia_tri(loi: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
     mr["so_bi_can"] = mr["so_bi_can"].where(~ngoai)
     p(f"    {int(ngoai.sum())} giá trị so_bi_can > {NGUONG_BI_CAN} -> trống, gắn cờ so_bi_can_ngoai_lai; giữ bản ghi")
 
-    p("\n[6] Tỉnh nhập đủ thông tin điều kiện")
+    p("\n[6] Cờ theo tỉnh")
+    p("  a) Nhập đủ thông tin điều kiện (bảng mở rộng, 2020–2021):")
     tinh = mr[KHOA].merge(loi[[*KHOA, "tinh"]], on=KHOA, how="left", validate="one_to_one")["tinh"]
     ti_le = mr["thoi_tiet"].isna().groupby(tinh.to_numpy()).mean()
     du = sorted(ti_le[ti_le < NGUONG_THIEU_TINH].index)
@@ -331,6 +379,22 @@ def xu_ly_gia_tri(loi: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
       f" {int(mr['tinh_nhap_day_du'].sum()):,d}/{len(mr):,d} bản ghi (cờ tinh_nhap_day_du)")
     p(f"    Tỉnh nhập đủ: {', '.join(du)}")
     p(f"    Tỉnh trống > 90%: {', '.join(sorted(ti_le[ti_le > 0.9].index))}")
+    p("  b) Ghi nhận cả vụ không có người chết (bảng lõi, cả 3 năm):")
+    ti_le_chet = pd.to_numeric(loi["co_nguoi_chet"]).astype(float).groupby(loi["tinh"]).mean()
+    nhe = sorted(ti_le_chet[ti_le_chet <= NGUONG_VU_NHE].index)
+    loi["tinh_ghi_ca_vu_nhe"] = pd.array([int(t in nhe) if pd.notna(t) else 0 for t in loi["tinh"]], dtype="Int64")
+    p(f"    Tiêu chí: tỉ lệ vụ có người chết của tỉnh <= {NGUONG_VU_NHE:.0%} -> {len(nhe)}/{ti_le_chet.size} tỉnh,"
+      f" {int(loi['tinh_ghi_ca_vu_nhe'].sum()):,d}/{len(loi):,d} vụ (cờ tinh_ghi_ca_vu_nhe)")
+    so_vu = loi["tinh"].value_counts()
+    for ng in (0.40, 0.60):
+        ds = ti_le_chet[ti_le_chet <= ng].index
+        p(f"    Độ nhạy: ngưỡng {ng:.0%} -> {len(ds)} tỉnh, {int(so_vu[ds].sum()):,d} vụ")
+    p(f"    Tỉnh: {', '.join(nhe)}")
+    chung = ti_le.index.intersection(ti_le_chet.index)
+    p(f"    Tương quan theo tỉnh giữa tỉ lệ trống thoi_tiet và tỉ lệ có người chết: r = "
+      f"{ti_le[chung].corr(ti_le_chet[chung]):.2f} -> hai cờ đo hai việc khác nhau (điền đủ ô / ghi đủ loại vụ)")
+    p("    Tỉnh có tỉ lệ chết rất cao nhiều khả năng chỉ ghi vụ nghiêm trọng. Dùng cờ này để chạy lại phân tích trên nhóm"
+      " tỉnh ghi nhận rộng hơn và so kết luận. Cờ suy ra từ nhãn nên KHÔNG dùng làm đặc trưng dự báo.")
 
     p("\n[7] Ô trống")
     p("  a) Trống mang nghĩa 'không có' (giả định theo cách nhập liệu của nguồn):")
@@ -349,7 +413,7 @@ def xu_ly_gia_tri(loi: pd.DataFrame, mr: pd.DataFrame) -> pd.DataFrame:
         n = int(mr[c].isna().sum())
         mr[c] = mr[c].fillna(KHONG_RO)
         p(f"    {c:22s}: {n:6,d} ô ({n / len(mr):5.1%})")
-    return mr
+    return loi, mr
 
 
 # ---------------------------------------------------------------------------
@@ -374,7 +438,7 @@ def vai_tro(cot: str) -> str:
 
 
 def main() -> None:
-    p(f"[0] Đọc đầu vào từ {VAO}")
+    p(f"[0] Đọc đầu vào: bảng thu_thap.bang_loi, thu_thap.bang_mo_rong trong {csdl.mo_ta()}")
     loi, mr = doc_bang("bang_loi"), doc_bang("bang_mo_rong")
     thieu = [c for c in DAC_TRUNG_A if c not in loi.columns]
     if thieu:
@@ -385,7 +449,8 @@ def main() -> None:
     loi, mr = xoa_trung_hoan_toan(loi, mr)
     loi = xu_ly_thoi_gian(loi)
     loi, mr = chuan_hoa_nhan(loi, mr)
-    mr = xu_ly_gia_tri(loi, mr)
+    loi, mr = gop_trung_thuc_the(loi, mr)
+    loi, mr = xu_ly_gia_tri(loi, mr)
 
     p("\n[8] Kiểm tra toàn vẹn và lưu")
     if loi.duplicated(subset=KHOA).any() or mr.duplicated(subset=KHOA).any():
@@ -408,9 +473,9 @@ def main() -> None:
     luu_bang(loi, "tai_nan_loi_sach")
     luu_bang(mr, "tai_nan_mo_rong_sach")
     tu_dien.to_csv(GOC / "tu_dien_sach.csv", index=False, encoding="utf-8-sig")
+    csdl.ghi(tu_dien, "tien_xu_ly", "tu_dien_sach")
     (GOC / "kiem_tra_tien_xu_ly.txt").write_text("\n".join(BC), encoding="utf-8")
-    for ten in ("tai_nan_loi_sach.csv", "tai_nan_loi_sach.parquet", "tai_nan_mo_rong_sach.csv",
-                "tai_nan_mo_rong_sach.parquet", "tu_dien_sach.csv", "kiem_tra_tien_xu_ly.txt"):
+    for ten in ("tai_nan_loi_sach.csv", "tai_nan_mo_rong_sach.csv", "tu_dien_sach.csv", "kiem_tra_tien_xu_ly.txt"):
         log.info("    Đã lưu %s (%s byte)", ten, f"{(GOC / ten).stat().st_size:,d}")
 
 

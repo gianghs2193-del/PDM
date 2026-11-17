@@ -5,7 +5,7 @@ Trình bày lại toàn bộ phần Chuẩn bị dữ liệu (Data Preparation) 
     2_tien_xu_ly/tien_xu_ly.py            -> tab "2a. Làm sạch"
     2_tien_xu_ly/bien_doi.py, ky_nghe_dac_trung.py, pipeline.py
                                           -> tab "3. Thử pipeline", "4. Kỹ nghệ đặc trưng", "5. Đầu ra"
-Ứng dụng CHỈ ĐỌC các file kết quả, không ghi gì vào dự án, không có mô hình dự báo.
+Ứng dụng CHỈ ĐỌC các bảng trong PostgreSQL (qua csdl.py) và file .joblib/.txt, không ghi gì vào dự án, không có mô hình dự báo.
 
 Chạy (từ D:/PDM, sau khi đã chạy đủ các script trên):
        .venv/Scripts/python -m streamlit run bai_tap_lon/app_tien_xu_ly.py
@@ -26,12 +26,13 @@ from sklearn.utils import estimator_html_repr
 
 GOC = Path(__file__).resolve().parent
 B1, B2 = GOC / "1_thu_thap_du_lieu", GOC / "2_tien_xu_ly"
-for thu_muc in (B2, B1):
+for thu_muc in (B2, B1, GOC):
     sys.path.insert(0, str(thu_muc))
 
 from ky_nghe_dac_trung import CO_MOI, KHONG_RO, NHAN, TaoDacTrungDong, tao_khung  # noqa: E402
 from thu_thap import rut_dac_trung_chung  # noqa: E402
 from tien_xu_ly import sua_vi_tri_dau  # noqa: E402
+import csdl  # noqa: E402
 
 KHOA = ["nguon", "dong_goc"]
 HUONG = {"du_bao": "Dự báo (có mã hoá tỉnh/huyện/đường)", "khong_dia_ly": "Không địa lý (để giải thích)"}
@@ -59,8 +60,8 @@ st.set_page_config(page_title="Tiền xử lý dữ liệu TNGT – Nhóm 6", la
 # ---------------------------------------------------------------------------
 @st.cache_data(show_spinner="Đang đọc dữ liệu…")
 def doc(thu_muc: str, ten: str) -> pd.DataFrame | None:
-    duong_dan = Path(thu_muc) / f"{ten}.parquet"
-    return pd.read_parquet(duong_dan) if duong_dan.exists() else None
+    """Đọc bảng <schema>.<ten> trong CSDL (thư mục bước -> schema); None nếu bảng chưa có."""
+    return csdl.doc(thu_muc, ten) if csdl.co_bang(thu_muc, ten) else None
 
 
 @st.cache_data
@@ -130,7 +131,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(
 
 # ---------------------------------------------------------------------------
 with tab1:
-    if can(loi, "bang_loi.parquet", "thu_thap.py"):
+    if can(loi, "bảng thu_thap.bang_loi", "thu_thap.py"):
         ngay = pd.to_datetime(loi["ngay"], errors="coerce")
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("Số vụ (bảng lõi)", f"{len(loi):,d}")
@@ -156,7 +157,7 @@ with tab1:
 
 # ---------------------------------------------------------------------------
 with tab2:
-    if can(loi, "bang_loi.parquet", "thu_thap.py") and can(sach, "tai_nan_loi_sach.parquet", "tien_xu_ly.py"):
+    if can(loi, "bảng thu_thap.bang_loi", "thu_thap.py") and can(sach, "bảng tien_xu_ly.tai_nan_loi_sach", "tien_xu_ly.py"):
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("Trước làm sạch", f"{len(loi):,d} vụ")
         c2.metric("Sau làm sạch", f"{len(sach):,d} vụ", delta=f"{len(sach) - len(loi):,d} trùng hoàn toàn")
@@ -200,7 +201,7 @@ with tab3:
     st.subheader("Đưa một vụ đi qua pipeline tiền xử lý")
     huong = st.radio("Pipeline", list(HUONG), format_func=HUONG.get, horizontal=True)
     pl = nap_joblib(str(B2 / f"pipeline_tien_xu_ly_{huong}.joblib"))
-    if can(sach, "tai_nan_loi_sach.parquet", "tien_xu_ly.py") and can(pl, f"pipeline_tien_xu_ly_{huong}.joblib",
+    if can(sach, "bảng tien_xu_ly.tai_nan_loi_sach", "tien_xu_ly.py") and can(pl, f"pipeline_tien_xu_ly_{huong}.joblib",
                                                                       "pipeline.py"):
         nguon_vao = st.radio("Bản ghi", ["Lấy một vụ có sẵn", "Tự nhập một vụ mới"], horizontal=True)
         if nguon_vao == "Lấy một vụ có sẵn":
@@ -269,7 +270,7 @@ with tab3:
 # ---------------------------------------------------------------------------
 with tab4:
     cau_hinh = nap_joblib(str(B2 / "bo_dac_trung.joblib"))
-    if can(sach, "tai_nan_loi_sach.parquet", "tien_xu_ly.py"):
+    if can(sach, "bảng tien_xu_ly.tai_nan_loi_sach", "tien_xu_ly.py"):
         st.subheader("10 đặc trưng mới theo dòng — tỉ lệ có người chết khi có / không có")
         x = khung_day_du(sach, len(sach))
         dong = []
@@ -286,7 +287,8 @@ with tab4:
         dong = []
         for bo, kq in cau_hinh["ket_qua_cv"].items():
             dong.append({"Bộ đặc trưng": bo, "AUC Logistic": kq["logistic"]["auc"], "F1 Logistic": kq["logistic"]["f1"],
-                         "AUC HistGB": kq["histgb"]["auc"], "F1 HistGB": kq["histgb"]["f1"]})
+                         "AUC HistGB": kq["histgb"]["auc"], "F1 HistGB": kq["histgb"]["f1"],
+                         "AUC HistGB theo thời gian": kq["histgb"].get("auc_tg", np.nan)})
         bang = pd.DataFrame(dong)
         st.dataframe(bang.style.format({c: "{:.3f}" for c in bang.columns[1:]}), width="stretch",
                      hide_index=True)
@@ -304,11 +306,12 @@ with tab4:
         else:
             qt = qt.assign(trang_thai=np.where(qt["nhom"].isin(ch["nhom"]), "Giữ", "Bỏ"))
             bieu_do_cot(qt, "nhom", "auc_giam", "AUC giảm khi tráo", ".4f")
-            st.dataframe(qt.rename(columns={"nhom": "Nhóm", "auc_giam": "AUC giảm", "sd": "Độ lệch chuẩn",
+            st.dataframe(qt.rename(columns={"nhom": "Nhóm", "auc_giam": "AUC giảm", "sd": "Sai số chuẩn", "so_lan_co_ich": "Có ích ở (số cách chia)",
                                             "trang_thai": "Kết quả"}).drop(columns="bo", errors="ignore")
-                         .style.format({"AUC giảm": "{:+.4f}", "Độ lệch chuẩn": "{:.4f}"}),
+                         .style.format({"AUC giảm": "{:+.4f}", "Sai số chuẩn": "{:.4f}"}),
                          width="stretch", hide_index=True)
-            st.caption("Bỏ nhóm nếu AUC giảm không vượt quá max(2 × độ lệch chuẩn, 0,0001), rồi kiểm định chéo "
+            st.caption("Mỗi nhóm được tráo trên 3 cách chia × 10 lần. Bỏ nhóm nếu AUC giảm trung bình không vượt quá "
+                       "max(2 × sai số chuẩn, 0,0001), rồi kiểm định chéo "
                        "lại để chắc AUC không giảm quá 0,002.")
         nhung_txt("Báo cáo kỹ nghệ đặc trưng (kiem_tra_ky_nghe_dac_trung.txt)", B2 / "kiem_tra_ky_nghe_dac_trung.txt")
 

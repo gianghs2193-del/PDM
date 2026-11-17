@@ -105,8 +105,8 @@ BÁO CÁO KIỂM TRA DỮ LIỆU THU THẬP
   2021   : 11,408 vụ | 5,716 người chết |  8,043 người bị thương
   8T2022 :  7,402 vụ | 4,204 người chết |  4,943 người bị thương
 
-[7] Đã lưu: du_lieu_tich_hop.csv, du_lieu_tich_hop.parquet, tu_dien_du_lieu.csv, kiem_tra.txt (33,086 dòng × 62 cột)
-[7] Lược đồ hai tầng (bang_loi + bang_mo_rong, mỗi bảng có .csv và .parquet):
+[7] Đã lưu: du_lieu_tich_hop.csv, tu_dien_du_lieu.csv, kiem_tra.txt + bảng thu_thap.* trong postgresql+psycopg://postgres@localhost:5432/tngt (33,086 dòng × 62 cột)
+[7] Lược đồ hai tầng (bang_loi + bang_mo_rong, mỗi bảng có file .csv và bảng thu_thap.<tên> trong CSDL):
     bang_loi    : 33,086 dòng × 17 cột = 3 cột truy vết + 11 thuộc tính chung + 3 cờ | nguồn: 2020, 2021, 8T2022
                   thuộc tính: ngay, gio, tinh, huyen, xa, loai_duong, ten_duong, km, dia_diem, so_chet, so_bi_thuong
     bang_mo_rong: 25,684 dòng × 47 cột = 2 cột khoá + 44 thuộc tính + 1 cờ | nguồn: 2020, 2021

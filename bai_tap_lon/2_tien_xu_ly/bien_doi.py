@@ -1,7 +1,7 @@
 """BIẾN ĐỔI DỮ LIỆU — Tai nạn giao thông đường bộ Việt Nam (2020 – 8 tháng 2022)
 
 Giai đoạn: 2 – Tiền xử lý (phần biến đổi, chạy sau tien_xu_ly.py trong cùng thư mục)
-Đầu vào  : tai_nan_loi_sach.parquet do tien_xu_ly.py tạo — chỉ dùng BẢNG LÕI (cả 3 năm).
+Đầu vào  : bảng tien_xu_ly.tai_nan_loi_sach (PostgreSQL) do tien_xu_ly.py tạo — chỉ dùng BẢNG LÕI (cả 3 năm).
 Đầu ra   : train / test      ma trận đặc trưng đã mã hoá + nhãn co_nguoi_chet (phân lớp)
            bo_ma_hoa.joblib  bộ mã hoá đã học trên tập train (bước mô hình dùng lại)
            giao_dich         dạng giao dịch True/False (luật kết hợp)
@@ -34,7 +34,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 GOC = Path(__file__).resolve().parent
-VAO = GOC                       # cùng thư mục với tien_xu_ly.py
+sys.path.insert(0, str(GOC.parent))  # để import csdl.py (bai_tap_lon/) — đọc/ghi bảng trong PostgreSQL
+import csdl  # noqa: E402
 BC: list[str] = ["BÁO CÁO BIẾN ĐỔI DỮ LIỆU", "=" * 70]
 
 KHOA = ["nguon", "dong_goc"]
@@ -51,7 +52,7 @@ KHONG_DUNG = {   # lý do không đưa vào mô hình
     "so_chet, so_bi_thuong": "rò rỉ nhãn (nhãn được tính từ so_chet)",
     "huyen, xa, ten_duong, km, dia_diem": "văn bản / quá chi tiết (hàng nghìn giá trị)",
     "ngay, gio, loai_duong": "đã có đặc trưng suy ra thay thế",
-    "co_*, gio_da_sua, thang_khong_tron, tinh_nhap_day_du": "cờ kiểm tra, chỉ dùng để lọc",
+    "co_*, gio_da_sua, thang_khong_tron, tinh_ghi_ca_vu_nhe": "cờ kiểm tra, chỉ dùng để lọc",
 }
 
 
@@ -61,12 +62,12 @@ def p(dong: str) -> None:
 
 
 def doc_bang(ten: str) -> pd.DataFrame:
-    return pd.read_parquet(VAO / f"{ten}.parquet")
+    return csdl.doc("tien_xu_ly", ten)
 
 
 def luu_bang(df: pd.DataFrame, ten: str) -> None:
     df.to_csv(GOC / f"{ten}.csv", index=False, encoding="utf-8-sig")
-    df.to_parquet(GOC / f"{ten}.parquet", index=False)
+    csdl.ghi(df, "tien_xu_ly", ten)
 
 
 # ---------------------------------------------------------------------------
@@ -136,7 +137,7 @@ def ho_so_tinh(df: pd.DataFrame) -> pd.DataFrame:
 
 # ---------------------------------------------------------------------------
 def main() -> None:
-    p(f"[0] Đọc {VAO / 'tai_nan_loi_sach.parquet'}")
+    p(f"[0] Đọc bảng tien_xu_ly.tai_nan_loi_sach trong {csdl.mo_ta()}")
     df = doc_bang("tai_nan_loi_sach")
     p(f"    {len(df):,d} vụ × {df.shape[1]} cột | scikit-learn {sklearn.__version__}, pandas {pd.__version__}")
 
@@ -208,7 +209,7 @@ def main() -> None:
 
     (GOC / "kiem_tra_bien_doi.txt").write_text("\n".join(BC), encoding="utf-8")
     for ten in ("train", "test", "giao_dich", "ho_so_tinh"):
-        print(f"    Đã lưu {ten}.csv / {ten}.parquet")
+        print(f"    Đã lưu {ten}.csv + bảng tien_xu_ly.{ten}")
 
 
 if __name__ == "__main__":

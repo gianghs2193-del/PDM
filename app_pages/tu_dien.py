@@ -1,6 +1,6 @@
 import streamlit as st
 
-from du_lieu import NGUON, doc_du_lieu, doc_file, doc_tu_dien
+from du_lieu import NGUON, csv_du_lieu, doc_du_lieu, doc_file, doc_tu_dien
 
 td = doc_tu_dien()
 df = doc_du_lieu()
@@ -8,14 +8,14 @@ df = doc_du_lieu()
 st.title(":material/menu_book: Từ điển dữ liệu & tải về")
 
 with st.container(horizontal=True):
-    st.download_button("Dữ liệu tích hợp (.parquet, 2,3 MB)", doc_file("du_lieu_tich_hop.parquet"),
-                       "du_lieu_tich_hop.parquet", icon=":material/download:", type="primary")
+    st.download_button("Dữ liệu tích hợp (.csv)", csv_du_lieu(), "du_lieu_tich_hop.csv", mime="text/csv",
+                       icon=":material/download:", type="primary")
     st.download_button("Từ điển dữ liệu (.csv)", doc_file("tu_dien_du_lieu.csv"), "tu_dien_du_lieu.csv",
                        mime="text/csv", icon=":material/download:")
     st.download_button("Báo cáo kiểm tra (.txt)", doc_file("kiem_tra.txt"), "kiem_tra.txt",
                        mime="text/plain", icon=":material/download:")
-st.caption("File CSV đầy đủ (16 MB, UTF-8 có BOM để mở bằng Excel) nằm trong thư mục "
-           "`bai_tap_lon/1_thu_thap_du_lieu/`.")
+st.caption("Dữ liệu được đọc từ bảng `thu_thap.du_lieu_tich_hop` trong PostgreSQL; bản CSV (UTF-8 có BOM để mở "
+           "bằng Excel) cũng nằm trong thư mục `bai_tap_lon/1_thu_thap_du_lieu/`.")
 
 st.subheader("Từ điển dữ liệu")
 tim = st.text_input("Tìm thuộc tính", placeholder="ví dụ: đường, PT1, thời tiết", live=True)

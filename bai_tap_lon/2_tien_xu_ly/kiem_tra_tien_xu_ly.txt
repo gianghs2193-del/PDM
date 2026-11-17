@@ -1,6 +1,6 @@
 BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU
 ======================================================================
-[0] Đọc đầu vào từ D:\PDM\bai_tap_lon\1_thu_thap_du_lieu
+[0] Đọc đầu vào: bảng thu_thap.bang_loi, thu_thap.bang_mo_rong trong postgresql+psycopg://postgres@localhost:5432/tngt
     bang_loi: 33,086 dòng × 29 cột | bang_mo_rong: 25,684 dòng × 47 cột
 
 [1] Bản ghi trùng hoàn toàn
@@ -13,7 +13,7 @@ BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU
       xoá: nguồn 8T2022, dòng Excel 119
       xoá: nguồn 8T2022, dòng Excel 6176
     Bảng lõi: 33,086 -> 33,079 | bảng mở rộng: 25,684 -> 25,679
-    Trùng theo khoá (co_trung_khoa = 1) còn lại: 15 bản ghi -> GIỮ, chỉ gắn cờ (có thể là hai vụ khác nhau)
+    Trùng theo khoá (co_trung_khoa = 1) còn lại: 15 bản ghi -> xử lý ở bước [4d] sau khi chuẩn hoá văn bản
 
 [2] Giờ xảy ra
     Sai định dạng: 90 | sửa được (chèn dấu ':' thiếu): 90, vd 18:0030 -> 18:00:30; 15:0030 -> 15:00:30; 11:0000 -> 11:00:00; 22:0000 -> 22:00:00; 13:0000 -> 13:00:00
@@ -49,26 +49,34 @@ BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU
   c) Nhãn đồng nghĩa và lỗi chính tả trong cột phân loại:
     kieu_va_cham: “Các trường hợp khác” -> “Trường hợp khác” (416 ô)
     kieu_va_cham: sửa chính tả ở 121 ô
-  d) Bản ghi cần nhóm xem tay (không tự sửa):
-    Trùng theo khoá: 15 bản ghi (cùng ngày, giờ, tỉnh, huyện, địa điểm, số chết, số bị thương với một bản ghi trước đó)
-      nguồn 2020, dòng Excel 1594: 13/11/2020 15:30:00, Đông Anh, Hà Nội, chết 1, bị thương 0
-      nguồn 2020, dòng Excel 2606: 22/10/2020 23:45:00, Tân Bình, Hồ Chí Minh, chết 0, bị thương 0
-      nguồn 2020, dòng Excel 2885: 16/10/2020 01:45:00, Ba Đình, Hà Nội, chết 0, bị thương 1
-      nguồn 2020, dòng Excel 2902: 15/10/2020 21:30:00, Mê Linh, Hà Nội, chết 1, bị thương 0
-      nguồn 2020, dòng Excel 3124: 10/10/2020 15:45:00, 6, Hồ Chí Minh, chết 0, bị thương 1
-      nguồn 2020, dòng Excel 4076: 19/09/2020 14:40:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
-      nguồn 2020, dòng Excel 8741: 27/05/2020 09:30:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
-      nguồn 2020, dòng Excel 8742: 27/05/2020 09:30:00, Hoàng Mai, Hà Nội, chết 0, bị thương 0
-      nguồn 2020, dòng Excel 10888: 27/03/2020 19:00:00, Cái Bè, Tiền Giang, chết 0, bị thương 1
-      nguồn 2020, dòng Excel 10993: 24/03/2020 21:45:00, Hoàng Mai, Hà Nội, chết 0, bị thương 1
-      nguồn 2020, dòng Excel 12354: 14/02/2020 07:30:00, Chương Mỹ, Hà Nội, chết 1, bị thương 0
-      nguồn 2020, dòng Excel 13362: 09/01/2020 02:30:00, 1, Hồ Chí Minh, chết 0, bị thương 0
-      nguồn 2020, dòng Excel 14188: 17/12/2019 12:10:00, Bình Chánh, Hồ Chí Minh, chết 0, bị thương 1
-      nguồn 2021, dòng Excel 10581: 03/01/2021 22:45:00, Thủ Đức, Hồ Chí Minh, chết 0, bị thương 1
-      nguồn 2021, dòng Excel 10728: 01/01/2021 05:00:00, Bắc Tân Uyên, Bình Dương, chết 1, bị thương 0
-    Thiếu tỉnh: nguồn 8T2022, dòng Excel 6464 -> giữ, vùng và mùa để trống
+  d) Trùng thực thể: trùng ngay, gio, tinh, huyen, dia_diem, so_chet, so_bi_thuong -> coi là MỘT vụ nhập nhiều lần
+      13/11/2020 15:30:00, Đông Anh, Hà Nội: 2 bản ghi, khác ở 6 cột (loai_duong, cap_duong, pt1_tinh_trang, …) -> giữ dòng 1593 (45 ô có giá trị), xoá dòng 1594
+      22/10/2020 23:45:00, Tân Bình, Hồ Chí Minh: 2 bản ghi, khác ở 3 cột (pt1_tinh_trang, do_rong_duong, to_chuc_gt) -> giữ dòng 2606 (44 ô có giá trị), xoá dòng 2605
+      16/10/2020 01:45:00, Ba Đình, Hà Nội: 2 bản ghi, khác ở 5 cột (loai_duong, ten_duong, cap_duong, …) -> giữ dòng 2885 (35 ô có giá trị), xoá dòng 2884
+      15/10/2020 21:30:00, Mê Linh, Hà Nội: 2 bản ghi, khác ở 21 cột (pt1_nhom, pt1_loai, pt1_tinh_trang, …) -> giữ dòng 2901 (51 ô có giá trị), xoá dòng 2902
+      10/10/2020 15:45:00, 6, Hồ Chí Minh: 2 bản ghi, khác ở 11 cột (loai_duong, cap_duong, khu_vuc, …) -> giữ dòng 3124 (40 ô có giá trị), xoá dòng 3123
+      19/09/2020 14:40:00, Hoàng Mai, Hà Nội: 2 bản ghi, khác ở 14 cột (pt1_nhom, pt1_loai, pt2_nhom, …) -> giữ dòng 4076 (48 ô có giá trị), xoá dòng 4075
+      27/05/2020 09:30:00, Hoàng Mai, Hà Nội: 3 bản ghi, khác ở 18 cột (loai_duong, cap_duong, khu_vuc, …) -> giữ dòng 8740 (40 ô có giá trị), xoá dòng 8741, 8742
+      27/03/2020 19:00:00, Cái Bè, Tiền Giang: 2 bản ghi, khác ở 8 cột (km, thiet_hai, phan_loai, …) -> giữ dòng 10887 (49 ô có giá trị), xoá dòng 10888
+      24/03/2020 21:45:00, Hoàng Mai, Hà Nội: 2 bản ghi, khác ở 10 cột (loai_duong, khu_vuc, phan_loai, …) -> giữ dòng 10992 (40 ô có giá trị), xoá dòng 10993
+      23/03/2020 14:00:00, Tân Thành, Bà Rịa - Vũng Tàu: 2 bản ghi, khác ở 5 cột (ten_duong, pt1_tinh_trang, thoi_tiet, …) -> giữ dòng 11035 (45 ô có giá trị), xoá dòng 11036
+      14/02/2020 07:30:00, Chương Mỹ, Hà Nội: 2 bản ghi, khác ở 8 cột (loai_duong, ten_duong, khu_vuc, …) -> giữ dòng 12353 (37 ô có giá trị), xoá dòng 12354
+      09/01/2020 02:30:00, 1, Hồ Chí Minh: 2 bản ghi, khác ở 5 cột (thiet_hai, nut_gt, den_chieu_sang, …) -> giữ dòng 13361 (44 ô có giá trị), xoá dòng 13362
+      17/12/2019 12:10:00, Bình Chánh, Hồ Chí Minh: 2 bản ghi, khác ở 2 cột (pt1_tinh_trang, pt1_gay_tn) -> giữ dòng 14188 (47 ô có giá trị), xoá dòng 14187
+      03/01/2021 22:45:00, Thủ Đức, Hồ Chí Minh: 2 bản ghi, khác ở 5 cột (pt1_tinh_trang, thoi_tiet, kieu_va_cham, …) -> giữ dòng 10580 (44 ô có giá trị), xoá dòng 10581
+      01/01/2021 05:00:00, Bắc Tân Uyên, Bình Dương: 2 bản ghi, khác ở 8 cột (loai_duong, ten_duong, khu_vuc, …) -> giữ dòng 10728 (44 ô có giá trị), xoá dòng 10727
+    16 bản ghi bị xoá. Lý do: hai vụ khác nhau gần như không thể trùng đúng phút, đúng địa điểm, đúng số người chết và bị thương; phần khác nhau là cách mô tả của người nhập (vd đảo thứ tự phương tiện 1 và 2, một bản ghi bỏ trống ô bản kia có). Giữ bản ghi đầy đủ hơn.
+  e) Không có thông tin địa điểm (tỉnh, huyện, địa điểm đều trống): nguồn 8T2022, dòng Excel 6464 -> XOÁ (không gán được cho tỉnh nào, không kiểm chứng được)
+    Bảng lõi: 33,079 -> 33,062 | bảng mở rộng: 25,679 -> 25,663 | không còn bản ghi trùng thực thể (co_trung_khoa = 0)
 
 [5] Ngoại lai
+  a) Phát hiện bằng thống kê (IQR và z-score) — chỉ báo cáo, không sửa:
+    so_chet     : Q1 = 0, Q3 = 1, ngưỡng trên IQR = Q3 + 1,5×(Q3 − Q1) = 2.5 -> 83 giá trị (0.3%) | |z| > 3: 83 giá trị | lớn nhất 15
+    so_bi_thuong: Q1 = 0, Q3 = 1, ngưỡng trên IQR = Q3 + 1,5×(Q3 − Q1) = 2.5 -> 758 giá trị (2.3%) | |z| > 3: 165 giá trị | lớn nhất 34
+    thiet_hai   : Q1 = 0, Q3 = 5, ngưỡng trên IQR = Q3 + 1,5×(Q3 − Q1) = 12.5 -> 2,844 giá trị (11.1%) | |z| > 3: 1 giá trị | lớn nhất 2.65996e+07
+    so_bi_can   : Q1 = 1, Q3 = 1, ngưỡng trên IQR = Q3 + 1,5×(Q3 − Q1) = 1 -> 33 giá trị (2.4%) | |z| > 3: 3 giá trị | lớn nhất 85
+    Không xoá theo IQR / z-score: đây là số đếm lệch phải (phần lớn bằng 0 hoặc 1), nên hai phương pháp đánh dấu cả những vụ nhiều người chết có thật. Chỉ xử lý giá trị VÔ LÝ ở mục b.
+  b) Giá trị vô lý (nhập sai) -> để trống, gắn cờ:
     nguồn 2021, dòng Excel 4703: 64,990 triệu đồng -> để trống
     nguồn 2021, dòng Excel 7916: 26,599,590 triệu đồng -> để trống
     2 giá trị > 10,000 triệu đồng -> trống, gắn cờ thiet_hai_ngoai_lai; giữ bản ghi
@@ -78,43 +86,51 @@ BÁO CÁO TIỀN XỬ LÝ DỮ LIỆU
     nguồn 2021, dòng Excel 10306: 85 bị can trong một vụ -> để trống
     3 giá trị so_bi_can > 10 -> trống, gắn cờ so_bi_can_ngoai_lai; giữ bản ghi
 
-[6] Tỉnh nhập đủ thông tin điều kiện
-    Tiêu chí: tỉ lệ trống của thoi_tiet theo tỉnh < 20% -> 16/63 tỉnh, 4,041/25,679 bản ghi (cờ tinh_nhap_day_du)
+[6] Cờ theo tỉnh
+  a) Nhập đủ thông tin điều kiện (bảng mở rộng, 2020–2021):
+    Tiêu chí: tỉ lệ trống của thoi_tiet theo tỉnh < 20% -> 16/63 tỉnh, 4,040/25,663 bản ghi (cờ tinh_nhap_day_du)
     Tỉnh nhập đủ: An Giang, Bà Rịa - Vũng Tàu, Bình Phước, Bắc Kạn, Bắc Ninh, Hà Tĩnh, Hòa Bình, Hậu Giang, Kiên Giang, Long An, Lâm Đồng, Ninh Thuận, Quảng Nam, Sơn La, Trà Vinh, Điện Biên
     Tỉnh trống > 90%: Bến Tre, Hưng Yên, Ninh Bình, Quảng Ninh, Sóc Trăng, Thanh Hóa, Vĩnh Long
+  b) Ghi nhận cả vụ không có người chết (bảng lõi, cả 3 năm):
+    Tiêu chí: tỉ lệ vụ có người chết của tỉnh <= 50% -> 21/63 tỉnh, 18,264/33,062 vụ (cờ tinh_ghi_ca_vu_nhe)
+    Độ nhạy: ngưỡng 40% -> 12 tỉnh, 12,481 vụ
+    Độ nhạy: ngưỡng 60% -> 35 tỉnh, 24,956 vụ
+    Tỉnh: Bà Rịa - Vũng Tàu, Bình Dương, Bắc Giang, Bắc Kạn, Cao Bằng, Cà Mau, Hà Nội, Hồ Chí Minh, Lai Châu, Lào Cai, Nam Định, Ninh Bình, Ninh Thuận, Thanh Hóa, Thái Bình, Thái Nguyên, Thừa Thiên Huế, Tuyên Quang, Tây Ninh, Yên Bái, Điện Biên
+    Tương quan theo tỉnh giữa tỉ lệ trống thoi_tiet và tỉ lệ có người chết: r = -0.11 -> hai cờ đo hai việc khác nhau (điền đủ ô / ghi đủ loại vụ)
+    Tỉnh có tỉ lệ chết rất cao nhiều khả năng chỉ ghi vụ nghiêm trọng. Dùng cờ này để chạy lại phân tích trên nhóm tỉnh ghi nhận rộng hơn và so kết luận. Cờ suy ra từ nhãn nên KHÔNG dùng làm đặc trưng dự báo.
 
 [7] Ô trống
   a) Trống mang nghĩa 'không có' (giả định theo cách nhập liệu của nguồn):
-    so_bi_can: 24,283 ô trống -> 0 (không có bị can); 3 ô ngoại lai giữ trống
-    bo_tron: 25,004 ô trống -> 'Không bỏ trốn'
+    so_bi_can: 24,267 ô trống -> 0 (không có bị can); 3 ô ngoại lai giữ trống
+    bo_tron: 24,989 ô trống -> 'Không bỏ trốn'
     pt1..pt5 trống = không có phương tiện thứ i -> giữ trống
     giao_duong_sat, den_tin_hieu: không phân biệt được 'không có' với 'không nhập' -> giữ trống
   b) Trống do đơn vị không nhập -> 'Không rõ' (14 thuộc tính phân loại):
-    thoi_tiet             : 11,708 ô (45.6%)
-    mat_do_gt             : 14,650 ô (57.1%)
-    hinh_thuc_va_cham     :  6,589 ô (25.7%)
-    kieu_va_cham          :  7,496 ô (29.2%)
-    dang_duong            : 10,706 ô (41.7%)
-    loai_mat_duong        : 10,634 ô (41.4%)
-    do_rong_duong         : 12,843 ô (50.0%)
-    tinh_trang_mat_duong  : 11,801 ô (46.0%)
-    to_chuc_gt            : 13,374 ô (52.1%)
-    nut_gt                : 20,202 ô (78.7%)
-    bien_bao              : 20,405 ô (79.5%)
-    den_chieu_sang        : 18,225 ô (71.0%)
-    nguyen_nhan           :  8,266 ô (32.2%)
-    hinh_thuc_xu_ly       : 16,398 ô (63.9%)
+    thoi_tiet             : 11,701 ô (45.6%)
+    mat_do_gt             : 14,639 ô (57.0%)
+    hinh_thuc_va_cham     :  6,585 ô (25.7%)
+    kieu_va_cham          :  7,492 ô (29.2%)
+    dang_duong            : 10,698 ô (41.7%)
+    loai_mat_duong        : 10,626 ô (41.4%)
+    do_rong_duong         : 12,835 ô (50.0%)
+    tinh_trang_mat_duong  : 11,792 ô (45.9%)
+    to_chuc_gt            : 13,364 ô (52.1%)
+    nut_gt                : 20,188 ô (78.7%)
+    bien_bao              : 20,391 ô (79.5%)
+    den_chieu_sang        : 18,214 ô (71.0%)
+    nguyen_nhan           :  8,260 ô (32.2%)
+    hinh_thuc_xu_ly       : 16,389 ô (63.9%)
 
 [8] Kiểm tra toàn vẹn và lưu
     Khoá duy nhất ở cả hai bảng; mọi bản ghi bảng mở rộng đều có trong bảng lõi
-    tai_nan_loi_sach    : 33,079 dòng × 32 cột (trước: 33,086 dòng)
-    tai_nan_mo_rong_sach: 25,679 dòng × 50 cột (trước: 25,684 dòng)
-    Vụ có người chết: 15,518/33,079 (46.9%)
+    tai_nan_loi_sach    : 33,062 dòng × 33 cột (trước: 33,086 dòng)
+    tai_nan_mo_rong_sach: 25,663 dòng × 50 cột (trước: 25,684 dòng)
+    Vụ có người chết: 15,514/33,062 (46.9%)
     [khoá / truy vết] 5 cột: nguon, file_goc, dong_goc, nguon, dong_goc
     [thuộc tính gốc — đã có đặc trưng suy ra thay thế] 3 cột: ngay, gio, loai_duong
     [đặc trưng] 37 cột: tinh, gio_so, khung_gio, thu, cuoi_tuan, thang, vung, mua, dip_tet, giai_doan_covid, cap_duong, khu_vuc, pt1_nhom, pt1_loai, pt2_nhom, pt2_loai, pt3_nhom, pt3_loai, pt4_nhom, pt4_loai, pt5_nhom, pt5_loai, thoi_tiet, mat_do_gt, hinh_thuc_va_cham, kieu_va_cham, dang_duong, loai_mat_duong, do_rong_duong, tinh_trang_mat_duong, to_chuc_gt, nut_gt, vong_xuyen, giao_duong_sat, den_tin_hieu, bien_bao, den_chieu_sang
     [địa bàn chi tiết / văn bản — không dùng trực tiếp] 5 cột: huyen, xa, ten_duong, km, dia_diem
     [rò rỉ nhãn — không dùng làm đầu vào dự đoán] 15 cột: so_chet, so_bi_thuong, so_thuong_nang, so_thuong_nhe, thiet_hai, phan_loai, pt1_tinh_trang, pt2_tinh_trang, pt3_tinh_trang, pt4_tinh_trang, pt5_tinh_trang, hinh_thuc_xu_ly, so_bi_can, co_lech_thuong_vong, thiet_hai_ngoai_lai
-    [cờ kiểm tra / lọc] 8 cột: co_trung_khoa, co_ngay_loi, co_gio_loi, gio_da_sua, co_gio_mac_dinh, thang_khong_tron, so_bi_can_ngoai_lai, tinh_nhap_day_du
+    [cờ kiểm tra / lọc] 9 cột: co_trung_khoa, co_ngay_loi, co_gio_loi, gio_da_sua, co_gio_mac_dinh, thang_khong_tron, tinh_ghi_ca_vu_nhe, so_bi_can_ngoai_lai, tinh_nhap_day_du
     [nhãn] 1 cột: co_nguoi_chet
     [biết sau điều tra — dùng cho mô tả / luật kết hợp, cân nhắc khi dự đoán] 8 cột: pt1_gay_tn, pt2_gay_tn, pt3_gay_tn, pt4_gay_tn, pt5_gay_tn, bo_tron, nguyen_nhan, loi_vi_pham

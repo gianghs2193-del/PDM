@@ -1,98 +1,107 @@
 BÁO CÁO KỸ NGHỆ ĐẶC TRƯNG
 ======================================================================
-[0] Đọc bảng lõi sạch + khoá chia train/test của bước 3 | scikit-learn 1.9.1
-    bảng lõi 33,079 vụ | train 26,463 | test 6,616 (giữ nguyên cách chia bước 3)
+[0] Đọc bảng lõi sạch + khoá chia train/test của bien_doi.py | scikit-learn 1.9.1
+    bảng lõi 33,062 vụ | train 26,449 | test 6,613 (giữ nguyên cách chia của bien_doi.py)
 
 [1] Tạo đặc trưng mới theo từng dòng (không học từ dữ liệu)
-    giao_lo        :  1,880 vụ ( 5.7%) | tỉ lệ có chết 33.3% vs 47.7% khi không có
+    giao_lo        :  1,879 vụ ( 5.7%) | tỉ lệ có chết 33.3% vs 47.7% khi không có
     cau            :    795 vụ ( 2.4%) | tỉ lệ có chết 35.3% vs 47.2% khi không có
     deo_doc        :     43 vụ ( 0.1%) | tỉ lệ có chết 46.5% vs 46.9% khi không có
-    ly_trinh       : 11,433 vụ (34.6%) | tỉ lệ có chết 57.8% vs 41.1% khi không có
-    so_nha         :  2,365 vụ ( 7.1%) | tỉ lệ có chết 25.8% vs 48.5% khi không có
+    ly_trinh       : 11,431 vụ (34.6%) | tỉ lệ có chết 57.8% vs 41.2% khi không có
+    so_nha         :  2,363 vụ ( 7.1%) | tỉ lệ có chết 25.8% vs 48.6% khi không có
     noi_dong_nguoi :    727 vụ ( 2.2%) | tỉ lệ có chết 43.6% vs 47.0% khi không có
-    dip_le         :  1,589 vụ ( 4.8%) | tỉ lệ có chết 48.9% vs 46.8%
-    dem            : 17,095 vụ (51.7%) | tỉ lệ có chết 47.5% vs 46.3%
-    dem_x_quoc_lo  :  6,167 vụ (18.6%) | tỉ lệ có chết 57.6% vs 44.5%
-    dem_x_cuoi_tuan:  5,892 vụ (17.8%) | tỉ lệ có chết 47.7% vs 46.7%
-    Chuẩn hoá tên đường: 5,793 cách viết -> 4,764 đường (vd 'QL 1A', 'Quốc lộ 1A', 'Quoc lo 1A' -> 'ql1a')
-    Khoá địa lý: 700 tỉnh|huyện, 6,235 tỉnh|đường (28% vụ không có tên đường)
+    dip_le         :  1,587 vụ ( 4.8%) | tỉ lệ có chết 48.9% vs 46.8%
+    dem            : 17,087 vụ (51.7%) | tỉ lệ có chết 47.5% vs 46.3%
+    dem_x_quoc_lo  :  6,165 vụ (18.6%) | tỉ lệ có chết 57.7% vs 44.5%
+    dem_x_cuoi_tuan:  5,891 vụ (17.8%) | tỉ lệ có chết 47.7% vs 46.7%
+    Chuẩn hoá tên đường: 5,790 cách viết -> 4,761 đường (vd 'QL 1A', 'Quốc lộ 1A', 'Quoc lo 1A' -> 'ql1a')
+    Khoá địa lý: 700 tỉnh|huyện, 6,232 tỉnh|đường (28% vụ không có tên đường)
 
 [2] So sánh 4 bộ đặc trưng — kiểm định chéo 5 lần, CHỈ trên train (mã hoá có học được học lại trong từng lần)
-    nen           : Bước 3: one-hot (có tỉnh) + sin/cos
+    nen           : bien_doi.py: one-hot (có tỉnh) + sin/cos
     nen_moi       : nền + 10 đặc trưng mới theo dòng
     ma_hoa_dia_ly : nền_mới, nhưng tỉnh one-hot -> Target Encoding tỉnh/huyện/đường + tần suất huyện/đường
     khong_dia_ly  : nền_mới bỏ hẳn tỉnh (đo phần dự báo KHÔNG nhờ thói quen báo cáo của tỉnh)
     bộ đặc trưng   số cột |  Logistic AUC     F1 |    HistGB AUC     F1
-    nen               105 | 0.7345±0.001 0.644 | 0.7401±0.002 0.650
-    nen_moi           115 | 0.7365±0.002 0.645 | 0.7423±0.002 0.654
-    ma_hoa_dia_ly      56 | 0.7628±0.005 0.667 | 0.7642±0.006 0.665
-    khong_dia_ly       51 | 0.6508±0.007 0.586 | 0.6565±0.007 0.590
-    -> Bộ tốt nhất: ma_hoa_dia_ly với histgb (AUC 0.7642)
-    -> Phần do thông tin tỉnh/huyện/đường: AUC 0.7642 so với 0.6565 khi bỏ hẳn địa lý
+    nen               102 | 0.7327±0.005 0.642 | 0.7382±0.005 0.651
+    nen_moi           112 | 0.7353±0.005 0.645 | 0.7404±0.004 0.652
+    ma_hoa_dia_ly      54 | 0.7630±0.005 0.669 | 0.7639±0.004 0.667
+    khong_dia_ly       49 | 0.6529±0.002 0.580 | 0.6608±0.002 0.588
+    Kiểm định theo thời gian, vẫn chỉ trong train: học 20,537 vụ 2020–2021, chấm 5,912 vụ 8T2022
+    bộ đặc trưng   |  Logistic: ngẫu nhiên -> thời gian |  HistGB: ngẫu nhiên -> thời gian
+    nen            | 0.7327 -> 0.7206                 | 0.7382 -> 0.7212
+    nen_moi        | 0.7353 -> 0.7242                 | 0.7404 -> 0.7246
+    ma_hoa_dia_ly  | 0.7630 -> 0.7445                 | 0.7639 -> 0.7443
+    khong_dia_ly   | 0.6529 -> 0.6477                 | 0.6608 -> 0.6559
+    AUC giảm 0.005–0.020 khi chấm giai đoạn chưa thấy; thứ hạng 4 bộ giữ nguyên -> kiểm định ngẫu nhiên hơi lạc quan, nhưng kết luận so sánh không đổi
+    -> Bộ tốt nhất: ma_hoa_dia_ly với histgb (AUC 0.7639)
+    -> Phần do thông tin tỉnh/huyện/đường: AUC 0.7639 so với 0.6608 khi bỏ hẳn địa lý
     Vì thông tin địa lý chi phối, giữ HAI hướng đầu ra:
       du_bao      : ma_hoa_dia_ly + histgb — dự báo tốt nhất, nhưng học cả thói quen báo cáo của địa phương
       khong_dia_ly: khong_dia_ly + histgb — chỉ yếu tố thời gian / loại đường / vị trí, dùng để giải thích
 
-[3] Chọn lọc đặc trưng — hướng du_bao (bộ ma_hoa_dia_ly, histgb): tráo từng nhóm cột trên 20% train giữ lại
-    AUC trên phần giữ lại khi chưa tráo: 0.7622
-    khoa_huyen      : AUC giảm +0.1592 (±0.0037)
-    tinh            : AUC giảm +0.0248 (±0.0026)
-    cap_duong       : AUC giảm +0.0090 (±0.0011)
-    khoa_duong      : AUC giảm +0.0090 (±0.0021)
-    thang           : AUC giảm +0.0058 (±0.0014)
-    gio_so          : AUC giảm +0.0023 (±0.0007)
-    khu_vuc         : AUC giảm +0.0008 (±0.0006)   <- không đóng góp rõ ràng
-    giao_lo         : AUC giảm +0.0006 (±0.0001)
-    mua             : AUC giảm +0.0006 (±0.0003)
-    so_nha          : AUC giảm +0.0004 (±0.0002)
-    vung            : AUC giảm +0.0004 (±0.0006)   <- không đóng góp rõ ràng
-    dem_x_quoc_lo   : AUC giảm +0.0002 (±0.0001)
-    ly_trinh        : AUC giảm +0.0001 (±0.0001)   <- không đóng góp rõ ràng
-    noi_dong_nguoi  : AUC giảm +0.0001 (±0.0001)   <- không đóng góp rõ ràng
-    giai_doan_covid : AUC giảm +0.0000 (±0.0002)   <- không đóng góp rõ ràng
-    dip_le          : AUC giảm +0.0000 (±0.0001)   <- không đóng góp rõ ràng
-    thu             : AUC giảm +0.0000 (±0.0004)   <- không đóng góp rõ ràng
-    dem_x_cuoi_tuan : AUC giảm +0.0000 (±0.0001)   <- không đóng góp rõ ràng
-    cau             : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    deo_doc         : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    cuoi_tuan       : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    gio_thieu       : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    dem             : AUC giảm -0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    khung_gio       : AUC giảm -0.0001 (±0.0006)   <- không đóng góp rõ ràng
-    dip_tet         : AUC giảm -0.0002 (±0.0002)   <- không đóng góp rõ ràng
-    Bỏ 15 nhóm: khu_vuc, vung, ly_trinh, noi_dong_nguoi, giai_doan_covid, dip_le, thu, dem_x_cuoi_tuan, cau, deo_doc, cuoi_tuan, gio_thieu, dem, khung_gio, dip_tet
-    Kiểm định chéo lại: AUC 0.7633 (đầy đủ 0.7642)
+[3] Chọn lọc đặc trưng — hướng du_bao (bộ ma_hoa_dia_ly, histgb): tráo từng nhóm cột trên phần giữ lại của train
+    AUC trên phần giữ lại khi chưa tráo (trung bình 3 cách chia): 0.7647
+    Mỗi nhóm: 3 cách chia × 10 lần tráo = 30 phép đo; ± là sai số chuẩn của trung bình
+    khoa_huyen      : AUC giảm +0.1626 (±0.0017) | có ích ở 3/3 cách chia
+    tinh            : AUC giảm +0.0251 (±0.0008) | có ích ở 3/3 cách chia
+    cap_duong       : AUC giảm +0.0070 (±0.0003) | có ích ở 3/3 cách chia
+    khoa_duong      : AUC giảm +0.0064 (±0.0004) | có ích ở 3/3 cách chia
+    thang           : AUC giảm +0.0032 (±0.0003) | có ích ở 3/3 cách chia
+    gio_so          : AUC giảm +0.0021 (±0.0003) | có ích ở 3/3 cách chia
+    khu_vuc         : AUC giảm +0.0009 (±0.0001) | có ích ở 3/3 cách chia
+    khung_gio       : AUC giảm +0.0005 (±0.0001) | có ích ở 1/3 cách chia   <- không đóng góp rõ ràng
+    giao_lo         : AUC giảm +0.0004 (±0.0000) | có ích ở 1/3 cách chia   <- không đóng góp rõ ràng
+    vung            : AUC giảm +0.0003 (±0.0000) | có ích ở 1/3 cách chia   <- không đóng góp rõ ràng
+    so_nha          : AUC giảm +0.0003 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    ly_trinh        : AUC giảm +0.0002 (±0.0001) | có ích ở 1/3 cách chia   <- không đóng góp rõ ràng
+    dem_x_quoc_lo   : AUC giảm +0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    giai_doan_covid : AUC giảm +0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    thu             : AUC giảm +0.0001 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dip_tet         : AUC giảm +0.0001 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dem             : AUC giảm +0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    gio_thieu       : AUC giảm +0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    deo_doc         : AUC giảm +0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    noi_dong_nguoi  : AUC giảm -0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    mua             : AUC giảm -0.0000 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dip_le          : AUC giảm -0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    cuoi_tuan       : AUC giảm -0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    cau             : AUC giảm -0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dem_x_cuoi_tuan : AUC giảm -0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    Bỏ 18 nhóm: khung_gio, giao_lo, vung, so_nha, ly_trinh, dem_x_quoc_lo, giai_doan_covid, thu, dip_tet, dem, gio_thieu, deo_doc, noi_dong_nguoi, mua, dip_le, cuoi_tuan, cau, dem_x_cuoi_tuan
+    Kiểm định chéo lại: AUC 0.7628 (đầy đủ 0.7639)
     -> Giữ bản rút gọn (AUC không giảm quá 0.002)
-    Học bộ biến đổi trên toàn bộ train, áp dụng cho test: 22 cột | train 26,463 × 22 | test 6,616 × 22
-    Nhóm giữ lại: mua, cap_duong, gio_so, thang, giao_lo, so_nha, dem_x_quoc_lo, tinh, khoa_huyen, khoa_duong
+    Học bộ biến đổi trên toàn bộ train, áp dụng cho test: 19 cột | train 26,449 × 19 | test 6,613 × 19
+    Nhóm giữ lại: cap_duong, khu_vuc, gio_so, thang, tinh, khoa_huyen, khoa_duong
     TargetEncoder: train được mã hoá bằng chia chéo nội bộ (mỗi dòng nhận tỉ lệ có chết tính từ các dòng KHÁC), test dùng tỉ lệ học từ toàn bộ train -> không rò rỉ nhãn
 
-[4] Chọn lọc đặc trưng — hướng khong_dia_ly (bộ khong_dia_ly, histgb): tráo từng nhóm cột trên 20% train giữ lại
-    AUC trên phần giữ lại khi chưa tráo: 0.6589
-    cap_duong       : AUC giảm +0.0400 (±0.0043)
-    ly_trinh        : AUC giảm +0.0386 (±0.0037)
-    vung            : AUC giảm +0.0266 (±0.0021)
-    khu_vuc         : AUC giảm +0.0186 (±0.0035)
-    so_nha          : AUC giảm +0.0115 (±0.0036)
-    thang           : AUC giảm +0.0069 (±0.0013)
-    dip_tet         : AUC giảm +0.0020 (±0.0007)
-    giao_lo         : AUC giảm +0.0018 (±0.0005)
-    gio_so          : AUC giảm +0.0014 (±0.0012)   <- không đóng góp rõ ràng
-    mua             : AUC giảm +0.0009 (±0.0006)   <- không đóng góp rõ ràng
-    giai_doan_covid : AUC giảm +0.0006 (±0.0006)   <- không đóng góp rõ ràng
-    cau             : AUC giảm +0.0005 (±0.0001)
-    khung_gio       : AUC giảm +0.0002 (±0.0009)   <- không đóng góp rõ ràng
-    noi_dong_nguoi  : AUC giảm +0.0002 (±0.0002)   <- không đóng góp rõ ràng
-    cuoi_tuan       : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    gio_thieu       : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    deo_doc         : AUC giảm +0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    dem             : AUC giảm -0.0000 (±0.0000)   <- không đóng góp rõ ràng
-    dip_le          : AUC giảm -0.0001 (±0.0002)   <- không đóng góp rõ ràng
-    dem_x_cuoi_tuan : AUC giảm -0.0004 (±0.0002)   <- không đóng góp rõ ràng
-    dem_x_quoc_lo   : AUC giảm -0.0008 (±0.0007)   <- không đóng góp rõ ràng
-    thu             : AUC giảm -0.0009 (±0.0008)   <- không đóng góp rõ ràng
-    Bỏ 13 nhóm: gio_so, mua, giai_doan_covid, khung_gio, noi_dong_nguoi, cuoi_tuan, gio_thieu, deo_doc, dem, dip_le, dem_x_cuoi_tuan, dem_x_quoc_lo, thu
-    Kiểm định chéo lại: AUC 0.6584 (đầy đủ 0.6565)
+[4] Chọn lọc đặc trưng — hướng khong_dia_ly (bộ khong_dia_ly, histgb): tráo từng nhóm cột trên phần giữ lại của train
+    AUC trên phần giữ lại khi chưa tráo (trung bình 3 cách chia): 0.6608
+    Mỗi nhóm: 3 cách chia × 10 lần tráo = 30 phép đo; ± là sai số chuẩn của trung bình
+    ly_trinh        : AUC giảm +0.0508 (±0.0010) | có ích ở 3/3 cách chia
+    cap_duong       : AUC giảm +0.0400 (±0.0008) | có ích ở 3/3 cách chia
+    vung            : AUC giảm +0.0285 (±0.0006) | có ích ở 3/3 cách chia
+    khu_vuc         : AUC giảm +0.0168 (±0.0006) | có ích ở 3/3 cách chia
+    so_nha          : AUC giảm +0.0105 (±0.0004) | có ích ở 3/3 cách chia
+    thang           : AUC giảm +0.0045 (±0.0005) | có ích ở 3/3 cách chia
+    giao_lo         : AUC giảm +0.0024 (±0.0002) | có ích ở 3/3 cách chia
+    gio_so          : AUC giảm +0.0020 (±0.0005) | có ích ở 2/3 cách chia
+    dip_tet         : AUC giảm +0.0009 (±0.0002) | có ích ở 2/3 cách chia
+    khung_gio       : AUC giảm +0.0009 (±0.0002) | có ích ở 2/3 cách chia
+    thu             : AUC giảm +0.0007 (±0.0002) | có ích ở 2/3 cách chia
+    giai_doan_covid : AUC giảm +0.0006 (±0.0001) | có ích ở 1/3 cách chia
+    mua             : AUC giảm +0.0006 (±0.0001) | có ích ở 3/3 cách chia
+    cau             : AUC giảm +0.0004 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dem_x_quoc_lo   : AUC giảm +0.0001 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    cuoi_tuan       : AUC giảm +0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    gio_thieu       : AUC giảm +0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    deo_doc         : AUC giảm -0.0000 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    noi_dong_nguoi  : AUC giảm -0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dem             : AUC giảm -0.0001 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dem_x_cuoi_tuan : AUC giảm -0.0003 (±0.0001) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    dip_le          : AUC giảm -0.0003 (±0.0000) | có ích ở 0/3 cách chia   <- không đóng góp rõ ràng
+    Bỏ 9 nhóm: cau, dem_x_quoc_lo, cuoi_tuan, gio_thieu, deo_doc, noi_dong_nguoi, dem, dem_x_cuoi_tuan, dip_le
+    Kiểm định chéo lại: AUC 0.6608 (đầy đủ 0.6608)
     -> Giữ bản rút gọn (AUC không giảm quá 0.002)
-    Học bộ biến đổi trên toàn bộ train, áp dụng cho test: 25 cột | train 26,463 × 25 | test 6,616 × 25
-    Nhóm giữ lại: vung, dip_tet, cap_duong, khu_vuc, thang, giao_lo, cau, ly_trinh, so_nha
+    Học bộ biến đổi trên toàn bộ train, áp dụng cho test: 40 cột | train 26,449 × 40 | test 6,613 × 40
+    Nhóm giữ lại: khung_gio, vung, mua, dip_tet, giai_doan_covid, cap_duong, khu_vuc, gio_so, thang, thu, giao_lo, ly_trinh, so_nha
