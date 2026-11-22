@@ -27,6 +27,9 @@ trang = st.navigation(
             st.Page("app_pages/kham_pha.py", title="Khám phá nhanh", icon=":material/bar_chart:"),
             st.Page("app_pages/tu_dien.py", title="Từ điển & tải về", icon=":material/menu_book:"),
         ],
+        "Bước 3 – Xây dựng mô hình": [
+            st.Page("app_pages/mo_hinh.py", title="Mô hình", icon=":material/model_training:"),
+        ],
     }
 )
 
