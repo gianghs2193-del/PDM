@@ -1,0 +1,14 @@
+﻿bai_toan,huong,mo_hinh,so_dong_hoc,giay,diem_tren_du_lieu_hoc,thuoc_do
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),21160,0.12,0.5308,Accuracy
+Phân loại,du_bao,Logistic Regression,21160,0.09,0.6976,Accuracy
+Phân loại,du_bao,Cây quyết định,21160,0.17,0.998,Accuracy
+Phân loại,du_bao,Random Forest,21160,1.14,0.998,Accuracy
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),21160,0.03,0.5308,Accuracy
+Phân loại,khong_dia_ly,Logistic Regression,21160,0.06,0.608,Accuracy
+Phân loại,khong_dia_ly,Cây quyết định,21160,0.13,0.9439,Accuracy
+Phân loại,khong_dia_ly,Random Forest,21160,1.21,0.9439,Accuracy
+Hồi quy,,Mốc (trung bình),3920,0.0,0.0,R2
+Hồi quy,,Hồi quy tuyến tính,3920,0.02,0.6503,R2
+Hồi quy,,Ridge,3920,0.01,0.6502,R2
+Phân cụm,,K-Means (k=3),63,,246.64,SSE
+Luật kết hợp,,Apriori,33062,0.02,21.0,Số luật

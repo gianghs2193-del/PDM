@@ -4,7 +4,11 @@ Dữ liệu nằm trong PostgreSQL, mỗi giai đoạn một schema:
     thu_thap   : du_lieu_tich_hop, bang_loi, bang_mo_rong, tu_dien_du_lieu
     tien_xu_ly : tai_nan_loi_sach, tai_nan_mo_rong_sach, tu_dien_sach, train, test, train_fe, test_fe,
                  train_fe_khong_dia_ly, test_fe_khong_dia_ly, giao_dich, ho_so_tinh
-    mo_hinh    : ket_qua_phan_loai, ho_so_tinh_cum, bang_so_vu_theo_o, ket_qua_hoi_quy, bang_thoi_diem_den
+    mo_hinh    : chia_phan_loai, chia_hoi_quy, ung_vien, huan_luyen, cum_tinh, tap_pho_bien, luat_ket_hop,
+                 danh_gia_ban_dau, luat_theo_nam, kiem_dinh_cheo,
+                 tinh_chinh, ket_qua_test, cum_tinh_cuoi, luat_cuoi,
+                 ket_qua_phan_loai, ho_so_tinh_cum, bang_so_vu_theo_o,
+                 ket_qua_hoi_quy, bang_thoi_diem_den
 Khoá chính, khoá ngoại và chỉ mục được tạo lại mỗi lần ghi (xem KHOA_CHINH, KHOA_NGOAI, CHI_MUC).
 Bảng phụ <schema>._kieu_cot lưu kiểu pandas của từng cột để doc() trả về đúng kiểu như lúc ghi.
 
@@ -44,6 +48,20 @@ KHOA_CHINH: dict[tuple[str, str], list[str]] = {
     ("mo_hinh", "ket_qua_hoi_quy"): ["mo_hinh"],
     ("mo_hinh", "bang_so_vu_theo_o"): ["ky", "vung", "khung_gio", "thu"],
     ("mo_hinh", "bang_thoi_diem_den"): ["khung_gio", "thu"],
+    ("mo_hinh", "chia_phan_loai"): KHOA_VU,
+    ("mo_hinh", "chia_hoi_quy"): ["ky"],
+    ("mo_hinh", "ung_vien"): ["bai_toan", "mo_hinh"],
+    ("mo_hinh", "huan_luyen"): ["bai_toan", "huong", "mo_hinh"],
+    ("mo_hinh", "cum_tinh"): ["tinh"],
+    ("mo_hinh", "tap_pho_bien"): ["tap"],
+    ("mo_hinh", "luat_ket_hop"): ["ve_trai", "ve_phai"],
+    ("mo_hinh", "danh_gia_ban_dau"): ["bai_toan", "huong", "mo_hinh", "tap", "chi_so"],
+    ("mo_hinh", "luat_theo_nam"): ["ve_trai", "ve_phai", "nam"],
+    ("mo_hinh", "kiem_dinh_cheo"): ["bai_toan", "huong", "mo_hinh", "lan", "tap", "chi_so"],
+    ("mo_hinh", "tinh_chinh"): ["bai_toan", "huong", "mo_hinh", "tham_so", "chi_so"],
+    ("mo_hinh", "ket_qua_test"): ["bai_toan", "huong", "mo_hinh", "chi_so"],
+    ("mo_hinh", "cum_tinh_cuoi"): ["tinh"],
+    ("mo_hinh", "luat_cuoi"): ["ve_trai", "ve_phai"],
 }
 # (schema, bảng) -> (cột, bảng được tham chiếu): mỗi vụ của bảng con phải có trong bảng cha
 KHOA_NGOAI: dict[tuple[str, str], tuple[list[str], str]] = {
@@ -51,6 +69,7 @@ KHOA_NGOAI: dict[tuple[str, str], tuple[list[str], str]] = {
     ("tien_xu_ly", "tai_nan_mo_rong_sach"): (KHOA_VU, "tien_xu_ly.tai_nan_loi_sach"),
     **{("tien_xu_ly", t): (KHOA_VU, "tien_xu_ly.tai_nan_loi_sach")
        for t in ("train", "test", "train_fe", "test_fe", "train_fe_khong_dia_ly", "test_fe_khong_dia_ly", "giao_dich")},
+    ("mo_hinh", "chia_phan_loai"): (KHOA_VU, "tien_xu_ly.tai_nan_loi_sach"),
 }
 CHI_MUC: dict[tuple[str, str], list[str]] = {
     ("thu_thap", "bang_loi"): ["tinh", "ngay"],

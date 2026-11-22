@@ -1,0 +1,189 @@
+﻿tap,so_item,support
+khung_gio=00-04,1,0.07201621196539834
+khung_gio=06-09,1,0.09170649083540015
+khung_gio=09-16,1,0.2826507773274454
+khung_gio=16-19,1,0.17521626035932492
+khung_gio=19-22,1,0.2263625914947674
+khung_gio=22-24,1,0.11142701590950335
+vung=Bắc,1,0.2573649506986873
+vung=Duyên hải miền Trung,1,0.22485028128969814
+vung=Nam Bộ,1,0.4497005625793963
+vung=Tây Nguyên,1,0.06808420543221826
+mua=Mùa khô,1,0.5370516000241969
+mua=Mùa mưa,1,0.46294839997580306
+cap_duong=Quốc lộ,1,0.35487871272155347
+cap_duong=Đường huyện,1,0.22705825418909928
+cap_duong=Đường tỉnh,1,0.18740548061218318
+cap_duong=Đường xã,1,0.07404270764019115
+khu_vuc=Nông thôn,1,0.10852338031577037
+khu_vuc=Nội thị,1,0.15679632206158128
+tinh=Bình Dương,1,0.06330530518419938
+tinh=Hà Nội,1,0.07159276510797895
+tinh=Hồ Chí Minh,1,0.17796866493255095
+cuoi_tuan=1,1,0.3307724880527494
+co_nguoi_chet=1,1,0.4692396104288912
+co_nguoi_chet=0,1,0.5307603895711088
+khung_gio=09-16 + vung=Bắc,2,0.0844474018510677
+khung_gio=09-16 + vung=Duyên hải miền Trung,2,0.06037142338636501
+khung_gio=09-16 + vung=Nam Bộ,2,0.12092432399733834
+khung_gio=09-16 + mua=Mùa khô,2,0.1542556409170649
+khung_gio=09-16 + mua=Mùa mưa,2,0.1283951364103805
+khung_gio=09-16 + cap_duong=Quốc lộ,2,0.10307906357752102
+khung_gio=09-16 + cap_duong=Đường huyện,2,0.058314681507470816
+khung_gio=09-16 + cap_duong=Đường tỉnh,2,0.05332405783074224
+khung_gio=09-16 + cuoi_tuan=1,2,0.09158550601899462
+khung_gio=09-16 + co_nguoi_chet=1,2,0.12890932188010404
+khung_gio=09-16 + co_nguoi_chet=0,2,0.15374145544734136
+khung_gio=16-19 + vung=Nam Bộ,2,0.07758151352005323
+khung_gio=16-19 + mua=Mùa khô,2,0.09548726634807332
+khung_gio=16-19 + mua=Mùa mưa,2,0.0797289940112516
+khung_gio=16-19 + cap_duong=Quốc lộ,2,0.059978222733047
+khung_gio=16-19 + cuoi_tuan=1,2,0.05910108281410683
+khung_gio=16-19 + co_nguoi_chet=1,2,0.0829955840542012
+khung_gio=16-19 + co_nguoi_chet=0,2,0.0922206763051237
+khung_gio=19-22 + vung=Bắc,2,0.05474562942350735
+khung_gio=19-22 + vung=Duyên hải miền Trung,2,0.054261690157885185
+khung_gio=19-22 + vung=Nam Bộ,2,0.09851188675821185
+khung_gio=19-22 + mua=Mùa khô,2,0.11959349101687738
+khung_gio=19-22 + mua=Mùa mưa,2,0.10676910047789002
+khung_gio=19-22 + cap_duong=Quốc lộ,2,0.07839816103079064
+khung_gio=19-22 + cap_duong=Đường huyện,2,0.05132780836005081
+khung_gio=19-22 + cuoi_tuan=1,2,0.08057588772609038
+khung_gio=19-22 + co_nguoi_chet=1,2,0.10752525558042465
+khung_gio=19-22 + co_nguoi_chet=0,2,0.11883733591434276
+khung_gio=22-24 + vung=Nam Bộ,2,0.05592523138346137
+khung_gio=22-24 + mua=Mùa khô,2,0.05898009799770129
+khung_gio=22-24 + mua=Mùa mưa,2,0.05244691791180207
+khung_gio=22-24 + co_nguoi_chet=1,2,0.051267315951848046
+khung_gio=22-24 + co_nguoi_chet=0,2,0.06015969995765531
+vung=Bắc + mua=Mùa khô,2,0.1341116689855423
+vung=Bắc + mua=Mùa mưa,2,0.123253281713145
+vung=Bắc + cap_duong=Quốc lộ,2,0.09457988022503176
+vung=Bắc + tinh=Hà Nội,2,0.07159276510797895
+vung=Bắc + cuoi_tuan=1,2,0.08148327384913194
+vung=Bắc + co_nguoi_chet=1,2,0.1257032242453572
+vung=Bắc + co_nguoi_chet=0,2,0.1316617264533301
+vung=Duyên hải miền Trung + mua=Mùa khô,2,0.1511705280987236
+vung=Duyên hải miền Trung + mua=Mùa mưa,2,0.07367975319097453
+vung=Duyên hải miền Trung + cap_duong=Quốc lộ,2,0.11448188252374326
+vung=Duyên hải miền Trung + cuoi_tuan=1,2,0.0708668562095457
+vung=Duyên hải miền Trung + co_nguoi_chet=1,2,0.11163873933821306
+vung=Duyên hải miền Trung + co_nguoi_chet=0,2,0.11321154195148508
+vung=Nam Bộ + mua=Mùa khô,2,0.21492952634444376
+vung=Nam Bộ + mua=Mùa mưa,2,0.23477103623495252
+vung=Nam Bộ + cap_duong=Quốc lộ,2,0.11233440203254491
+vung=Nam Bộ + cap_duong=Đường huyện,2,0.1540741636924566
+vung=Nam Bộ + cap_duong=Đường tỉnh,2,0.09678785312443289
+vung=Nam Bộ + khu_vuc=Nội thị,2,0.09802794749258968
+vung=Nam Bộ + tinh=Bình Dương,2,0.06330530518419938
+vung=Nam Bộ + tinh=Hồ Chí Minh,2,0.17796866493255095
+vung=Nam Bộ + cuoi_tuan=1,2,0.1561309055713508
+vung=Nam Bộ + co_nguoi_chet=1,2,0.18864557498033996
+vung=Nam Bộ + co_nguoi_chet=0,2,0.2610549875990563
+mua=Mùa khô + cap_duong=Quốc lộ,2,0.20258907507107857
+mua=Mùa khô + cap_duong=Đường huyện,2,0.11732502570927349
+mua=Mùa khô + cap_duong=Đường tỉnh,2,0.09951001149355757
+mua=Mùa khô + khu_vuc=Nông thôn,2,0.06028068477406086
+mua=Mùa khô + khu_vuc=Nội thị,2,0.08335853850341782
+mua=Mùa khô + tinh=Hồ Chí Minh,2,0.08508257213719678
+mua=Mùa khô + cuoi_tuan=1,2,0.1750045369306152
+mua=Mùa khô + co_nguoi_chet=1,2,0.2651382251527433
+mua=Mùa khô + co_nguoi_chet=0,2,0.2719133748714536
+mua=Mùa mưa + cap_duong=Quốc lộ,2,0.15228963765047487
+mua=Mùa mưa + cap_duong=Đường huyện,2,0.10973322847982578
+mua=Mùa mưa + cap_duong=Đường tỉnh,2,0.08789546911862561
+mua=Mùa mưa + khu_vuc=Nội thị,2,0.07343778355816345
+mua=Mùa mưa + tinh=Hồ Chí Minh,2,0.09288609279535419
+mua=Mùa mưa + cuoi_tuan=1,2,0.15576795112213418
+mua=Mùa mưa + co_nguoi_chet=1,2,0.20410138527614785
+mua=Mùa mưa + co_nguoi_chet=0,2,0.2588470146996552
+cap_duong=Quốc lộ + cuoi_tuan=1,2,0.11327203435968786
+cap_duong=Quốc lộ + co_nguoi_chet=1,2,0.201681688948037
+cap_duong=Quốc lộ + co_nguoi_chet=0,2,0.15319702377351643
+cap_duong=Đường huyện + khu_vuc=Nội thị,2,0.08302583025830258
+cap_duong=Đường huyện + tinh=Hồ Chí Minh,2,0.09712056136954812
+cap_duong=Đường huyện + cuoi_tuan=1,2,0.0786703768677031
+cap_duong=Đường huyện + co_nguoi_chet=1,2,0.0714717802915734
+cap_duong=Đường huyện + co_nguoi_chet=0,2,0.15558647389752586
+cap_duong=Đường tỉnh + cuoi_tuan=1,2,0.06288185832677999
+cap_duong=Đường tỉnh + co_nguoi_chet=1,2,0.09252313834613755
+cap_duong=Đường tỉnh + co_nguoi_chet=0,2,0.09488234226604561
+khu_vuc=Nông thôn + co_nguoi_chet=1,2,0.062488657673461984
+khu_vuc=Nội thị + tinh=Hồ Chí Minh,2,0.06439416853184925
+khu_vuc=Nội thị + cuoi_tuan=1,2,0.0505414070534148
+khu_vuc=Nội thị + co_nguoi_chet=1,2,0.05087411529853003
+khu_vuc=Nội thị + co_nguoi_chet=0,2,0.10592220676305124
+tinh=Hồ Chí Minh + cuoi_tuan=1,2,0.06136954812171073
+tinh=Hồ Chí Minh + co_nguoi_chet=0,2,0.13625914947674067
+cuoi_tuan=1 + co_nguoi_chet=1,2,0.15709878410259512
+cuoi_tuan=1 + co_nguoi_chet=0,2,0.17367370395015425
+khung_gio=09-16 + vung=Nam Bộ + mua=Mùa khô,3,0.058677635956687436
+khung_gio=09-16 + vung=Nam Bộ + mua=Mùa mưa,3,0.0622466880406509
+khung_gio=09-16 + vung=Nam Bộ + co_nguoi_chet=1,3,0.050117960195995404
+khung_gio=09-16 + vung=Nam Bộ + co_nguoi_chet=0,3,0.07080636380134293
+khung_gio=09-16 + mua=Mùa khô + cap_duong=Quốc lộ,3,0.05846591252797774
+khung_gio=09-16 + mua=Mùa khô + co_nguoi_chet=1,3,0.0745568931099147
+khung_gio=09-16 + mua=Mùa khô + co_nguoi_chet=0,3,0.07969874780715021
+khung_gio=09-16 + mua=Mùa mưa + co_nguoi_chet=1,3,0.054352428770189344
+khung_gio=09-16 + mua=Mùa mưa + co_nguoi_chet=0,3,0.07404270764019115
+khung_gio=09-16 + cap_duong=Quốc lộ + co_nguoi_chet=1,3,0.055532030730143365
+khung_gio=19-22 + vung=Nam Bộ + mua=Mùa mưa,3,0.0532030730143367
+khung_gio=19-22 + vung=Nam Bộ + co_nguoi_chet=0,3,0.05665114028189462
+khung_gio=19-22 + mua=Mùa khô + co_nguoi_chet=1,3,0.05991773032484423
+khung_gio=19-22 + mua=Mùa khô + co_nguoi_chet=0,3,0.05967576069203315
+khung_gio=19-22 + mua=Mùa mưa + co_nguoi_chet=0,3,0.0591615752223096
+vung=Bắc + mua=Mùa khô + cap_duong=Quốc lộ,3,0.05045066844111064
+vung=Bắc + mua=Mùa khô + co_nguoi_chet=1,3,0.06753977375839332
+vung=Bắc + mua=Mùa khô + co_nguoi_chet=0,3,0.06657189522714899
+vung=Bắc + mua=Mùa mưa + co_nguoi_chet=1,3,0.058163450486963884
+vung=Bắc + mua=Mùa mưa + co_nguoi_chet=0,3,0.06508983122618112
+vung=Duyên hải miền Trung + mua=Mùa khô + cap_duong=Quốc lộ,3,0.07924505474562943
+vung=Duyên hải miền Trung + mua=Mùa khô + co_nguoi_chet=1,3,0.07957776299074466
+vung=Duyên hải miền Trung + mua=Mùa khô + co_nguoi_chet=0,3,0.07159276510797895
+vung=Duyên hải miền Trung + cap_duong=Quốc lộ + co_nguoi_chet=1,3,0.06493860020567419
+vung=Nam Bộ + mua=Mùa khô + cap_duong=Quốc lộ,3,0.05420119774968241
+vung=Nam Bộ + mua=Mùa khô + cap_duong=Đường huyện,3,0.07340753735406207
+vung=Nam Bộ + mua=Mùa khô + tinh=Hồ Chí Minh,3,0.08508257213719678
+vung=Nam Bộ + mua=Mùa khô + cuoi_tuan=1,3,0.07243965882281773
+vung=Nam Bộ + mua=Mùa khô + co_nguoi_chet=1,3,0.09451938781682899
+vung=Nam Bộ + mua=Mùa khô + co_nguoi_chet=0,3,0.12041013852761479
+vung=Nam Bộ + mua=Mùa mưa + cap_duong=Quốc lộ,3,0.0581332042828625
+vung=Nam Bộ + mua=Mùa mưa + cap_duong=Đường huyện,3,0.08066662633839453
+vung=Nam Bộ + mua=Mùa mưa + khu_vuc=Nội thị,3,0.0503296836247051
+vung=Nam Bộ + mua=Mùa mưa + tinh=Hồ Chí Minh,3,0.09288609279535419
+vung=Nam Bộ + mua=Mùa mưa + cuoi_tuan=1,3,0.08369124674853307
+vung=Nam Bộ + mua=Mùa mưa + co_nguoi_chet=1,3,0.09412618716351098
+vung=Nam Bộ + mua=Mùa mưa + co_nguoi_chet=0,3,0.14064484907144154
+vung=Nam Bộ + cap_duong=Quốc lộ + co_nguoi_chet=1,3,0.0644849071441534
+vung=Nam Bộ + cap_duong=Đường huyện + khu_vuc=Nội thị,3,0.06173250257092735
+vung=Nam Bộ + cap_duong=Đường huyện + tinh=Hồ Chí Minh,3,0.09712056136954812
+vung=Nam Bộ + cap_duong=Đường huyện + cuoi_tuan=1,3,0.05522956868912952
+vung=Nam Bộ + cap_duong=Đường huyện + co_nguoi_chet=0,3,0.10979372088802855
+vung=Nam Bộ + cap_duong=Đường tỉnh + co_nguoi_chet=0,3,0.051116084931341114
+vung=Nam Bộ + khu_vuc=Nội thị + tinh=Hồ Chí Minh,3,0.06439416853184925
+vung=Nam Bộ + khu_vuc=Nội thị + co_nguoi_chet=0,3,0.07119956445466094
+vung=Nam Bộ + tinh=Hồ Chí Minh + cuoi_tuan=1,3,0.06136954812171073
+vung=Nam Bộ + tinh=Hồ Chí Minh + co_nguoi_chet=0,3,0.13625914947674067
+vung=Nam Bộ + cuoi_tuan=1 + co_nguoi_chet=1,3,0.06502933881797834
+vung=Nam Bộ + cuoi_tuan=1 + co_nguoi_chet=0,3,0.09110156675337246
+mua=Mùa khô + cap_duong=Quốc lộ + cuoi_tuan=1,3,0.06345653620470632
+mua=Mùa khô + cap_duong=Quốc lộ + co_nguoi_chet=1,3,0.11805093460770673
+mua=Mùa khô + cap_duong=Quốc lộ + co_nguoi_chet=0,3,0.08453814046337185
+mua=Mùa khô + cap_duong=Đường huyện + co_nguoi_chet=0,3,0.07821668380618232
+mua=Mùa khô + cap_duong=Đường tỉnh + co_nguoi_chet=1,3,0.0519629786461799
+mua=Mùa khô + khu_vuc=Nội thị + co_nguoi_chet=0,3,0.05450365979069627
+mua=Mùa khô + tinh=Hồ Chí Minh + co_nguoi_chet=0,3,0.06333555138830077
+mua=Mùa khô + cuoi_tuan=1 + co_nguoi_chet=1,3,0.0871090678119896
+mua=Mùa khô + cuoi_tuan=1 + co_nguoi_chet=0,3,0.08789546911862561
+mua=Mùa mưa + cap_duong=Quốc lộ + co_nguoi_chet=1,3,0.0836307543403303
+mua=Mùa mưa + cap_duong=Quốc lộ + co_nguoi_chet=0,3,0.06865888331014458
+mua=Mùa mưa + cap_duong=Đường huyện + tinh=Hồ Chí Minh,3,0.05026919121650233
+mua=Mùa mưa + cap_duong=Đường huyện + co_nguoi_chet=0,3,0.07736979009134354
+mua=Mùa mưa + khu_vuc=Nội thị + co_nguoi_chet=0,3,0.05141854697235497
+mua=Mùa mưa + tinh=Hồ Chí Minh + co_nguoi_chet=0,3,0.0729235980884399
+mua=Mùa mưa + cuoi_tuan=1 + co_nguoi_chet=1,3,0.06998971629060553
+mua=Mùa mưa + cuoi_tuan=1 + co_nguoi_chet=0,3,0.08577823483152865
+cap_duong=Quốc lộ + cuoi_tuan=1 + co_nguoi_chet=1,3,0.06536204706309358
+cap_duong=Đường huyện + khu_vuc=Nội thị + co_nguoi_chet=0,3,0.06209545702014397
+cap_duong=Đường huyện + tinh=Hồ Chí Minh + co_nguoi_chet=0,3,0.07528280200834796
+cap_duong=Đường huyện + cuoi_tuan=1 + co_nguoi_chet=0,3,0.053626519871756095

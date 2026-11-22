@@ -1,0 +1,87 @@
+BÁO CÁO HUẤN LUYỆN
+======================================================================
+
+[1] PHÂN LOẠI — học trên phần 1–4, giữ phần 5 cho bước 4
+
+    Hướng du_bao: học 21,160 vụ × 9 cột gốc (giữ lại 5,289 vụ)
+      Mốc (đoán theo tỉ lệ)   :  0.12 giây | Accuracy trên chính dữ liệu học 0.531
+      Logistic Regression     :  0.09 giây | Accuracy trên chính dữ liệu học 0.698
+      Cây quyết định          :  0.17 giây | Accuracy trên chính dữ liệu học 0.998
+      Random Forest           :  1.14 giây | Accuracy trên chính dữ liệu học 0.998
+      Sau mã hoá (học trên phần học): 19 cột
+      Logistic Regression học được (hệ số sau chuẩn hoá, 5 lớn nhất; dương = tăng khả năng có người chết):
+        khoa_huyen                       +0.693
+        tinh                             +0.237
+        cap_duong_Cao tốc                -0.152
+        tan_suat_khoa_huyen              -0.130
+        thang_sin                        +0.117
+      Cây quyết định: sâu 35 tầng, 5,511 lá (trung bình 3.8 vụ mỗi lá) -> học gần như thuộc lòng dữ liệu học
+      Random Forest: 300 cây, sâu trung bình 33 tầng; tầm quan trọng (5 cột đầu):
+        khoa_huyen                       0.201
+        tinh                             0.149
+        tan_suat_khoa_huyen              0.114
+        khoa_duong                       0.105
+        gio_so_cos                       0.082
+      -> huan_luyen_phan_loai_du_bao.joblib
+
+    Hướng khong_dia_ly: học 21,160 vụ × 16 cột gốc (giữ lại 5,289 vụ)
+      Mốc (đoán theo tỉ lệ)   :  0.03 giây | Accuracy trên chính dữ liệu học 0.531
+      Logistic Regression     :  0.06 giây | Accuracy trên chính dữ liệu học 0.608
+      Cây quyết định          :  0.13 giây | Accuracy trên chính dữ liệu học 0.944
+      Random Forest           :  1.21 giây | Accuracy trên chính dữ liệu học 0.944
+      Sau mã hoá (học trên phần học): 40 cột
+      Logistic Regression học được (hệ số sau chuẩn hoá, 5 lớn nhất; dương = tăng khả năng có người chết):
+        so_nha                           -0.189
+        cap_duong_Cao tốc                -0.167
+        cap_duong_Đường huyện            -0.162
+        khu_vuc_Nội thị                  -0.135
+        ly_trinh                         +0.132
+      Cây quyết định: sâu 36 tầng, 9,100 lá (trung bình 2.3 vụ mỗi lá) -> học gần như thuộc lòng dữ liệu học
+      Random Forest: 300 cây, sâu trung bình 34 tầng; tầm quan trọng (5 cột đầu):
+        thu_sin                          0.131
+        gio_so_sin                       0.114
+        gio_so_cos                       0.105
+        thang_sin                        0.099
+        thang_cos                        0.093
+      -> huan_luyen_phan_loai_khong_dia_ly.joblib
+
+[2] HỒI QUY — học trên khối 0–3, giữ khối 4 (09–12/2021) cho bước 4
+    Học: 2020-01 – 2021-08 (20 tháng, 3,920 ô)
+      Mốc (trung bình)    :  0.00 giây | trên chính dữ liệu học RMSE 5.83 vụ, R² 0.000
+      Hồi quy tuyến tính  :  0.02 giây | trên chính dữ liệu học RMSE 3.45 vụ, R² 0.650
+      Ridge               :  0.01 giây | trên chính dữ liệu học RMSE 3.45 vụ, R² 0.650
+    Hồi quy tuyến tính: hệ số lớn nhất / nhỏ nhất = 5.54 / 0.046 | 3 hệ số lớn nhất: khung_gio_09-16 +5.54, vung_Nam Bộ +4.55, vung_Tây Nguyên -3.99
+    Ridge: hệ số lớn nhất / nhỏ nhất = 5.53 / 0.046 | 3 hệ số lớn nhất: khung_gio_09-16 +5.53, vung_Nam Bộ +4.55, vung_Tây Nguyên -3.99
+    -> huan_luyen_hoi_quy.joblib
+
+[3] PHÂN CỤM — K-Means, k = 3 tạm thời, trên 63 tỉnh × 6 chỉ số
+    Tổng bình phương khoảng cách tới tâm (SSE): 246.6 | 4 vòng lặp
+    Cụm 1: 29 tỉnh | nổi bật: ti_le_co_chet +0.8 độ lệch, log_so_vu -0.4 độ lệch | ví dụ: An Giang, Bình Phước, Bình Định, Bắc Ninh
+    Cụm 2: 18 tỉnh | nổi bật: ti_le_cuoi_tuan -0.8 độ lệch, ti_le_dem -0.8 độ lệch | ví dụ: Bạc Liêu, Bắc Kạn, Cao Bằng, Cà Mau
+    Cụm 3: 16 tỉnh | nổi bật: log_so_vu +1.1 độ lệch, ti_le_quoc_lo -1.1 độ lệch | ví dụ: Bà Rịa - Vũng Tàu, Bình Dương, Bình Thuận, Bắc Giang
+    -> huan_luyen_phan_cum.joblib, bảng mo_hinh.cum_tinh
+
+[4] LUẬT KẾT HỢP — Apriori tự viết, min_support 5%, tối đa 3 item
+      cỡ 1: 92 item -> 24 phổ biến
+      cỡ 2: 276 ứng viên -> 94 phổ biến
+      cỡ 3: 224 ứng viên -> 70 phổ biến
+    188 tập phổ biến trong 0.02 giây
+    Kiểm tra: đếm lại độ hỗ trợ trực tiếp bằng pandas cho 20 tập bất kỳ
+      chênh lớn nhất 0.00e+00 -> ĐẠT
+    50 luật có vế phải là nhãn và confidence ≥ 0.5; bỏ 29 luật thừa (thêm item mà confidence tăng < 1 điểm %) -> còn 21 luật
+    5 luật lift cao nhất cho 'co_nguoi_chet=1' (độ hỗ trợ của riêng nhãn: 46.9%):
+      cap_duong=Quốc lộ + mua=Mùa khô  ->  co_nguoi_chet=1 | sup 11.8%, conf 58.3%, lift 1.24
+      khu_vuc=Nông thôn  ->  co_nguoi_chet=1 | sup 6.2%, conf 57.6%, lift 1.23
+      cap_duong=Quốc lộ  ->  co_nguoi_chet=1 | sup 20.2%, conf 56.8%, lift 1.21
+      mua=Mùa khô + vung=Duyên hải miền Trung  ->  co_nguoi_chet=1 | sup 8.0%, conf 52.6%, lift 1.12
+      cap_duong=Đường tỉnh + mua=Mùa khô  ->  co_nguoi_chet=1 | sup 5.2%, conf 52.2%, lift 1.11
+    5 luật lift cao nhất cho 'co_nguoi_chet=0' (độ hỗ trợ của riêng nhãn: 53.1%):
+      mua=Mùa mưa + tinh=Hồ Chí Minh  ->  co_nguoi_chet=0 | sup 7.3%, conf 78.5%, lift 1.48
+      tinh=Hồ Chí Minh  ->  co_nguoi_chet=0 | sup 13.6%, conf 76.6%, lift 1.44
+      cap_duong=Đường huyện + khu_vuc=Nội thị  ->  co_nguoi_chet=0 | sup 6.2%, conf 74.8%, lift 1.41
+      khu_vuc=Nội thị + vung=Nam Bộ  ->  co_nguoi_chet=0 | sup 7.1%, conf 72.6%, lift 1.37
+      cap_duong=Đường huyện + vung=Nam Bộ  ->  co_nguoi_chet=0 | sup 11.0%, conf 71.3%, lift 1.34
+    -> bảng mo_hinh.tap_pho_bien, mo_hinh.luat_ket_hop
+
+[5] Lưu tóm tắt
+    13 mô hình đã học -> bảng mo_hinh.huan_luyen + huan_luyen.csv

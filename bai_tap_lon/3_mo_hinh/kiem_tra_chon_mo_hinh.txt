@@ -1,0 +1,75 @@
+BÁO CÁO CHỌN MÔ HÌNH
+======================================================================
+[0] Mô hình ứng viên
+    Phân loại     Mốc (đoán theo tỉ lệ)    DummyClassifier(strategy='prior')
+    Phân loại     Logistic Regression      LogisticRegression
+    Phân loại     Cây quyết định           DecisionTreeClassifier
+    Phân loại     Random Forest            RandomForestClassifier
+    Hồi quy       Mốc (trung bình)         DummyRegressor(strategy='mean')
+    Hồi quy       Hồi quy tuyến tính       LinearRegression
+    Hồi quy       Ridge                    Ridge
+    Phân cụm      K-Means                  KMeans(n_init=10)
+    Luật kết hợp  Apriori                  tự viết
+
+[1] PHÂN LOẠI — dữ liệu có hợp với Logistic Regression, Cây quyết định, Random Forest không?
+
+    Hướng du_bao (train_fe): 26,449 vụ × 19 cột
+      ô trống: 0 | cột không phải số: 0 | khoảng giá trị: -1.00 đến 6.58
+      độ lệch chuẩn các cột từ 0.12 (cap_duong_Cao tốc) đến 1.69 (tan_suat_khoa_duong) -> gấp 14 lần: Logistic Regression cần StandardScaler, cây thì không
+      có người chết: 46.9% -> hai lớp gần cân bằng, không cần cân bằng lại; Accuracy đọc được
+      thời gian học trên toàn bộ train (tham số mặc định):
+        Mốc (đoán theo tỉ lệ)   :   0.02 giây
+        Logistic Regression     :   0.04 giây
+        Cây quyết định          :   0.16 giây
+        Random Forest           :   1.36 giây
+      Vì sao không chọn SVM: đo thời gian học của SVC (nhân RBF) khi số vụ tăng gấp đôi
+         2,000 vụ:   0.07 giây
+         4,000 vụ:   0.31 giây (gấp 4.4 lần)
+         8,000 vụ:   1.72 giây (gấp 5.6 lần)
+        ước lượng cho 26,449 vụ (thời gian tăng ít nhất theo bình phương số vụ): ~19 giây mỗi lần học; tinh chỉnh 5 phần × 12 bộ tham số = 60 lần -> ~19 phút
+        -> chạy được, nhưng SVM không cho luật đọc được như cây và không cho tầm quan trọng đặc trưng như Random Forest; ba mô hình đã đủ vai trò mốc / dễ giải thích / mạnh, nên không thêm SVM
+
+    Hướng khong_dia_ly (train_fe_khong_dia_ly): 26,449 vụ × 40 cột
+      ô trống: 0 | cột không phải số: 0 | khoảng giá trị: -1.00 đến 1.00
+      độ lệch chuẩn các cột từ 0.05 (khung_gio_Không rõ) đến 0.71 (thu_sin) -> gấp 15 lần: Logistic Regression cần StandardScaler, cây thì không
+      có người chết: 46.9% -> hai lớp gần cân bằng, không cần cân bằng lại; Accuracy đọc được
+      thời gian học trên toàn bộ train (tham số mặc định):
+        Mốc (đoán theo tỉ lệ)   :   0.00 giây
+        Logistic Regression     :   0.06 giây
+        Cây quyết định          :   0.13 giây
+        Random Forest           :   1.30 giây
+
+[2] HỒI QUY — dữ liệu có hợp với hồi quy tuyến tính và Ridge không?
+    Ô học: 4,704 | số vụ mỗi ô: trung bình 5.41, trung vị 4, lớn nhất 43, 14% ô bằng 0
+    Phương sai / trung bình = 6.0 (dữ liệu đếm, lệch phải) -> mô hình tuyến tính có thể đoán số âm: cắt về 0 khi đánh giá
+    Sau One-Hot + chuẩn hoá: 34 cột; ma trận (kèm hệ số chặn) có hạng 31 < 35
+      -> 4 cột là tổ hợp tuyến tính của cột khác: mỗi nhóm One-Hot (vùng, khung giờ, thứ, tháng) cộng lại luôn bằng 1, trùng với hệ số chặn
+      -> hồi quy tuyến tính thường không có nghiệm duy nhất; Ridge (phạt L2) cho hệ số ổn định
+    Hai cột số tương quan mạnh nhất: ti_le_gian_cach – xu_huong, |r| = 0.24
+    Mốc (trung bình)    : học 0.00 giây
+    Hồi quy tuyến tính  : học 0.02 giây
+    Ridge               : học 0.02 giây
+
+[3] PHÂN CỤM — dữ liệu có hợp với K-Means không?
+    63 tỉnh × 7 chỉ số z-score | trung bình 0.00, độ lệch chuẩn 1.01–1.01 -> cùng thang đo, khoảng cách Euclid công bằng
+    Cặp chỉ số trùng thông tin: ti_le_co_chet_z – chet_moi_vu_z, r = +0.99 -> hai cột này cùng kéo cụm về một hướng (tính hai lần)
+    Cặp chỉ số trùng thông tin: ti_le_quoc_lo_z – log_so_vu_z, r = -0.56
+    Tỉnh ngoại lai (|z| > 3): Bắc Kạn ở ti_le_cuoi_tuan_z -> K-Means nhạy với điểm xa, cần xem riêng
+    Tỉnh ngoại lai (|z| > 3): Hồ Chí Minh ở log_so_vu_z -> K-Means nhạy với điểm xa, cần xem riêng
+    Tỉnh ngoại lai (|z| > 3): Sóc Trăng ở ti_le_dip_tet_z -> K-Means nhạy với điểm xa, cần xem riêng
+    Quyết định: phân cụm trên 6 chỉ số, bỏ chet_moi_vu_z (trùng thông tin với ti_le_co_chet_z)
+    Lưu ý: ti_le_co_chet phụ thuộc cách mỗi tỉnh báo cáo (22–98%); cụm nào tách chủ yếu theo chỉ số này phải nói rõ
+    Số cụm sẽ thử: k = 2–8 (chọn ở bước 6 bằng SSE và silhouette)
+    K-Means k=3, n_init=10: 0.07 giây
+
+[4] LUẬT KẾT HỢP — dữ liệu có hợp với Apriori không?
+    33,062 giao dịch × 94 item (True/False), trung bình 8.5 item mỗi vụ
+    Bỏ 'giai_doan_covid=Không': có ở 94.2% số vụ -> luật nào cũng chứa nó, không thêm thông tin
+    Bỏ 'dip_tet=Không': có ở 93.9% số vụ -> luật nào cũng chứa nó, không thêm thông tin
+    Item có độ hỗ trợ ≥ 5%: 24/92
+    Không có Apriori phải đếm mọi tổ hợp ≤ 3 trong 92 item: 129,766 tập
+    Có Apriori: chỉ ghép từ 24 item phổ biến -> 276 cặp ứng viên, 94 cặp đạt ngưỡng (tính chất Apriori: tập con không phổ biến thì tập lớn hơn cũng không)
+    Cài đặt: tự viết theo thuật toán Apriori (pandas/numpy), không cần thư viện mới
+
+[5] Lưu
+    9 mô hình -> bảng mo_hinh.ung_vien + ung_vien.csv

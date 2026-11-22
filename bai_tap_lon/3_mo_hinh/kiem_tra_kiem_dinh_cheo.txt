@@ -1,0 +1,60 @@
+BÁO CÁO KIỂM ĐỊNH CHÉO
+======================================================================
+
+[1] PHÂN LOẠI — 5 lần: học 4 phần, chấm phần còn lại (lớp 1 = có người chết)
+
+    Hướng du_bao: 26,449 vụ × 9 cột gốc, 5 phần; mã hoá học lại trong từng lần
+      (14 giây) trung bình ± độ lệch chuẩn qua 5 lần:
+      Mô hình                       Accuracy     Precision        Recall            F1           AUC | AUC học
+      Mốc (đoán theo tỉ lệ)     0.531±0.000  0.000±0.000  0.000±0.000  0.000±0.000  0.500±0.000 |   0.500
+      Logistic Regression       0.697±0.006  0.688±0.008  0.649±0.004  0.668±0.005  0.762±0.006 |   0.761
+      Cây quyết định            0.607±0.004  0.582±0.004  0.579±0.005  0.580±0.004  0.606±0.004 |   1.000
+      Random Forest             0.690±0.004  0.678±0.007  0.646±0.006  0.662±0.003  0.753±0.005 |   1.000
+      AUC từng lần (phần 1 → 5):
+        Mốc (đoán theo tỉ lệ)    0.500  0.500  0.500  0.500  0.500
+        Logistic Regression      0.767  0.764  0.765  0.765  0.752
+        Cây quyết định           0.606  0.604  0.611  0.607  0.601
+        Random Forest            0.759  0.755  0.754  0.752  0.745
+      Random Forest − Logistic Regression: AUC chênh -0.0092 ± 0.0025; RF hơn ở 0/5 lần; t hiệu chỉnh = -5.46, p = 0.005
+      -> khác biệt có ý nghĩa thống kê ở mức 5%: Logistic Regression tốt hơn
+
+    Hướng khong_dia_ly: 26,449 vụ × 16 cột gốc, 5 phần; mã hoá học lại trong từng lần
+      (12 giây) trung bình ± độ lệch chuẩn qua 5 lần:
+      Mô hình                       Accuracy     Precision        Recall            F1           AUC | AUC học
+      Mốc (đoán theo tỉ lệ)     0.531±0.000  0.000±0.000  0.000±0.000  0.000±0.000  0.500±0.000 |   0.500
+      Logistic Regression       0.607±0.002  0.582±0.002  0.578±0.005  0.580±0.003  0.653±0.002 |   0.655
+      Cây quyết định            0.546±0.005  0.517±0.005  0.492±0.010  0.504±0.007  0.548±0.005 |   0.994
+      Random Forest             0.582±0.004  0.557±0.005  0.539±0.008  0.548±0.002  0.606±0.004 |   0.993
+      AUC từng lần (phần 1 → 5):
+        Mốc (đoán theo tỉ lệ)    0.500  0.500  0.500  0.500  0.500
+        Logistic Regression      0.654  0.652  0.651  0.653  0.655
+        Cây quyết định           0.542  0.547  0.551  0.555  0.548
+        Random Forest            0.605  0.605  0.605  0.601  0.612
+      Random Forest − Logistic Regression: AUC chênh -0.0472 ± 0.0033; RF hơn ở 0/5 lần; t hiệu chỉnh = -21.55, p = 0.000
+      -> khác biệt có ý nghĩa thống kê ở mức 5%: Logistic Regression tốt hơn
+
+[2] HỒI QUY — học các khối trước, chấm khối sau (dự đoán âm cắt về 0)
+      Lần  Học               Chấm              |  Mốc (trung bình)   | Hồi quy tuyến tính  |        Ridge       
+                                               |   RMSE   MAE     R² |   RMSE   MAE     R² |   RMSE   MAE     R²
+      1    2020-01–2020-08   2020-09–2020-12   |   6.80  4.84 -0.042 |   3.91  2.74  0.656 |   3.91  2.74  0.655  <- tháng [9, 10, 11, 12] chưa từng có trong phần học
+      2    2020-01–2020-12   2021-01–2021-04   |   5.91  4.50 -0.006 |   3.93  3.06  0.556 |   3.93  3.06  0.556
+      3    2020-01–2021-04   2021-05–2021-08   |   4.53  3.93 -0.372 |   5.22  3.96 -0.824 |   5.21  3.96 -0.818
+      4    2020-01–2021-08   2021-09–2021-12   |   5.15  4.15 -0.003 |   3.31  2.46  0.585 |   3.31  2.46  0.585
+      TB                                       |   5.60              |   4.09              |   4.09             
+      Ridge − tuyến tính: RMSE chênh trung bình -0.0015 vụ/ô -> gần như trùng nhau; alpha = 1 quá nhỏ để thấy tác dụng, sẽ thử ở bước 6
+
+[3] PHÂN CỤM — độ ổn định: bootstrap 100 lần, K-Means k = 3
+    ARI so với lần học trên đủ 63 tỉnh (1 = chia y hệt, 0 = như chia ngẫu nhiên):
+      trung bình 0.419 | trung vị 0.395 | thấp nhất 0.065 | 5% số lần ≥ 0,8
+    -> cách chia 3 cụm không ổn định: đổi vài tỉnh trong dữ liệu là ranh giới cụm thay đổi
+
+[4] LUẬT KẾT HỢP — chia toàn bộ giao_dich (như bước 3) thành 5 phần ngẫu nhiên; tìm luật trên 4 phần, kiểm lại trên phần còn lại
+      lần 1: 23 luật | lift trên phần học 1.226 → trên phần 1 1.223 | lift > 1: 96% | confidence vẫn ≥ 0.5: 100%
+      lần 2: 22 luật | lift trên phần học 1.211 → trên phần 2 1.226 | lift > 1: 95% | confidence vẫn ≥ 0.5: 95%
+      lần 3: 23 luật | lift trên phần học 1.218 → trên phần 3 1.220 | lift > 1: 100% | confidence vẫn ≥ 0.5: 100%
+      lần 4: 25 luật | lift trên phần học 1.238 → trên phần 4 1.195 | lift > 1: 100% | confidence vẫn ≥ 0.5: 88%
+      lần 5: 22 luật | lift trên phần học 1.212 → trên phần 5 1.223 | lift > 1: 95% | confidence vẫn ≥ 0.5: 100%
+    21 luật xuất hiện ở cả 5 lần / 28 luật xuất hiện ít nhất một lần (Jaccard 0.75)
+
+[5] Lưu
+    435 con số -> bảng mo_hinh.kiem_dinh_cheo (+ kiem_dinh_cheo.csv)

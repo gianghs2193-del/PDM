@@ -1,0 +1,50 @@
+BÁO CÁO DỰ ĐOÁN VÀ ĐÁNH GIÁ BAN ĐẦU
+======================================================================
+
+[1] PHÂN LOẠI — chấm trên phần 5 (mô hình chưa thấy), lớp 1 = có người chết
+
+    Hướng du_bao: kiểm định 5,289 vụ (46.9% có người chết)
+      Mô hình                  Accuracy Precision  Recall     F1    AUC | AUC học  chênh
+      Mốc (đoán theo tỉ lệ)       0.531     0.000   0.000  0.000  0.500 |   0.500 +0.000
+      Logistic Regression         0.689     0.677   0.643  0.660  0.752 |   0.763 +0.011
+      Cây quyết định              0.603     0.576   0.581  0.579  0.601 |   1.000 +0.399
+      Random Forest               0.683     0.668   0.648  0.658  0.745 |   1.000 +0.255
+      Ma trận nhầm lẫn Random Forest: đoán đúng không chết 2,006 | báo nhầm có chết 801 | bỏ sót vụ có chết 873 | đoán đúng có chết 1,609
+
+    Hướng khong_dia_ly: kiểm định 5,289 vụ (46.9% có người chết)
+      Mô hình                  Accuracy Precision  Recall     F1    AUC | AUC học  chênh
+      Mốc (đoán theo tỉ lệ)       0.531     0.000   0.000  0.000  0.500 |   0.500 +0.000
+      Logistic Regression         0.608     0.584   0.577  0.580  0.655 |   0.654 -0.001
+      Cây quyết định              0.545     0.517   0.483  0.499  0.548 |   0.993 +0.446
+      Random Forest               0.586     0.561   0.539  0.550  0.612 |   0.993 +0.381
+      Ma trận nhầm lẫn Random Forest: đoán đúng không chết 1,759 | báo nhầm có chết 1,048 | bỏ sót vụ có chết 1,144 | đoán đúng có chết 1,338
+
+[2] HỒI QUY — chấm trên khối 4 (mô hình chưa thấy), dự đoán âm cắt về 0
+    Kiểm định: 2021-09 – 2021-12 (784 ô, trung bình 5.18 vụ/ô; phần học trung bình 5.46)
+      Mô hình                  MSE   RMSE    MAE   MAPE     R² | R² học
+      Mốc (trung bình)       26.55   5.15   4.15 134.1% -0.003 |  0.000
+      Hồi quy tuyến tính     10.98   3.31   2.46  83.7%  0.585 |  0.650
+      Ridge                  10.98   3.31   2.46  83.6%  0.585 |  0.650
+    Tổng số vụ cả nước theo tháng (thật / Ridge dự đoán):
+      2021-09:   604 /     632 (+5%)
+      2021-10: 1,069 /   1,258 (+18%)
+      2021-11: 1,185 /   1,355 (+14%)
+      2021-12: 1,203 /   1,229 (+2%)
+
+[3] PHÂN CỤM — không có nhãn, dùng chỉ số nội tại
+    k = 3: silhouette 0.182 (−1 đến 1, càng cao càng tách bạch) | Davies–Bouldin 1.60 (càng thấp càng tốt) | Calinski–Harabasz 16.0
+    -> cấu trúc cụm yếu, các cụm chồng lấn; số cụm sẽ chọn lại ở bước 6
+
+[4] LUẬT KẾT HỢP — độ bền theo năm: tính lại từng luật trên mỗi năm báo cáo
+    21/21 luật có lift > 1 ở cả ba năm (bền); 0 luật đổi chiều ở ít nhất một năm
+      mua=Mùa mưa + tinh=Hồ Chí Minh -> co_nguoi_chet=0: lift 2020 1.45 | 2021 1.43 | 8T2022 1.52
+      tinh=Hồ Chí Minh -> co_nguoi_chet=0: lift 2020 1.44 | 2021 1.40 | 8T2022 1.49
+      khu_vuc=Nội thị + vung=Nam Bộ -> co_nguoi_chet=0: lift 2020 1.42 | 2021 1.36 | 8T2022 1.33
+      cap_duong=Đường huyện + khu_vuc=Nội thị -> co_nguoi_chet=0: lift 2020 1.40 | 2021 1.40 | 8T2022 1.47
+      cap_duong=Đường huyện + vung=Nam Bộ -> co_nguoi_chet=0: lift 2020 1.36 | 2021 1.29 | 8T2022 1.41
+      khu_vuc=Nội thị + mua=Mùa mưa -> co_nguoi_chet=0: lift 2020 1.33 | 2021 1.29 | 8T2022 1.26
+      cap_duong=Đường huyện + mua=Mùa mưa -> co_nguoi_chet=0: lift 2020 1.31 | 2021 1.28 | 8T2022 1.42
+      cap_duong=Quốc lộ + mua=Mùa khô -> co_nguoi_chet=1: lift 2020 1.30 | 2021 1.16 | 8T2022 1.23
+
+[5] Lưu
+    124 con số -> bảng mo_hinh.danh_gia_ban_dau, mo_hinh.luat_theo_nam (+ .csv)

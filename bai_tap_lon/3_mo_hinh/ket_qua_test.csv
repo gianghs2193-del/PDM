@@ -1,0 +1,56 @@
+﻿bai_toan,huong,mo_hinh,duoc_chon,chi_so,gia_tri
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),False,Accuracy,0.5307727203992136
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),False,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),False,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),False,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),False,AUC,0.5
+Phân loại,du_bao,Logistic Regression,False,Accuracy,0.7014970512626645
+Phân loại,du_bao,Logistic Regression,False,Precision,0.6912910877668587
+Phân loại,du_bao,Logistic Regression,False,Recall,0.6574282951981953
+Phân loại,du_bao,Logistic Regression,False,F1,0.6739345887016849
+Phân loại,du_bao,Logistic Regression,False,AUC,0.7637590402817602
+Phân loại,du_bao,Cây quyết định,False,Accuracy,0.6978678360804476
+Phân loại,du_bao,Cây quyết định,False,Precision,0.6988125224901044
+Phân loại,du_bao,Cây quyết định,False,Recall,0.6258459555269095
+Phân loại,du_bao,Cây quyết định,False,F1,0.6603196191771507
+Phân loại,du_bao,Cây quyết định,False,AUC,0.7602063254657517
+Phân loại,du_bao,Random Forest,True,Accuracy,0.7017994858611826
+Phân loại,du_bao,Random Forest,True,Precision,0.6922815368922135
+Phân loại,du_bao,Random Forest,True,Recall,0.6561392201095714
+Phân loại,du_bao,Random Forest,True,F1,0.6737260092653872
+Phân loại,du_bao,Random Forest,True,AUC,0.7709399414040085
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),False,Accuracy,0.5307727203992136
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),False,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),False,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),False,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),False,AUC,0.5
+Phân loại,khong_dia_ly,Logistic Regression,False,Accuracy,0.5995765915620747
+Phân loại,khong_dia_ly,Logistic Regression,False,Precision,0.5740801042005861
+Phân loại,khong_dia_ly,Logistic Regression,False,Recall,0.5681598453109894
+Phân loại,khong_dia_ly,Logistic Regression,False,F1,0.5711046323291221
+Phân loại,khong_dia_ly,Logistic Regression,False,AUC,0.6441511431359965
+Phân loại,khong_dia_ly,Cây quyết định,False,Accuracy,0.6062301527294722
+Phân loại,khong_dia_ly,Cây quyết định,False,Precision,0.5773643410852713
+Phân loại,khong_dia_ly,Cây quyết định,False,Recall,0.6000644537544312
+Phân loại,khong_dia_ly,Cây quyết định,False,F1,0.588495575221239
+Phân loại,khong_dia_ly,Cây quyết định,False,AUC,0.6478602179859029
+Phân loại,khong_dia_ly,Random Forest,True,Accuracy,0.6101618025102071
+Phân loại,khong_dia_ly,Random Forest,True,Precision,0.5801526717557252
+Phân loại,khong_dia_ly,Random Forest,True,Recall,0.6123106670963584
+Phân loại,khong_dia_ly,Random Forest,True,F1,0.5957980558168705
+Phân loại,khong_dia_ly,Random Forest,True,AUC,0.6550221135138956
+Hồi quy,,Mốc (trung bình),False,MSE,24.193702249713663
+Hồi quy,,Mốc (trung bình),False,RMSE,4.918709408952074
+Hồi quy,,Mốc (trung bình),False,MAE,3.8461485541738556
+Hồi quy,,Mốc (trung bình),False,MAPE,1.2714669801365883
+Hồi quy,,Mốc (trung bình),False,R2,-0.022456541415295073
+Hồi quy,,Hồi quy tuyến tính,False,MSE,7.555964041081527
+Hồi quy,,Hồi quy tuyến tính,False,RMSE,2.7488113869601034
+Hồi quy,,Hồi quy tuyến tính,False,MAE,1.878226649176152
+Hồi quy,,Hồi quy tuyến tính,False,MAPE,0.630513517104605
+Hồi quy,,Hồi quy tuyến tính,False,R2,0.6806753765602787
+Hồi quy,,Ridge (alpha=100),True,MSE,7.803952318671752
+Hồi quy,,Ridge (alpha=100),True,RMSE,2.7935554976895935
+Hồi quy,,Ridge (alpha=100),True,MAE,1.8983582050105092
+Hồi quy,,Ridge (alpha=100),True,MAPE,0.6355078310698656
+Hồi quy,,Ridge (alpha=100),True,R2,0.6701950774312175

@@ -1,0 +1,10 @@
+﻿bai_toan,mo_hinh,lop,tien_xu_ly_them,sieu_tham_so_se_chinh,ly_do
+Phân loại,Mốc (đoán theo tỉ lệ),DummyClassifier(strategy='prior'),—,—,Điểm sàn: mô hình nào không hơn mốc thì không học được gì
+Phân loại,Logistic Regression,LogisticRegression,StandardScaler,C,"Đơn giản, nhanh, hệ số đọc được; mốc tuyến tính"
+Phân loại,Cây quyết định,DecisionTreeClassifier,Không cần chuẩn hoá,"max_depth, min_samples_leaf",Dễ giải thích: in ra được luật nếu–thì; xử lý quan hệ phi tuyến
+Phân loại,Random Forest,RandomForestClassifier,Không cần chuẩn hoá,"max_depth, min_samples_leaf, max_features","Nhiều cây bỏ phiếu: giảm quá khớp của một cây, thường mạnh nhất"
+Hồi quy,Mốc (trung bình),DummyRegressor(strategy='mean'),—,—,Điểm sàn: luôn đoán số vụ trung bình
+Hồi quy,Hồi quy tuyến tính,LinearRegression,One-Hot + StandardScaler,—,"Mô hình hồi quy cơ bản của Chương 5, hệ số đọc được"
+Hồi quy,Ridge,Ridge,One-Hot + StandardScaler,alpha,Phạt L2 làm ổn định hệ số khi các cột One-Hot phụ thuộc tuyến tính
+Phân cụm,K-Means,KMeans(n_init=10),z-score (đã làm ở bước 2),k (2–8),"Đơn giản, nhanh, dễ diễn giải tâm cụm; hợp với 63 điểm số liên tục. Dùng 6 chỉ số, bỏ chet_moi_vu (trùng)"
+Luật kết hợp,Apriori,tự viết,Dạng giao dịch (đã làm ở bước 2),"min_support, min_confidence","Thuật toán luật kết hợp kinh điển, Chương 5 nêu tên"

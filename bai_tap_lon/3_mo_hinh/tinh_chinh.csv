@@ -1,0 +1,177 @@
+﻿bai_toan,huong,mo_hinh,tham_so,chi_so,gia_tri
+Phân loại,du_bao,Logistic Regression,C=0.01,AUC_tb,0.7622486566682927
+Phân loại,du_bao,Logistic Regression,C=0.01,AUC_dl,0.005444264412981625
+Phân loại,du_bao,Logistic Regression,C=0.1,AUC_tb,0.7623789272258705
+Phân loại,du_bao,Logistic Regression,C=0.1,AUC_dl,0.0053883432927877345
+Phân loại,du_bao,Logistic Regression,C=1,AUC_tb,0.7623916412372701
+Phân loại,du_bao,Logistic Regression,C=1,AUC_dl,0.005384715506991754
+Phân loại,du_bao,Logistic Regression,C=10,AUC_tb,0.7623937362874041
+Phân loại,du_bao,Logistic Regression,C=10,AUC_dl,0.005384204105803479
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=20",AUC_tb,0.7499535113532767
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=20",AUC_dl,0.004123972628378848
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=50",AUC_tb,0.748787373129324
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=50",AUC_dl,0.003780827476710217
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=100",AUC_tb,0.749780684258336
+Phân loại,du_bao,Cây quyết định,"max_depth=4, min_samples_leaf=100",AUC_dl,0.003762132864146227
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=20",AUC_tb,0.7552900336426905
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=20",AUC_dl,0.004163892931502895
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=50",AUC_tb,0.7546586646766711
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=50",AUC_dl,0.004316140235248472
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=100",AUC_tb,0.7535662442600135
+Phân loại,du_bao,Cây quyết định,"max_depth=6, min_samples_leaf=100",AUC_dl,0.005779984613479137
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=20",AUC_tb,0.7482955984603905
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=20",AUC_dl,0.005197140297604129
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=50",AUC_tb,0.7500166982477934
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=50",AUC_dl,0.004983905147027384
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=100",AUC_tb,0.7500909148763337
+Phân loại,du_bao,Cây quyết định,"max_depth=8, min_samples_leaf=100",AUC_dl,0.005834745308518687
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=20",AUC_tb,0.7300734260411568
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=20",AUC_dl,0.003006536723875156
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=50",AUC_tb,0.7394546799848274
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=50",AUC_dl,0.004418512114754782
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=100",AUC_tb,0.7451939670461388
+Phân loại,du_bao,Cây quyết định,"max_depth=12, min_samples_leaf=100",AUC_dl,0.006682317980306338
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.7649881625523266
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.004517812281932695
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.7644968677740547
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.004487315756784666
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=5",AUC_tb,0.7651756816015742
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=5",AUC_dl,0.004189533645479778
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=20",AUC_tb,0.7650182928667946
+Phân loại,du_bao,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=20",AUC_dl,0.0041216960614883025
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.7661679998445534
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.00403126918234594
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.7660296315159569
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.0043474704194558745
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=5",AUC_tb,0.7641568312799929
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=5",AUC_dl,0.004045772538163312
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=20",AUC_tb,0.7648974276803331
+Phân loại,du_bao,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=20",AUC_dl,0.0037450063704803334
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.7637683633779336
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.0040574313635471934
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.7658427603846201
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.004485444581251047
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=5",AUC_tb,0.7598442043206165
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=5",AUC_dl,0.0037077776181535745
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=20",AUC_tb,0.7640378887686482
+Phân loại,du_bao,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=20",AUC_dl,0.004290089122305877
+Phân loại,du_bao,RF − LR,đã chỉnh,p,0.09549641868730803
+Phân loại,khong_dia_ly,Logistic Regression,C=0.01,AUC_tb,0.6528606814073801
+Phân loại,khong_dia_ly,Logistic Regression,C=0.01,AUC_dl,0.001477070541481412
+Phân loại,khong_dia_ly,Logistic Regression,C=0.1,AUC_tb,0.6528719323826148
+Phân loại,khong_dia_ly,Logistic Regression,C=0.1,AUC_dl,0.0015202811949408001
+Phân loại,khong_dia_ly,Logistic Regression,C=1,AUC_tb,0.6528683454925149
+Phân loại,khong_dia_ly,Logistic Regression,C=1,AUC_dl,0.0015286330515739837
+Phân loại,khong_dia_ly,Logistic Regression,C=10,AUC_tb,0.6528706700054355
+Phân loại,khong_dia_ly,Logistic Regression,C=10,AUC_dl,0.0015282729937515633
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=20",AUC_tb,0.6351307524181355
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=20",AUC_dl,0.003217682699708134
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=50",AUC_tb,0.6360566905399093
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=50",AUC_dl,0.0020377183979361523
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=100",AUC_tb,0.6364794783796379
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=4, min_samples_leaf=100",AUC_dl,0.002058404943566748
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=20",AUC_tb,0.650135199712011
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=20",AUC_dl,0.00638653263660509
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=50",AUC_tb,0.6503583081623402
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=50",AUC_dl,0.005219221815335568
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=100",AUC_tb,0.651770264541115
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=6, min_samples_leaf=100",AUC_dl,0.004249807693170201
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=20",AUC_tb,0.6494540395857056
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=20",AUC_dl,0.005693723363941462
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=50",AUC_tb,0.649400630224362
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=50",AUC_dl,0.007093170546842024
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=100",AUC_tb,0.6518328597885138
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=8, min_samples_leaf=100",AUC_dl,0.00491365306200206
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=20",AUC_tb,0.635833089947592
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=20",AUC_dl,0.005733685842067472
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=50",AUC_tb,0.6435732743296769
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=50",AUC_dl,0.006601188085753871
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=100",AUC_tb,0.6473016645929957
+Phân loại,khong_dia_ly,Cây quyết định,"max_depth=12, min_samples_leaf=100",AUC_dl,0.006029449364270215
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.6620367150587148
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.0030177920724162905
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.6610525206092975
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.00314643648667749
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=5",AUC_tb,0.662616408739015
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=5",AUC_dl,0.00516548563393836
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=20",AUC_tb,0.6623293642048088
+Phân loại,khong_dia_ly,Random Forest,"max_depth=8, max_features=0.5, min_samples_leaf=20",AUC_dl,0.0045561758938903645
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.6614837839162212
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.003944515282482368
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.6616376295733334
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.0036978672127560962
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=5",AUC_tb,0.6567061457114468
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=5",AUC_dl,0.005143232409162325
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=20",AUC_tb,0.6591771938881423
+Phân loại,khong_dia_ly,Random Forest,"max_depth=12, max_features=0.5, min_samples_leaf=20",AUC_dl,0.004887574619280163
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=5",AUC_tb,0.6529834196184113
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=5",AUC_dl,0.003438609733076984
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=20",AUC_tb,0.6596657196378768
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=sqrt, min_samples_leaf=20",AUC_dl,0.0036401369216377596
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=5",AUC_tb,0.6410660950673246
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=5",AUC_dl,0.003292997823783834
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=20",AUC_tb,0.6550340111206328
+Phân loại,khong_dia_ly,Random Forest,"max_depth=20, max_features=0.5, min_samples_leaf=20",AUC_dl,0.004478513614673146
+Phân loại,khong_dia_ly,RF − LR,đã chỉnh,p,0.02547311634651007
+Hồi quy,,Ridge,alpha=0.1,RMSE_tb,4.146431200903866
+Hồi quy,,Ridge,alpha=1,RMSE_tb,4.1446378364496805
+Hồi quy,,Ridge,alpha=10,RMSE_tb,4.128767975485408
+Hồi quy,,Ridge,alpha=30,RMSE_tb,4.104656854331113
+Hồi quy,,Ridge,alpha=100,RMSE_tb,4.090986344592535
+Hồi quy,,Ridge,alpha=300,RMSE_tb,4.226772403821682
+Hồi quy,,Ridge,alpha=1000,RMSE_tb,4.669519904617065
+Phân cụm,,K-Means,k=2,SSE,302.9144405873023
+Phân cụm,,K-Means,k=2,silhouette,0.16258313325081097
+Phân cụm,,K-Means,k=2,davies_bouldin,1.8850751266279895
+Phân cụm,,K-Means,k=2,ARI_tb,0.25635387854129704
+Phân cụm,,K-Means,k=3,SSE,246.64422510221272
+Phân cụm,,K-Means,k=3,silhouette,0.18244370743972693
+Phân cụm,,K-Means,k=3,davies_bouldin,1.603756113455523
+Phân cụm,,K-Means,k=3,ARI_tb,0.45197024322817325
+Phân cụm,,K-Means,k=4,SSE,213.38985168460388
+Phân cụm,,K-Means,k=4,silhouette,0.1782402241914084
+Phân cụm,,K-Means,k=4,davies_bouldin,1.555806177544642
+Phân cụm,,K-Means,k=4,ARI_tb,0.36481259789604953
+Phân cụm,,K-Means,k=5,SSE,188.82200117586507
+Phân cụm,,K-Means,k=5,silhouette,0.17893018617001794
+Phân cụm,,K-Means,k=5,davies_bouldin,1.4552046679814619
+Phân cụm,,K-Means,k=5,ARI_tb,0.3494982248428333
+Phân cụm,,K-Means,k=6,SSE,170.50778129060936
+Phân cụm,,K-Means,k=6,silhouette,0.16619348981296794
+Phân cụm,,K-Means,k=6,davies_bouldin,1.3854858994428827
+Phân cụm,,K-Means,k=6,ARI_tb,0.34928665716984447
+Phân cụm,,K-Means,k=7,SSE,155.6980941731655
+Phân cụm,,K-Means,k=7,silhouette,0.19568616997253635
+Phân cụm,,K-Means,k=7,davies_bouldin,1.321734216297052
+Phân cụm,,K-Means,k=7,ARI_tb,0.39505305262361345
+Phân cụm,,K-Means,k=8,SSE,144.56120705737587
+Phân cụm,,K-Means,k=8,silhouette,0.1778117723027832
+Phân cụm,,K-Means,k=8,davies_bouldin,1.2604168259592097
+Phân cụm,,K-Means,k=8,ARI_tb,0.40144286614859476
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.5",so_luat,34.0
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.5",jaccard,0.6521739130434783
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.5",lift_kd,1.2130350749715597
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.55",so_luat,25.0
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.55",jaccard,0.6764705882352942
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.55",lift_kd,1.2624346986425035
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.6",so_luat,15.0
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.6",jaccard,0.6666666666666666
+Luật kết hợp,,Apriori,"min_support=0.03, min_confidence=0.6",lift_kd,1.3360199286842132
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.5",so_luat,21.0
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.5",jaccard,0.75
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.5",lift_kd,1.2168082593707852
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.55",so_luat,16.0
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.55",jaccard,0.8
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.55",lift_kd,1.2698249692433257
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.6",so_luat,9.0
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.6",jaccard,0.75
+Luật kết hợp,,Apriori,"min_support=0.05, min_confidence=0.6",lift_kd,1.3586026643431666
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.5",so_luat,10.0
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.5",jaccard,0.7692307692307693
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.5",lift_kd,1.1998715809695915
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.55",so_luat,9.0
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.55",jaccard,1.0
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.55",lift_kd,1.230985130669098
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.6",so_luat,4.0
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.6",jaccard,0.8
+Luật kết hợp,,Apriori,"min_support=0.08, min_confidence=0.6",lift_kd,1.3253997895144705

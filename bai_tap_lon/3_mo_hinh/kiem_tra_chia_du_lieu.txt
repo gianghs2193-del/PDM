@@ -1,0 +1,69 @@
+BÁO CÁO CHIA DỮ LIỆU CHO BƯỚC MÔ HÌNH
+======================================================================
+[0] Đọc bảng lõi sạch của bước 2
+    33,062 vụ, tỉ lệ có người chết 46.92%
+
+[1] PHÂN LOẠI — dùng lại cách chia của bước 2 (80/20, phân tầng theo nhãn, random_state=42)
+    Bảng lõi sạch: 33,062 vụ | train 26,449 (80.0%) | test 6,613 (20.0%)
+
+    a) Hai phần không chồng lên nhau và ghép lại đúng bằng bảng lõi
+    [ĐẠT] không vụ nào vừa ở train vừa ở test (trùng: 0)
+    [ĐẠT] train ∪ test = bảng lõi (33,062 = 33,062 vụ)
+    [ĐẠT] khoá (nguon, dong_goc) không lặp trong từng phần
+
+    b) Phân tầng: tỉ lệ vụ có người chết giữ nguyên ở hai phần
+       bảng lõi 46.92% | train 46.92% | test 46.92%
+    [ĐẠT] chênh tỉ lệ nhãn giữa train và test < 0,5 điểm %
+
+    c) Mỗi năm báo cáo có mặt ở cả hai phần theo đúng tỉ lệ
+       2020   : train 11,454 | test 2,803 (19.7%) | có chết: train 43.0%, test 44.0%
+       2021   : train  9,083 | test 2,323 (20.4%) | có chết: train 47.3%, test 47.2%
+       8T2022 : train  5,912 | test 1,487 (20.1%) | có chết: train 53.9%, test 52.0%
+    [ĐẠT] mỗi năm có 18–22% số vụ ở test
+
+    d) Bảng đặc trưng của bước 2 khớp đúng cách chia này
+    [ĐẠT] train_fe: 26,449 vụ, cùng tập vụ với train
+    [ĐẠT] test_fe: 6,613 vụ, cùng tập vụ với test
+    [ĐẠT] train_fe_khong_dia_ly: 26,449 vụ, cùng tập vụ với train
+    [ĐẠT] test_fe_khong_dia_ly: 6,613 vụ, cùng tập vụ với test
+
+    e) Chia train thành 5 phần cho kiểm định chéo (StratifiedKFold, xáo trộn, random_state=42)
+       phần 1: 5,290 vụ, có chết 46.92%
+       phần 2: 5,290 vụ, có chết 46.92%
+       phần 3: 5,290 vụ, có chết 46.92%
+       phần 4: 5,290 vụ, có chết 46.94%
+       phần 5: 5,289 vụ, có chết 46.93%
+    [ĐẠT] mọi vụ train thuộc đúng một phần
+       Lần thứ k: học trên 4 phần còn lại, chấm trên phần k -> 5 điểm, lấy trung bình và độ lệch chuẩn.
+
+[2] HỒI QUY — chia theo thời gian: học các tháng trước 2022-01, kiểm tra từ 2022-01 trở đi
+    Bảng ô (tháng × vùng × khung giờ × thứ): 6,076 ô từ 31,887 vụ, 31 tháng trọn
+    train: 2020-01 – 2021-12 (24 tháng, 4,704 ô) | trung bình 5.41 vụ/ô, 14% ô bằng 0
+    test : 2022-01 – 2022-07 (7 tháng, 1,372 ô) | trung bình 4.68 vụ/ô, 15% ô bằng 0
+    [ĐẠT] mọi tháng học đều đứng trước mọi tháng kiểm tra
+
+    Kiểm định chéo theo thời gian (TimeSeriesSplit(4) trên 24 tháng học)
+       lần 1: học 2020-01 – 2020-08 (8 tháng) -> kiểm tra 2020-09 – 2020-12 (4 tháng)
+       lần 2: học 2020-01 – 2020-12 (12 tháng) -> kiểm tra 2021-01 – 2021-04 (4 tháng)
+       lần 3: học 2020-01 – 2021-04 (16 tháng) -> kiểm tra 2021-05 – 2021-08 (4 tháng)
+       lần 4: học 2020-01 – 2021-08 (20 tháng) -> kiểm tra 2021-09 – 2021-12 (4 tháng)
+       Không xáo trộn: mô hình không bao giờ được thấy tháng nằm sau tháng nó dự báo.
+
+[3] PHÂN CỤM — không chia train/test
+    ho_so_tinh: 63 tỉnh × 15 cột. Không có nhãn đúng để chấm trên phần giữ lại;
+    chất lượng cụm đo bằng silhouette và độ ổn định khi chạy lại với hạt giống khác / bỏ bớt tỉnh.
+
+[4] LUẬT KẾT HỢP — không chia train/test
+    giao_dich: 33,062 vụ × 94 item. Luật dùng để mô tả, không để dự đoán vụ mới;
+    độ bền được kiểm tra bằng cách tính lại support/confidence của từng luật trên mỗi năm báo cáo.
+    [ĐẠT] giao_dich không lặp vụ
+
+[5] Lưu
+    chia_phan_loai: 33,062 dòng -> bảng mo_hinh.chia_phan_loai + chia_phan_loai.csv
+    chia_hoi_quy: 31 dòng -> bảng mo_hinh.chia_hoi_quy + chia_hoi_quy.csv
+
+TÓM TẮT
+    Phân loại : train 26,449 vụ (5 phần) | test 6,613 vụ, để dành chấm một lần cuối
+    Hồi quy   : học 24 tháng (2020–2021) | kiểm tra 7 tháng 2022
+    Phân cụm, luật kết hợp: dùng toàn bộ dữ liệu, không chia
+    Kiểm tra: tất cả ĐẠT

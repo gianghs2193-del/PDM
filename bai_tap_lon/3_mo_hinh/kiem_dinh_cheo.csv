@@ -1,0 +1,436 @@
+﻿bai_toan,huong,mo_hinh,lan,tap,chi_so,gia_tri
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,kiem_dinh,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,kiem_dinh,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),1,hoc,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,kiem_dinh,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,kiem_dinh,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),2,hoc,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,kiem_dinh,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,kiem_dinh,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),3,hoc,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Accuracy,0.5306238185255199
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,kiem_dinh,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,kiem_dinh,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),4,hoc,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Accuracy,0.5307241444507468
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Precision,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Recall,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,kiem_dinh,F1,0.0
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,kiem_dinh,AUC,0.5
+Phân loại,du_bao,Mốc (đoán theo tỉ lệ),5,hoc,AUC,0.5
+Phân loại,du_bao,Logistic Regression,1,kiem_dinh,Accuracy,0.699054820415879
+Phân loại,du_bao,Logistic Regression,1,kiem_dinh,Precision,0.6900085397096499
+Phân loại,du_bao,Logistic Regression,1,kiem_dinh,Recall,0.6510878323932313
+Phân loại,du_bao,Logistic Regression,1,kiem_dinh,F1,0.6699834162520729
+Phân loại,du_bao,Logistic Regression,1,kiem_dinh,AUC,0.7669856155200636
+Phân loại,du_bao,Logistic Regression,1,hoc,AUC,0.7602033117233874
+Phân loại,du_bao,Logistic Regression,2,kiem_dinh,Accuracy,0.7039697542533081
+Phân loại,du_bao,Logistic Regression,2,kiem_dinh,Precision,0.6991304347826087
+Phân loại,du_bao,Logistic Regression,2,kiem_dinh,Recall,0.6478646253021757
+Phân loại,du_bao,Logistic Regression,2,kiem_dinh,F1,0.6725219573400251
+Phân loại,du_bao,Logistic Regression,2,kiem_dinh,AUC,0.763838598019702
+Phân loại,du_bao,Logistic Regression,2,hoc,AUC,0.7593250771483768
+Phân loại,du_bao,Logistic Regression,3,kiem_dinh,Accuracy,0.6958412098298676
+Phân loại,du_bao,Logistic Regression,3,kiem_dinh,Precision,0.6866182129115006
+Phân loại,du_bao,Logistic Regression,3,kiem_dinh,Recall,0.6470588235294118
+Phân loại,du_bao,Logistic Regression,3,kiem_dinh,F1,0.666251814976146
+Phân loại,du_bao,Logistic Regression,3,kiem_dinh,AUC,0.7645273892252136
+Phân loại,du_bao,Logistic Regression,3,hoc,AUC,0.7603494920794271
+Phân loại,du_bao,Logistic Regression,4,kiem_dinh,Accuracy,0.6981096408317581
+Phân loại,du_bao,Logistic Regression,4,kiem_dinh,Precision,0.687394247038917
+Phân loại,du_bao,Logistic Regression,4,kiem_dinh,Recall,0.6544502617801047
+Phân loại,du_bao,Logistic Regression,4,kiem_dinh,F1,0.6705178460903651
+Phân loại,du_bao,Logistic Regression,4,kiem_dinh,AUC,0.7647758229419259
+Phân loại,du_bao,Logistic Regression,4,hoc,AUC,0.7605888880215353
+Phân loại,du_bao,Logistic Regression,5,kiem_dinh,Accuracy,0.6887880506712044
+Phân loại,du_bao,Logistic Regression,5,kiem_dinh,Precision,0.6772688719253604
+Phân loại,du_bao,Logistic Regression,5,kiem_dinh,Recall,0.6434327155519742
+Phân loại,du_bao,Logistic Regression,5,kiem_dinh,F1,0.6599173553719008
+Phân loại,du_bao,Logistic Regression,5,kiem_dinh,AUC,0.7518307804794448
+Phân loại,du_bao,Logistic Regression,5,hoc,AUC,0.7632309287312011
+Phân loại,du_bao,Cây quyết định,1,kiem_dinh,Accuracy,0.6066162570888469
+Phân loại,du_bao,Cây quyết định,1,kiem_dinh,Precision,0.5810756166599272
+Phân loại,du_bao,Cây quyết định,1,kiem_dinh,Recall,0.5789685737308622
+Phân loại,du_bao,Cây quyết định,1,kiem_dinh,F1,0.5800201816347124
+Phân loại,du_bao,Cây quyết định,1,kiem_dinh,AUC,0.6057284815342833
+Phân loại,du_bao,Cây quyết định,1,hoc,AUC,0.9999928252839148
+Phân loại,du_bao,Cây quyết định,2,kiem_dinh,Accuracy,0.6054820415879018
+Phân loại,du_bao,Cây quyết định,2,kiem_dinh,Precision,0.5803172021146807
+Phân loại,du_bao,Cây quyết định,2,kiem_dinh,Recall,0.5749395648670427
+Phân loại,du_bao,Cây quyết định,2,kiem_dinh,F1,0.5776158672333536
+Phân loại,du_bao,Cây quyết định,2,kiem_dinh,AUC,0.6038403140790328
+Phân loại,du_bao,Cây quyết định,2,hoc,AUC,0.9999928207997171
+Phân loại,du_bao,Cây quyết định,3,kiem_dinh,Accuracy,0.6128544423440454
+Phân loại,du_bao,Cây quyết định,3,kiem_dinh,Precision,0.5876413570274637
+Phân loại,du_bao,Cây quyết định,3,kiem_dinh,Recall,0.5862207896857373
+Phân loại,du_bao,Cây quyết định,3,kiem_dinh,F1,0.5869302137958854
+Phân loại,du_bao,Cây quyết định,3,kiem_dinh,AUC,0.6112317805005153
+Phân loại,du_bao,Cây quyết định,3,hoc,AUC,0.9999935203345355
+Phân loại,du_bao,Cây quyết định,4,kiem_dinh,Accuracy,0.6088846880907373
+Phân loại,du_bao,Cây quyết định,4,kiem_dinh,Precision,0.5851851851851851
+Phân loại,du_bao,Cây quyết định,4,kiem_dinh,Recall,0.5726943213854209
+Phân loại,du_bao,Cây quyết định,4,kiem_dinh,F1,0.5788723794015876
+Phân loại,du_bao,Cây quyết định,4,kiem_dinh,AUC,0.6069316955582966
+Phân loại,du_bao,Cây quyết định,4,hoc,AUC,0.99999418392786
+Phân loại,du_bao,Cây quyết định,5,kiem_dinh,Accuracy,0.6029495178672717
+Phân loại,du_bao,Cây quyết định,5,kiem_dinh,Precision,0.5762779552715654
+Phân loại,du_bao,Cây quyết định,5,kiem_dinh,Recall,0.5813859790491539
+Phân loại,du_bao,Cây quyết định,5,kiem_dinh,F1,0.5788206979542719
+Phân loại,du_bao,Cây quyết định,5,kiem_dinh,AUC,0.6012299600945834
+Phân loại,du_bao,Cây quyết định,5,hoc,AUC,0.9999917094569736
+Phân loại,du_bao,Random Forest,1,kiem_dinh,Accuracy,0.6924385633270321
+Phân loại,du_bao,Random Forest,1,kiem_dinh,Precision,0.6813746287653797
+Phân loại,du_bao,Random Forest,1,kiem_dinh,Recall,0.6470588235294118
+Phân loại,du_bao,Random Forest,1,kiem_dinh,F1,0.6637735069229179
+Phân loại,du_bao,Random Forest,1,kiem_dinh,AUC,0.7592641376887952
+Phân loại,du_bao,Random Forest,1,hoc,AUC,0.9999928073471245
+Phân loại,du_bao,Random Forest,2,kiem_dinh,Accuracy,0.6926275992438563
+Phân loại,du_bao,Random Forest,2,kiem_dinh,Precision,0.6854419410745234
+Phân loại,du_bao,Random Forest,2,kiem_dinh,Recall,0.637389202256245
+Phân loại,du_bao,Random Forest,2,kiem_dinh,F1,0.6605427974947808
+Phân loại,du_bao,Random Forest,2,kiem_dinh,AUC,0.7552283851135584
+Phân loại,du_bao,Random Forest,2,hoc,AUC,0.999990784974028
+Phân loại,du_bao,Random Forest,3,kiem_dinh,Accuracy,0.6897920604914933
+Phân loại,du_bao,Random Forest,3,kiem_dinh,Precision,0.6751353602665556
+Phân loại,du_bao,Random Forest,3,kiem_dinh,Recall,0.653102336825141
+Phân loại,du_bao,Random Forest,3,kiem_dinh,F1,0.6639361048535736
+Phân loại,du_bao,Random Forest,3,kiem_dinh,AUC,0.753784800420578
+Phân loại,du_bao,Random Forest,3,hoc,AUC,0.9999914486352658
+Phân loại,du_bao,Random Forest,4,kiem_dinh,Accuracy,0.6918714555765595
+Phân loại,du_bao,Random Forest,4,kiem_dinh,Precision,0.6821870995301154
+Phân loại,du_bao,Random Forest,4,kiem_dinh,Recall,0.6431735803463552
+Phân loại,du_bao,Random Forest,4,kiem_dinh,F1,0.662106135986733
+Phân loại,du_bao,Random Forest,4,kiem_dinh,AUC,0.7520737021722776
+Phân loại,du_bao,Random Forest,4,hoc,AUC,0.9999925157868915
+Phân loại,du_bao,Random Forest,5,kiem_dinh,Accuracy,0.683494044242768
+Phân loại,du_bao,Random Forest,5,kiem_dinh,Precision,0.6676348547717842
+Phân loại,du_bao,Random Forest,5,kiem_dinh,Recall,0.6482675261885577
+Phân loại,du_bao,Random Forest,5,kiem_dinh,F1,0.6578086672117743
+Phân loại,du_bao,Random Forest,5,kiem_dinh,AUC,0.7454907970088593
+Phân loại,du_bao,Random Forest,5,hoc,AUC,0.9999917094569736
+Phân loại,du_bao,RF − LR,0,so_sanh,AUC_chenh_tb,-0.009223276756456266
+Phân loại,du_bao,RF − LR,0,so_sanh,t_hieu_chinh,-5.46095964925083
+Phân loại,du_bao,RF − LR,0,so_sanh,p,0.005466775437270172
+Phân loại,du_bao,RF − LR,0,so_sanh,so_lan_RF_hon,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,kiem_dinh,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,kiem_dinh,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,kiem_dinh,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),1,hoc,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,kiem_dinh,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,kiem_dinh,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,kiem_dinh,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),2,hoc,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Accuracy,0.530812854442344
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,kiem_dinh,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,kiem_dinh,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,kiem_dinh,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),3,hoc,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Accuracy,0.5306238185255199
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,kiem_dinh,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,kiem_dinh,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,kiem_dinh,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),4,hoc,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Accuracy,0.5307241444507468
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Precision,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,kiem_dinh,Recall,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,kiem_dinh,F1,0.0
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,kiem_dinh,AUC,0.5
+Phân loại,khong_dia_ly,Mốc (đoán theo tỉ lệ),5,hoc,AUC,0.5
+Phân loại,khong_dia_ly,Logistic Regression,1,kiem_dinh,Accuracy,0.6069943289224953
+Phân loại,khong_dia_ly,Logistic Regression,1,kiem_dinh,Precision,0.5827515400410678
+Phân loại,khong_dia_ly,Logistic Regression,1,kiem_dinh,Recall,0.5717163577759871
+Phân loại,khong_dia_ly,Logistic Regression,1,kiem_dinh,F1,0.5771812080536913
+Phân loại,khong_dia_ly,Logistic Regression,1,kiem_dinh,AUC,0.653569661678042
+Phân loại,khong_dia_ly,Logistic Regression,1,hoc,AUC,0.6550019564553925
+Phân loại,khong_dia_ly,Logistic Regression,2,kiem_dinh,Accuracy,0.6094517958412098
+Phân loại,khong_dia_ly,Logistic Regression,2,kiem_dinh,Precision,0.5836012861736335
+Phân loại,khong_dia_ly,Logistic Regression,2,kiem_dinh,Recall,0.5850120870265915
+Phân loại,khong_dia_ly,Logistic Regression,2,kiem_dinh,F1,0.5843058350100604
+Phân loại,khong_dia_ly,Logistic Regression,2,kiem_dinh,AUC,0.6518808641592687
+Phân loại,khong_dia_ly,Logistic Regression,2,hoc,AUC,0.6554296726706185
+Phân loại,khong_dia_ly,Logistic Regression,3,kiem_dinh,Accuracy,0.6054820415879018
+Phân loại,khong_dia_ly,Logistic Regression,3,kiem_dinh,Precision,0.579031612645058
+Phân loại,khong_dia_ly,Logistic Regression,3,kiem_dinh,Recall,0.5829975825946817
+Phân loại,khong_dia_ly,Logistic Regression,3,kiem_dinh,F1,0.5810078297530616
+Phân loại,khong_dia_ly,Logistic Regression,3,kiem_dinh,AUC,0.6505717232449705
+Phân loại,khong_dia_ly,Logistic Regression,3,hoc,AUC,0.6559538170700308
+Phân loại,khong_dia_ly,Logistic Regression,4,kiem_dinh,Accuracy,0.6064272211720226
+Phân loại,khong_dia_ly,Logistic Regression,4,kiem_dinh,Precision,0.5815372102480684
+Phân loại,khong_dia_ly,Logistic Regression,4,kiem_dinh,Recall,0.5759162303664922
+Phân loại,khong_dia_ly,Logistic Regression,4,kiem_dinh,F1,0.5787130716309187
+Phân loại,khong_dia_ly,Logistic Regression,4,kiem_dinh,AUC,0.6532634239153282
+Phân loại,khong_dia_ly,Logistic Regression,4,hoc,AUC,0.654994448139865
+Phân loại,khong_dia_ly,Logistic Regression,5,kiem_dinh,Accuracy,0.608243524295708
+Phân loại,khong_dia_ly,Logistic Regression,5,kiem_dinh,Precision,0.583605220228385
+Phân loại,khong_dia_ly,Logistic Regression,5,kiem_dinh,Recall,0.5765511684125705
+Phân loại,khong_dia_ly,Logistic Regression,5,kiem_dinh,F1,0.5800567490879611
+Phân loại,khong_dia_ly,Logistic Regression,5,kiem_dinh,AUC,0.6550560544649656
+Phân loại,khong_dia_ly,Logistic Regression,5,hoc,AUC,0.6542542784784345
+Phân loại,khong_dia_ly,Cây quyết định,1,kiem_dinh,Accuracy,0.5398865784499055
+Phân loại,khong_dia_ly,Cây quyết định,1,kiem_dinh,Precision,0.5102127659574468
+Phân loại,khong_dia_ly,Cây quyết định,1,kiem_dinh,Recall,0.4830781627719581
+Phân loại,khong_dia_ly,Cây quyết định,1,kiem_dinh,F1,0.4962748344370861
+Phân loại,khong_dia_ly,Cây quyết định,1,kiem_dinh,AUC,0.5421017077946974
+Phân loại,khong_dia_ly,Cây quyết định,1,hoc,AUC,0.9934963440785768
+Phân loại,khong_dia_ly,Cây quyết định,2,kiem_dinh,Accuracy,0.543289224952741
+Phân loại,khong_dia_ly,Cây quyết định,2,kiem_dinh,Precision,0.5139593908629442
+Phân loại,khong_dia_ly,Cây quyết định,2,kiem_dinh,Recall,0.4895245769540693
+Phân loại,khong_dia_ly,Cây quyết định,2,kiem_dinh,F1,0.5014444903012794
+Phân loại,khong_dia_ly,Cây quyết định,2,kiem_dinh,AUC,0.5465390699073214
+Phân loại,khong_dia_ly,Cây quyết định,2,hoc,AUC,0.9934032297163826
+Phân loại,khong_dia_ly,Cây quyết định,3,kiem_dinh,Accuracy,0.5485822306238185
+Phân loại,khong_dia_ly,Cây quyết định,3,kiem_dinh,Precision,0.5196817420435511
+Phân loại,khong_dia_ly,Cây quyết định,3,kiem_dinh,Recall,0.5
+Phân loại,khong_dia_ly,Cây quyết định,3,kiem_dinh,F1,0.5096509240246406
+Phân loại,khong_dia_ly,Cây quyết định,3,kiem_dinh,AUC,0.5506489315665383
+Phân loại,khong_dia_ly,Cây quyết định,3,hoc,AUC,0.9934624345766788
+Phân loại,khong_dia_ly,Cây quyết định,4,kiem_dinh,Accuracy,0.5523629489603025
+Phân loại,khong_dia_ly,Cây quyết định,4,kiem_dinh,Precision,0.5240485152655793
+Phân loại,khong_dia_ly,Cây quyết định,4,kiem_dinh,Recall,0.50463149416029
+Phân loại,khong_dia_ly,Cây quyết định,4,kiem_dinh,F1,0.5141567501025851
+Phân loại,khong_dia_ly,Cây quyết định,4,kiem_dinh,AUC,0.5546581736212371
+Phân loại,khong_dia_ly,Cây quyết định,4,hoc,AUC,0.9936842120179189
+Phân loại,khong_dia_ly,Cây quyết định,5,kiem_dinh,Accuracy,0.5452826621289468
+Phân loại,khong_dia_ly,Cây quyết định,5,kiem_dinh,Precision,0.5165733964700818
+Phân loại,khong_dia_ly,Cây quyết định,5,kiem_dinh,Recall,0.48348106365834004
+Phân loại,khong_dia_ly,Cây quyết định,5,kiem_dinh,F1,0.4994797086368366
+Phân loại,khong_dia_ly,Cây quyết định,5,kiem_dinh,AUC,0.5476234732611317
+Phân loại,khong_dia_ly,Cây quyết định,5,hoc,AUC,0.9934871664142632
+Phân loại,khong_dia_ly,Random Forest,1,kiem_dinh,Accuracy,0.5860113421550095
+Phân loại,khong_dia_ly,Random Forest,1,kiem_dinh,Precision,0.5623931623931624
+Phân loại,khong_dia_ly,Random Forest,1,kiem_dinh,Recall,0.5302175664786463
+Phân loại,khong_dia_ly,Random Forest,1,kiem_dinh,F1,0.5458316051430941
+Phân loại,khong_dia_ly,Random Forest,1,kiem_dinh,AUC,0.6048967092984016
+Phân loại,khong_dia_ly,Random Forest,1,hoc,AUC,0.9927501287637327
+Phân loại,khong_dia_ly,Random Forest,2,kiem_dinh,Accuracy,0.5822306238185255
+Phân loại,khong_dia_ly,Random Forest,2,kiem_dinh,Precision,0.5574809805579036
+Phân loại,khong_dia_ly,Random Forest,2,kiem_dinh,Recall,0.5314262691377921
+Phân loại,khong_dia_ly,Random Forest,2,kiem_dinh,F1,0.5441419141914191
+Phân loại,khong_dia_ly,Random Forest,2,kiem_dinh,AUC,0.6053767324164182
+Phân loại,khong_dia_ly,Random Forest,2,hoc,AUC,0.9927700968954376
+Phân loại,khong_dia_ly,Random Forest,3,kiem_dinh,Accuracy,0.5775047258979206
+Phân loại,khong_dia_ly,Random Forest,3,kiem_dinh,Precision,0.5498587000403714
+Phân loại,khong_dia_ly,Random Forest,3,kiem_dinh,Recall,0.5487510072522159
+Phân loại,khong_dia_ly,Random Forest,3,kiem_dinh,F1,0.5493042952208107
+Phân loại,khong_dia_ly,Random Forest,3,kiem_dinh,AUC,0.6050043217146359
+Phân loại,khong_dia_ly,Random Forest,3,hoc,AUC,0.9928438305558065
+Phân loại,khong_dia_ly,Random Forest,4,kiem_dinh,Accuracy,0.579773156899811
+Phân loại,khong_dia_ly,Random Forest,4,kiem_dinh,Precision,0.5531914893617021
+Phân loại,khong_dia_ly,Random Forest,4,kiem_dinh,Recall,0.5445026178010471
+Phân loại,khong_dia_ly,Random Forest,4,kiem_dinh,F1,0.5488126649076517
+Phân loại,khong_dia_ly,Random Forest,4,kiem_dinh,AUC,0.6014546224623126
+Phân loại,khong_dia_ly,Random Forest,4,hoc,AUC,0.9929862743926156
+Phân loại,khong_dia_ly,Random Forest,5,kiem_dinh,Accuracy,0.5855549253166951
+Phân loại,khong_dia_ly,Random Forest,5,kiem_dinh,Precision,0.5607711651299245
+Phân loại,khong_dia_ly,Random Forest,5,kiem_dinh,Recall,0.5390813859790492
+Phân loại,khong_dia_ly,Random Forest,5,kiem_dinh,F1,0.5497124075595727
+Phân loại,khong_dia_ly,Random Forest,5,kiem_dinh,AUC,0.611855520057919
+Phân loại,khong_dia_ly,Random Forest,5,hoc,AUC,0.9929843443071398
+Phân loại,khong_dia_ly,RF − LR,0,so_sanh,AUC_chenh_tb,-0.047150764302577544
+Phân loại,khong_dia_ly,RF − LR,0,so_sanh,t_hieu_chinh,-21.55203871389297
+Phân loại,khong_dia_ly,RF − LR,0,so_sanh,p,2.7415117881223806e-05
+Phân loại,khong_dia_ly,RF − LR,0,so_sanh,so_lan_RF_hon,0.0
+Hồi quy,,Mốc (trung bình),1,kiem_dinh,MSE,46.22593654011349
+Hồi quy,,Mốc (trung bình),1,kiem_dinh,RMSE,6.798965843428946
+Hồi quy,,Mốc (trung bình),1,kiem_dinh,MAE,4.843974515826738
+Hồi quy,,Mốc (trung bình),1,kiem_dinh,MAPE,1.024336848484507
+Hồi quy,,Mốc (trung bình),1,kiem_dinh,R2,-0.04202761322545756
+Hồi quy,,Hồi quy tuyến tính,1,kiem_dinh,MSE,15.266156134970817
+Hồi quy,,Hồi quy tuyến tính,1,kiem_dinh,RMSE,3.9071928714834154
+Hồi quy,,Hồi quy tuyến tính,1,kiem_dinh,MAE,2.737704189806254
+Hồi quy,,Hồi quy tuyến tính,1,kiem_dinh,MAPE,0.6698321004602011
+Hồi quy,,Hồi quy tuyến tính,1,kiem_dinh,R2,0.6558694656917001
+Hồi quy,,Ridge,1,kiem_dinh,MSE,15.294971210764093
+Hồi quy,,Ridge,1,kiem_dinh,RMSE,3.910878572746039
+Hồi quy,,Ridge,1,kiem_dinh,MAE,2.7400817231828207
+Hồi quy,,Ridge,1,kiem_dinh,MAPE,0.6702829271862865
+Hồi quy,,Ridge,1,kiem_dinh,R2,0.6552199146625345
+Hồi quy,,Mốc (trung bình),2,kiem_dinh,MSE,34.925645853579525
+Hồi quy,,Mốc (trung bình),2,kiem_dinh,RMSE,5.909792369752048
+Hồi quy,,Mốc (trung bình),2,kiem_dinh,MAE,4.502754928502014
+Hồi quy,,Mốc (trung bình),2,kiem_dinh,MAPE,1.3310901571888525
+Hồi quy,,Mốc (trung bình),2,kiem_dinh,R2,-0.006017322755967003
+Hồi quy,,Hồi quy tuyến tính,2,kiem_dinh,MSE,15.410904845402364
+Hồi quy,,Hồi quy tuyến tính,2,kiem_dinh,RMSE,3.9256725341528886
+Hồi quy,,Hồi quy tuyến tính,2,kiem_dinh,MAE,3.0578470460707425
+Hồi quy,,Hồi quy tuyến tính,2,kiem_dinh,MAPE,1.0836952309263699
+Hồi quy,,Hồi quy tuyến tính,2,kiem_dinh,R2,0.5560959044589957
+Hồi quy,,Ridge,2,kiem_dinh,MSE,15.40798228780769
+Hồi quy,,Ridge,2,kiem_dinh,RMSE,3.925300279954094
+Hồi quy,,Ridge,2,kiem_dinh,MAE,3.057633504217375
+Hồi quy,,Ridge,2,kiem_dinh,MAPE,1.0838362764552891
+Hồi quy,,Ridge,2,kiem_dinh,R2,0.5561800873995009
+Hồi quy,,Mốc (trung bình),3,kiem_dinh,MSE,20.517082014167272
+Hồi quy,,Mốc (trung bình),3,kiem_dinh,RMSE,4.529578569157099
+Hồi quy,,Mốc (trung bình),3,kiem_dinh,MAE,3.9343795553935856
+Hồi quy,,Mốc (trung bình),3,kiem_dinh,MAPE,1.6738431437657257
+Hồi quy,,Mốc (trung bình),3,kiem_dinh,R2,-0.37178833520376364
+Hồi quy,,Hồi quy tuyến tính,3,kiem_dinh,MSE,27.279566846986924
+Hồi quy,,Hồi quy tuyến tính,3,kiem_dinh,RMSE,5.222984477000379
+Hồi quy,,Hồi quy tuyến tính,3,kiem_dinh,MAE,3.962847635479098
+Hồi quy,,Hồi quy tuyến tính,3,kiem_dinh,MAPE,1.8697318252363813
+Hồi quy,,Hồi quy tuyến tính,3,kiem_dinh,R2,-0.8239334211496456
+Hồi quy,,Ridge,3,kiem_dinh,MSE,27.194489001235816
+Hồi quy,,Ridge,3,kiem_dinh,RMSE,5.214833554509273
+Hồi quy,,Ridge,3,kiem_dinh,MAE,3.957306731953448
+Hồi quy,,Ridge,3,kiem_dinh,MAPE,1.8676231662338345
+Hồi quy,,Ridge,3,kiem_dinh,R2,-0.8182450490748523
+Hồi quy,,Mốc (trung bình),4,kiem_dinh,MSE,26.5469596001666
+Hồi quy,,Mốc (trung bình),4,kiem_dinh,RMSE,5.152374171211423
+Hồi quy,,Mốc (trung bình),4,kiem_dinh,MAE,4.152462515618493
+Hồi quy,,Mốc (trung bình),4,kiem_dinh,MAPE,1.3408584617866004
+Hồi quy,,Mốc (trung bình),4,kiem_dinh,R2,-0.0029479472579225785
+Hồi quy,,Hồi quy tuyến tính,4,kiem_dinh,MSE,10.983633127030256
+Hồi quy,,Hồi quy tuyến tính,4,kiem_dinh,RMSE,3.3141564729249366
+Hồi quy,,Hồi quy tuyến tính,4,kiem_dinh,MAE,2.4597334534267685
+Hồi quy,,Hồi quy tuyến tính,4,kiem_dinh,MAPE,0.8371088304988566
+Hồi quy,,Hồi quy tuyến tính,4,kiem_dinh,R2,0.5850367626234689
+Hồi quy,,Ridge,4,kiem_dinh,MSE,10.97644855735571
+Hồi quy,,Ridge,4,kiem_dinh,RMSE,3.313072374300886
+Hồi quy,,Ridge,4,kiem_dinh,MAE,2.4586789860832705
+Hồi quy,,Ridge,4,kiem_dinh,MAPE,0.8364241592034497
+Hồi quy,,Ridge,4,kiem_dinh,R2,0.5853081966978619
+Phân cụm,,K-Means (k=3),1,bootstrap,ARI,0.9115854649462086
+Phân cụm,,K-Means (k=3),2,bootstrap,ARI,0.5323530496575974
+Phân cụm,,K-Means (k=3),3,bootstrap,ARI,0.4172843564467571
+Phân cụm,,K-Means (k=3),4,bootstrap,ARI,0.11269413425747657
+Phân cụm,,K-Means (k=3),5,bootstrap,ARI,0.5797269018752087
+Phân cụm,,K-Means (k=3),6,bootstrap,ARI,0.2416060837956763
+Phân cụm,,K-Means (k=3),7,bootstrap,ARI,0.596483547411131
+Phân cụm,,K-Means (k=3),8,bootstrap,ARI,0.274121971850183
+Phân cụm,,K-Means (k=3),9,bootstrap,ARI,0.23327683522848822
+Phân cụm,,K-Means (k=3),10,bootstrap,ARI,0.7179129669039407
+Phân cụm,,K-Means (k=3),11,bootstrap,ARI,0.3209818838243827
+Phân cụm,,K-Means (k=3),12,bootstrap,ARI,0.27609532604915027
+Phân cụm,,K-Means (k=3),13,bootstrap,ARI,0.5916296052049572
+Phân cụm,,K-Means (k=3),14,bootstrap,ARI,0.49007000766983794
+Phân cụm,,K-Means (k=3),15,bootstrap,ARI,0.4469903590003806
+Phân cụm,,K-Means (k=3),16,bootstrap,ARI,0.3949408470763405
+Phân cụm,,K-Means (k=3),17,bootstrap,ARI,0.16408422877880546
+Phân cụm,,K-Means (k=3),18,bootstrap,ARI,0.5048271852384523
+Phân cụm,,K-Means (k=3),19,bootstrap,ARI,0.4290012475232993
+Phân cụm,,K-Means (k=3),20,bootstrap,ARI,0.295509328793416
+Phân cụm,,K-Means (k=3),21,bootstrap,ARI,0.06496176413431477
+Phân cụm,,K-Means (k=3),22,bootstrap,ARI,0.28774371240124663
+Phân cụm,,K-Means (k=3),23,bootstrap,ARI,0.8504786728703321
+Phân cụm,,K-Means (k=3),24,bootstrap,ARI,0.6448701839129228
+Phân cụm,,K-Means (k=3),25,bootstrap,ARI,0.3728091565824367
+Phân cụm,,K-Means (k=3),26,bootstrap,ARI,0.4546729724136345
+Phân cụm,,K-Means (k=3),27,bootstrap,ARI,0.2416060837956763
+Phân cụm,,K-Means (k=3),28,bootstrap,ARI,0.5049807161705999
+Phân cụm,,K-Means (k=3),29,bootstrap,ARI,0.34851138353765326
+Phân cụm,,K-Means (k=3),30,bootstrap,ARI,0.4194993390884316
+Phân cụm,,K-Means (k=3),31,bootstrap,ARI,0.39317645548082636
+Phân cụm,,K-Means (k=3),32,bootstrap,ARI,0.3430245464924521
+Phân cụm,,K-Means (k=3),33,bootstrap,ARI,0.3303438936775784
+Phân cụm,,K-Means (k=3),34,bootstrap,ARI,0.7335898791447927
+Phân cụm,,K-Means (k=3),35,bootstrap,ARI,0.8495440729483282
+Phân cụm,,K-Means (k=3),36,bootstrap,ARI,0.2663319377467765
+Phân cụm,,K-Means (k=3),37,bootstrap,ARI,0.4514680457167337
+Phân cụm,,K-Means (k=3),38,bootstrap,ARI,0.5249631603460255
+Phân cụm,,K-Means (k=3),39,bootstrap,ARI,0.815757048633761
+Phân cụm,,K-Means (k=3),40,bootstrap,ARI,0.7573475114458721
+Phân cụm,,K-Means (k=3),41,bootstrap,ARI,0.8153495440729484
+Phân cụm,,K-Means (k=3),42,bootstrap,ARI,0.45079565432989227
+Phân cụm,,K-Means (k=3),43,bootstrap,ARI,0.555380248636306
+Phân cụm,,K-Means (k=3),44,bootstrap,ARI,0.35290280495759946
+Phân cụm,,K-Means (k=3),45,bootstrap,ARI,0.711620483860109
+Phân cụm,,K-Means (k=3),46,bootstrap,ARI,0.5015429592333929
+Phân cụm,,K-Means (k=3),47,bootstrap,ARI,0.2359403672475623
+Phân cụm,,K-Means (k=3),48,bootstrap,ARI,0.31155015197568386
+Phân cụm,,K-Means (k=3),49,bootstrap,ARI,0.2472677694177734
+Phân cụm,,K-Means (k=3),50,bootstrap,ARI,0.22930630960531134
+Phân cụm,,K-Means (k=3),51,bootstrap,ARI,0.13778595257953055
+Phân cụm,,K-Means (k=3),52,bootstrap,ARI,0.17141060510784664
+Phân cụm,,K-Means (k=3),53,bootstrap,ARI,0.675390010487677
+Phân cụm,,K-Means (k=3),54,bootstrap,ARI,0.30320785234047953
+Phân cụm,,K-Means (k=3),55,bootstrap,ARI,0.35298953720149223
+Phân cụm,,K-Means (k=3),56,bootstrap,ARI,0.607716478312433
+Phân cụm,,K-Means (k=3),57,bootstrap,ARI,0.24800271147048855
+Phân cụm,,K-Means (k=3),58,bootstrap,ARI,0.4763139077583125
+Phân cụm,,K-Means (k=3),59,bootstrap,ARI,0.4305224909159253
+Phân cụm,,K-Means (k=3),60,bootstrap,ARI,0.20718160681994316
+Phân cụm,,K-Means (k=3),61,bootstrap,ARI,0.37282379950258276
+Phân cụm,,K-Means (k=3),62,bootstrap,ARI,0.32991179287766803
+Phân cụm,,K-Means (k=3),63,bootstrap,ARI,0.5245149449396959
+Phân cụm,,K-Means (k=3),64,bootstrap,ARI,0.3514431300013212
+Phân cụm,,K-Means (k=3),65,bootstrap,ARI,0.4319689000686028
+Phân cụm,,K-Means (k=3),66,bootstrap,ARI,0.23973369984031523
+Phân cụm,,K-Means (k=3),67,bootstrap,ARI,0.4773967548632453
+Phân cụm,,K-Means (k=3),68,bootstrap,ARI,0.23468091692134727
+Phân cụm,,K-Means (k=3),69,bootstrap,ARI,0.4319689000686028
+Phân cụm,,K-Means (k=3),70,bootstrap,ARI,0.33732343410828325
+Phân cụm,,K-Means (k=3),71,bootstrap,ARI,0.14494479964974696
+Phân cụm,,K-Means (k=3),72,bootstrap,ARI,0.418693009118541
+Phân cụm,,K-Means (k=3),73,bootstrap,ARI,0.27106529591167583
+Phân cụm,,K-Means (k=3),74,bootstrap,ARI,0.62997060488781
+Phân cụm,,K-Means (k=3),75,bootstrap,ARI,0.40025085689718415
+Phân cụm,,K-Means (k=3),76,bootstrap,ARI,0.4747732584574396
+Phân cụm,,K-Means (k=3),77,bootstrap,ARI,0.3583732696330806
+Phân cụm,,K-Means (k=3),78,bootstrap,ARI,0.6337320927484862
+Phân cụm,,K-Means (k=3),79,bootstrap,ARI,0.4030603671992562
+Phân cụm,,K-Means (k=3),80,bootstrap,ARI,0.24212677015570325
+Phân cụm,,K-Means (k=3),81,bootstrap,ARI,0.27310039615974874
+Phân cụm,,K-Means (k=3),82,bootstrap,ARI,0.5939666017118472
+Phân cụm,,K-Means (k=3),83,bootstrap,ARI,0.466194615013532
+Phân cụm,,K-Means (k=3),84,bootstrap,ARI,0.3466413091301324
+Phân cụm,,K-Means (k=3),85,bootstrap,ARI,0.3583732696330806
+Phân cụm,,K-Means (k=3),86,bootstrap,ARI,0.12856488132146612
+Phân cụm,,K-Means (k=3),87,bootstrap,ARI,0.6380493634157421
+Phân cụm,,K-Means (k=3),88,bootstrap,ARI,0.39588275565603653
+Phân cụm,,K-Means (k=3),89,bootstrap,ARI,0.6651719468387892
+Phân cụm,,K-Means (k=3),90,bootstrap,ARI,0.6496661040581199
+Phân cụm,,K-Means (k=3),91,bootstrap,ARI,0.28340794011888165
+Phân cụm,,K-Means (k=3),92,bootstrap,ARI,0.5713307603588036
+Phân cụm,,K-Means (k=3),93,bootstrap,ARI,0.1867621710954479
+Phân cụm,,K-Means (k=3),94,bootstrap,ARI,0.15678918601941164
+Phân cụm,,K-Means (k=3),95,bootstrap,ARI,0.49035201774048165
+Phân cụm,,K-Means (k=3),96,bootstrap,ARI,0.37537993920972645
+Phân cụm,,K-Means (k=3),97,bootstrap,ARI,0.5624540695339905
+Phân cụm,,K-Means (k=3),98,bootstrap,ARI,0.29673029522267336
+Phân cụm,,K-Means (k=3),99,bootstrap,ARI,0.20391297608815118
+Phân cụm,,K-Means (k=3),100,bootstrap,ARI,0.36081319380203514
+Luật kết hợp,,Apriori,1,kiem_dinh,so_luat,23.0
+Luật kết hợp,,Apriori,1,kiem_dinh,lift_hoc_tb,1.22555217895509
+Luật kết hợp,,Apriori,1,kiem_dinh,lift_kiem_dinh_tb,1.222520383481902
+Luật kết hợp,,Apriori,1,kiem_dinh,ti_le_lift_tren_1,0.9565217391304348
+Luật kết hợp,,Apriori,1,kiem_dinh,ti_le_conf_dat,1.0
+Luật kết hợp,,Apriori,2,kiem_dinh,so_luat,22.0
+Luật kết hợp,,Apriori,2,kiem_dinh,lift_hoc_tb,1.2113295027357125
+Luật kết hợp,,Apriori,2,kiem_dinh,lift_kiem_dinh_tb,1.226115614305141
+Luật kết hợp,,Apriori,2,kiem_dinh,ti_le_lift_tren_1,0.9545454545454546
+Luật kết hợp,,Apriori,2,kiem_dinh,ti_le_conf_dat,0.9545454545454546
+Luật kết hợp,,Apriori,3,kiem_dinh,so_luat,23.0
+Luật kết hợp,,Apriori,3,kiem_dinh,lift_hoc_tb,1.21832446041291
+Luật kết hợp,,Apriori,3,kiem_dinh,lift_kiem_dinh_tb,1.2201824012978477
+Luật kết hợp,,Apriori,3,kiem_dinh,ti_le_lift_tren_1,1.0
+Luật kết hợp,,Apriori,3,kiem_dinh,ti_le_conf_dat,1.0
+Luật kết hợp,,Apriori,4,kiem_dinh,so_luat,25.0
+Luật kết hợp,,Apriori,4,kiem_dinh,lift_hoc_tb,1.2378037515680094
+Luật kết hợp,,Apriori,4,kiem_dinh,lift_kiem_dinh_tb,1.1948477940555442
+Luật kết hợp,,Apriori,4,kiem_dinh,ti_le_lift_tren_1,1.0
+Luật kết hợp,,Apriori,4,kiem_dinh,ti_le_conf_dat,0.88
+Luật kết hợp,,Apriori,5,kiem_dinh,so_luat,22.0
+Luật kết hợp,,Apriori,5,kiem_dinh,lift_hoc_tb,1.2120375212814094
+Luật kết hợp,,Apriori,5,kiem_dinh,lift_kiem_dinh_tb,1.2229567005274709
+Luật kết hợp,,Apriori,5,kiem_dinh,ti_le_lift_tren_1,0.9545454545454546
+Luật kết hợp,,Apriori,5,kiem_dinh,ti_le_conf_dat,1.0
+Luật kết hợp,,Apriori,0,so_sanh,so_luat_ca_5_lan,21.0
+Luật kết hợp,,Apriori,0,so_sanh,so_luat_it_nhat_1_lan,28.0
